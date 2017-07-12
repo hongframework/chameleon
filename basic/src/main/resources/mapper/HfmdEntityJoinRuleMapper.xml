@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hframe.dao.HfmdEntityJoinRuleMapper" >
+  <resultMap id="BaseResultMap" type="com.hframe.domain.model.HfmdEntityJoinRule" >
+    <constructor >
+      <idArg column="hfmd_entity_join_rule_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="source_hfmd_entity_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="source_hfmd_entity_attr_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="source_hfmd_entity_attr_value" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="join_type" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="target_hfmd_entity_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="target_hfmd_entity_attr_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="target_hfmd_entity_attr_value" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="editable" jdbcType="TINYINT" javaType="java.lang.Byte" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    hfmd_entity_join_rule_id, source_hfmd_entity_id, source_hfmd_entity_attr_id, source_hfmd_entity_attr_value, 
+    join_type, target_hfmd_entity_id, target_hfmd_entity_attr_id, target_hfmd_entity_attr_value, 
+    editable
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hframe.domain.model.HfmdEntityJoinRule_Example" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hfmd_entity_join_rule
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitEnd != null and limitEnd != 0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from hfmd_entity_join_rule
+    where hfmd_entity_join_rule_id = #{hfmdEntityJoinRuleId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from hfmd_entity_join_rule
+    where hfmd_entity_join_rule_id = #{hfmdEntityJoinRuleId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hframe.domain.model.HfmdEntityJoinRule_Example" >
+    delete from hfmd_entity_join_rule
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hframe.domain.model.HfmdEntityJoinRule" >
+    <selectKey resultType="java.lang.Long" keyProperty="hfmdEntityJoinRuleId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into hfmd_entity_join_rule (source_hfmd_entity_id, source_hfmd_entity_attr_id, 
+      source_hfmd_entity_attr_value, join_type, target_hfmd_entity_id, 
+      target_hfmd_entity_attr_id, target_hfmd_entity_attr_value, 
+      editable)
+    values (#{sourceHfmdEntityId,jdbcType=BIGINT}, #{sourceHfmdEntityAttrId,jdbcType=BIGINT}, 
+      #{sourceHfmdEntityAttrValue,jdbcType=VARCHAR}, #{joinType,jdbcType=TINYINT}, #{targetHfmdEntityId,jdbcType=BIGINT}, 
+      #{targetHfmdEntityAttrId,jdbcType=BIGINT}, #{targetHfmdEntityAttrValue,jdbcType=VARCHAR}, 
+      #{editable,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hframe.domain.model.HfmdEntityJoinRule" >
+    <selectKey resultType="java.lang.Long" keyProperty="hfmdEntityJoinRuleId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into hfmd_entity_join_rule
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sourceHfmdEntityId != null" >
+        source_hfmd_entity_id,
+      </if>
+      <if test="sourceHfmdEntityAttrId != null" >
+        source_hfmd_entity_attr_id,
+      </if>
+      <if test="sourceHfmdEntityAttrValue != null" >
+        source_hfmd_entity_attr_value,
+      </if>
+      <if test="joinType != null" >
+        join_type,
+      </if>
+      <if test="targetHfmdEntityId != null" >
+        target_hfmd_entity_id,
+      </if>
+      <if test="targetHfmdEntityAttrId != null" >
+        target_hfmd_entity_attr_id,
+      </if>
+      <if test="targetHfmdEntityAttrValue != null" >
+        target_hfmd_entity_attr_value,
+      </if>
+      <if test="editable != null" >
+        editable,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sourceHfmdEntityId != null" >
+        #{sourceHfmdEntityId,jdbcType=BIGINT},
+      </if>
+      <if test="sourceHfmdEntityAttrId != null" >
+        #{sourceHfmdEntityAttrId,jdbcType=BIGINT},
+      </if>
+      <if test="sourceHfmdEntityAttrValue != null" >
+        #{sourceHfmdEntityAttrValue,jdbcType=VARCHAR},
+      </if>
+      <if test="joinType != null" >
+        #{joinType,jdbcType=TINYINT},
+      </if>
+      <if test="targetHfmdEntityId != null" >
+        #{targetHfmdEntityId,jdbcType=BIGINT},
+      </if>
+      <if test="targetHfmdEntityAttrId != null" >
+        #{targetHfmdEntityAttrId,jdbcType=BIGINT},
+      </if>
+      <if test="targetHfmdEntityAttrValue != null" >
+        #{targetHfmdEntityAttrValue,jdbcType=VARCHAR},
+      </if>
+      <if test="editable != null" >
+        #{editable,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hframe.domain.model.HfmdEntityJoinRule_Example" resultType="java.lang.Integer" >
+    select count(*) from hfmd_entity_join_rule
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update hfmd_entity_join_rule
+    <set >
+      <if test="record.hfmdEntityJoinRuleId != null" >
+        hfmd_entity_join_rule_id = #{record.hfmdEntityJoinRuleId,jdbcType=BIGINT},
+      </if>
+      <if test="record.sourceHfmdEntityId != null" >
+        source_hfmd_entity_id = #{record.sourceHfmdEntityId,jdbcType=BIGINT},
+      </if>
+      <if test="record.sourceHfmdEntityAttrId != null" >
+        source_hfmd_entity_attr_id = #{record.sourceHfmdEntityAttrId,jdbcType=BIGINT},
+      </if>
+      <if test="record.sourceHfmdEntityAttrValue != null" >
+        source_hfmd_entity_attr_value = #{record.sourceHfmdEntityAttrValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.joinType != null" >
+        join_type = #{record.joinType,jdbcType=TINYINT},
+      </if>
+      <if test="record.targetHfmdEntityId != null" >
+        target_hfmd_entity_id = #{record.targetHfmdEntityId,jdbcType=BIGINT},
+      </if>
+      <if test="record.targetHfmdEntityAttrId != null" >
+        target_hfmd_entity_attr_id = #{record.targetHfmdEntityAttrId,jdbcType=BIGINT},
+      </if>
+      <if test="record.targetHfmdEntityAttrValue != null" >
+        target_hfmd_entity_attr_value = #{record.targetHfmdEntityAttrValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.editable != null" >
+        editable = #{record.editable,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update hfmd_entity_join_rule
+    set hfmd_entity_join_rule_id = #{record.hfmdEntityJoinRuleId,jdbcType=BIGINT},
+      source_hfmd_entity_id = #{record.sourceHfmdEntityId,jdbcType=BIGINT},
+      source_hfmd_entity_attr_id = #{record.sourceHfmdEntityAttrId,jdbcType=BIGINT},
+      source_hfmd_entity_attr_value = #{record.sourceHfmdEntityAttrValue,jdbcType=VARCHAR},
+      join_type = #{record.joinType,jdbcType=TINYINT},
+      target_hfmd_entity_id = #{record.targetHfmdEntityId,jdbcType=BIGINT},
+      target_hfmd_entity_attr_id = #{record.targetHfmdEntityAttrId,jdbcType=BIGINT},
+      target_hfmd_entity_attr_value = #{record.targetHfmdEntityAttrValue,jdbcType=VARCHAR},
+      editable = #{record.editable,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hframe.domain.model.HfmdEntityJoinRule" >
+    update hfmd_entity_join_rule
+    <set >
+      <if test="sourceHfmdEntityId != null" >
+        source_hfmd_entity_id = #{sourceHfmdEntityId,jdbcType=BIGINT},
+      </if>
+      <if test="sourceHfmdEntityAttrId != null" >
+        source_hfmd_entity_attr_id = #{sourceHfmdEntityAttrId,jdbcType=BIGINT},
+      </if>
+      <if test="sourceHfmdEntityAttrValue != null" >
+        source_hfmd_entity_attr_value = #{sourceHfmdEntityAttrValue,jdbcType=VARCHAR},
+      </if>
+      <if test="joinType != null" >
+        join_type = #{joinType,jdbcType=TINYINT},
+      </if>
+      <if test="targetHfmdEntityId != null" >
+        target_hfmd_entity_id = #{targetHfmdEntityId,jdbcType=BIGINT},
+      </if>
+      <if test="targetHfmdEntityAttrId != null" >
+        target_hfmd_entity_attr_id = #{targetHfmdEntityAttrId,jdbcType=BIGINT},
+      </if>
+      <if test="targetHfmdEntityAttrValue != null" >
+        target_hfmd_entity_attr_value = #{targetHfmdEntityAttrValue,jdbcType=VARCHAR},
+      </if>
+      <if test="editable != null" >
+        editable = #{editable,jdbcType=TINYINT},
+      </if>
+    </set>
+    where hfmd_entity_join_rule_id = #{hfmdEntityJoinRuleId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hframe.domain.model.HfmdEntityJoinRule" >
+    update hfmd_entity_join_rule
+    set source_hfmd_entity_id = #{sourceHfmdEntityId,jdbcType=BIGINT},
+      source_hfmd_entity_attr_id = #{sourceHfmdEntityAttrId,jdbcType=BIGINT},
+      source_hfmd_entity_attr_value = #{sourceHfmdEntityAttrValue,jdbcType=VARCHAR},
+      join_type = #{joinType,jdbcType=TINYINT},
+      target_hfmd_entity_id = #{targetHfmdEntityId,jdbcType=BIGINT},
+      target_hfmd_entity_attr_id = #{targetHfmdEntityAttrId,jdbcType=BIGINT},
+      target_hfmd_entity_attr_value = #{targetHfmdEntityAttrValue,jdbcType=VARCHAR},
+      editable = #{editable,jdbcType=TINYINT}
+    where hfmd_entity_join_rule_id = #{hfmdEntityJoinRuleId,jdbcType=BIGINT}
+  </update>
+</mapper>

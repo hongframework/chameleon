@@ -1,0 +1,154 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<!--
+/**
+*
+* Licensed to the Apache Software Foundation (ASF) under one
+* or more contributor license agreements.  See the NOTICE file
+* distributed with this work for additional information
+* regarding copyright ownership.  The ASF licenses this file
+* to you under the Apache License, Version 2.0 (the
+* "License"); you may not use this file except in compliance
+* with the License.  You may obtain a copy of the License at
+*
+*     http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
+-->
+<configuration>
+    <property>
+        <name>hbase.zookeeper.quorum</name>
+        <value>zqh,wzk,zzy</value>
+    </property>
+    <!--<property>-->
+    <!--<name>hbase.rootdir</name>-->
+    <!--<value>hdfs://test-cluster/hbase</value>-->
+    <!--</property>-->
+    <!-- -->
+    <!--<property>-->
+    <!--<name>hbase.zookeeper.property.dataDir</name>-->
+    <!--<value>/data/zookeeper/data</value>-->
+    <!--</property>-->
+
+
+    <property>
+        <name>hbase.security.authorization</name>
+        <value>true</value>
+    </property>
+
+    <property>
+        <name>hbase.coprocessor.master.classes</name>
+        <value>org.apache.hadoop.hbase.security.access.AccessController</value>
+    </property>
+
+    <property>
+        <name>hbase.coprocessor.region.classes</name>
+        <value>org.apache.hadoop.hbase.security.token.TokenProvider,org.apache.hadoop.hbase.security.access.AccessController</value>
+    </property>
+
+
+
+    <property>
+        <name>hbase.cluster.distributed</name>
+        <value>true</value>
+    </property>
+
+    <property>
+        <name>hbase.zookeeper.property.clientPort</name>
+        <value>2181</value>
+    </property>
+
+    <!--
+    <property>
+        <name>hbase.master</name>
+        <value>60000</value>
+    </property>
+    -->
+    <property>
+        <name>hbase.regionserver.storefile.refresh.period</name>
+        <value>30000</value>
+    </property>
+
+    <property>
+        <name>hbase.region.replica.replication.enabled</name>
+        <value>true</value>
+    </property>
+
+    <property>
+        <name>hbase.master.hfilecleaner.ttl</name>
+        <value>3600000</value>
+    </property>
+
+    <property>
+        <name>hbase.master.loadbalancer.class</name>
+        <value>org.apache.hadoop.hbase.master.balancer.StochasticLoadBalancer</value>
+    </property>
+
+    <property>
+        <name>hbase.meta.replica.count</name>
+        <value>3</value>
+    </property>
+
+    <property>
+        <name>hbase.regionserver.storefile.refresh.all</name>
+        <value>false</value>
+    </property>
+
+    <property>
+        <name>hbase.region.replica.wait.for.primary.flush</name>
+        <value>true</value>
+    </property>
+
+    <property>
+        <name>hbase.region.replica.storefile.refresh.memstore.multiplier</name>
+        <value>4</value>
+    </property>
+
+    <!-- For client-->
+    <property>
+        <name>hbase.ipc.client.specificThreadForWriting</name>
+        <value>true</value>
+    </property>
+
+    <property>
+        <name>hbase.client.primaryCallTimeout.get</name>
+        <value>10000</value>
+    </property>
+
+    <property>
+        <name>hbase.client.primaryCallTimeout.multiget</name>
+        <value>10000</value>
+    </property>
+
+    <property>
+        <name>hbase.client.primaryCallTimeout.scan</name>
+        <value>10000</value>
+    </property>
+
+    <property>
+        <name>hbase.meta.replicas.use</name>
+        <value>true</value>
+    </property>
+
+
+    <property>
+        <name>zookeeper.session.timeout</name>
+        <value>1800000</value>
+    </property>
+    <property>
+        <name>hbase.zookeeper.property.tickTime</name>
+        <value>6000</value>
+    </property>
+
+    <property>
+        <name>ipc.socket.timeout</name>
+        <value>10</value>
+    </property>
+
+
+</configuration>

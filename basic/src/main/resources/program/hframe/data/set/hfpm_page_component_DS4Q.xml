@@ -1,0 +1,28 @@
+<dataset>
+  <module>hframe</module>
+  <code>hfpm_page_component_DS4Q</code>
+  <entity>hfpm_page_component</entity>
+  <name>页面组件【查询】</name>
+  <fields>
+    <field code="hfpm_page_component_id" name="页面组件ID" edit-type="input" is-key="true"/>
+    <field code="hfpm_page_component_name" name="页面组件名称" edit-type="input"/>
+    <field code="hfpm_page_component_type" name="页面组件类型" edit-type="input"/>
+    <field code="hfpm_page_id" name="页面ID" edit-type="select" not-null="true">
+      <rel entity-code="hfpm_page/hfpm_page_id/hfpm_page_name"/>
+    </field>
+    <field code="hfpm_data_set_id" name="数据集ID" edit-type="select">
+      <rel entity-code="hfpm_data_set/hfpm_data_set_id/hfpm_data_set_name"/>
+    </field>
+    <field code="op_id" name="创建人" edit-type="input">
+      <rel entity-code="hfsec_user/hfsec_user_id/hfsec_user_name"/>
+    </field>
+    <field code="create_time_LEQ" name="创建结束时间" edit-type="datetime"/>
+    <field code="create_time_GEQ" name="创建开始时间" edit-type="datetime"/>
+    <field code="modify_op_id" name="修改人" edit-type="input">
+      <rel entity-code="hfsec_user/hfsec_user_id/hfsec_user_name"/>
+    </field>
+    <field code="modify_time_GEQ" name="修改开始时间" edit-type="datetime"/>
+    <field code="modify_time_LEQ" name="修改结束时间" edit-type="datetime"/>
+    <field code="del_flag" name="删除标识" edit-type="input"/>
+  </fields>
+</dataset>

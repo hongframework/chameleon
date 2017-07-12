@@ -1,0 +1,10 @@
+<dataset>
+  <module>hframe</module>
+  <code>hfsec_user_4_login</code>
+  <entity>hfsec_user</entity>
+  <name>用户</name>
+  <fields>
+    <field code="account" name="账号" edit-type="input"/>
+    <field code="password" name="密码" edit-type="password"/>
+  </fields>
+</dataset>

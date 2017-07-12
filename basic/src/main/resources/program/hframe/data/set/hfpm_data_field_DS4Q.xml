@@ -1,0 +1,42 @@
+<dataset>
+  <module>hframe</module>
+  <code>hfpm_data_field_DS4Q</code>
+  <entity>hfpm_data_field</entity>
+  <name>数据列【查询】</name>
+  <fields>
+    <field code="hfpm_data_field_id" name="数据列ID" edit-type="input" is-key="true"/>
+    <field code="hfpm_data_field_code" name="数据列编码" edit-type="input"/>
+    <field code="hfpm_field_show_type_id" name="列展示类型ID" edit-type="select">
+      <rel entity-code="hfpm_field_show_type/hfpm_field_show_type_id/hfpm_field_show_type_name"/>
+    </field>
+    <field code="field_show_code" name="列展示码            " edit-type="input"/>
+    <field code="hfmd_entity_id" name="实体ID" edit-type="select">
+      <rel entity-code="hfmd_entity/hfmd_entity_id/hfmd_entity_name"/>
+    </field>
+    <field code="create_edit_auth" name="新增编辑权限" edit-type="input"/>
+    <field code="hfmd_entity_attr_id" name="实体属性ID" edit-type="select">
+      <rel entity-code="hfmd_entity_attr/hfmd_entity_attr_id/hfmd_entity_attr_name" rel-field="hfmd_entity_attr_id"/>
+    </field>
+    <field code="update_edit_auth" name="修改编辑权限" edit-type="input"/>
+    <field code="data_get_method" name="数据获取方式          " edit-type="select">
+      <enum-class code="hfpm_data_field.data_get_method"/>
+    </field>
+    <field code="list_show_auth" name="列表展示权限" edit-type="input"/>
+    <field code="hfpm_data_field_name" name="数据列名称" edit-type="input" is-name="true"/>
+    <field code="detail_show_auth" name="明细展示权限" edit-type="input"/>
+    <field code="hfpm_data_set_id" name="数据集ID" edit-type="select">
+      <rel entity-code="hfpm_data_set/hfpm_data_set_id/hfpm_data_set_name" rel-field="hfmd_entity_id"/>
+    </field>
+    <field code="op_id" name="创建人" edit-type="input">
+      <rel entity-code="hfsec_user/hfsec_user_id/hfsec_user_name"/>
+    </field>
+    <field code="create_time_LEQ" name="创建结束时间" edit-type="datetime"/>
+    <field code="create_time_GEQ" name="创建开始时间" edit-type="datetime"/>
+    <field code="modify_op_id" name="修改人" edit-type="input">
+      <rel entity-code="hfsec_user/hfsec_user_id/hfsec_user_name"/>
+    </field>
+    <field code="modify_time_LEQ" name="修改结束时间" edit-type="datetime"/>
+    <field code="modify_time_GEQ" name="修改开始时间" edit-type="datetime"/>
+    <field code="del_flag" name="删除标识" edit-type="input"/>
+  </fields>
+</dataset>

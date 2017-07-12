@@ -1,0 +1,61 @@
+<dataset>
+  <module>hframe</module>
+  <code>hfpm_program_cfg</code>
+  <entity>hfpm_program_cfg</entity>
+  <name>项目设置</name>
+  <fields>
+    <field code="hfpm_program_cfg_id" name="项目配置ID" edit-type="input" is-key="true" not-null="true">
+      <create-edit-type>hidden</create-edit-type>
+      <update-edit-type>text</update-edit-type>
+    </field>
+    <field code="show_name" name="项目标题" edit-type="input"/>
+    <field code="hfcfg_program_template_id" name="项目模板ID" edit-type="select">
+      <rel entity-code="hfcfg_program_template/hfcfg_program_template_id/program_template_name"/>
+    </field>
+    <field code="hfcfg_program_skin_id" name="项目皮肤ID" edit-type="select">
+      <rel entity-code="hfcfg_program_skin/hfcfg_program_skin_id/program_skin_name" rel-field="hfcfg_program_template_id"/>
+    </field>
+    <field code="hfcfg_login_page_id" name="项目登陆页ID" edit-type="select">
+      <rel entity-code="hfcfg_login_page/hfcfg_login_page_id/hfcfg_login_page_name"/>
+    </field>
+    <field code="bg_img_url" name="背景图片URL" edit-type="input"/>
+    <field code="hfcfg_db_connect_id" name="数据库连接信息id" edit-type="select" not-null="true">
+      <rel entity-code="hfcfg_db_connect/hfcfg_db_connect_id/hfcfg_db_connect_name"/>
+    </field>
+    <field code="hfpm_program_id" name="项目ID" edit-type="hidden">
+      <rel entity-code="hfpm_program/hfpm_program_id/hfpm_program_name"/>
+      <create-edit-type>hidden</create-edit-type>
+      <update-edit-type>hidden</update-edit-type>
+    </field>
+    <field code="user_entity_name" name="用户登录实体" edit-type="muti-select">
+      <rel entity-code="hfmd_entity/hfmd_entity_id/hfmd_entity_name" rel-field="hfpm_program_id"/>
+    </field>
+    <field code="data_entity_name" name="数据权限实体" edit-type="muti-select">
+      <rel entity-code="hfmd_entity/hfmd_entity_id/hfmd_entity_name" rel-field="hfpm_program_id"/>
+    </field>
+    <field code="func_entity_name" name="功能权限实体" edit-type="muti-select">
+      <rel entity-code="hfmd_entity/hfmd_entity_id/hfmd_entity_name" rel-field="hfpm_program_id"/>
+    </field>
+    <field code="user_auth_path" name="用户授权路径" edit-type="muti-select">
+      <rel url="/extend/user_data_path_list.json" rel-field="user_entity_name,data_entity_name"/>
+    </field>
+    <field code="func_auth_path" name="功能授权路径" edit-type="muti-select">
+      <rel url="/extend/user_func_path_list.json" rel-field="user_entity_name,func_entity_name"/>
+    </field>
+    <field code="dictionarys" name="系统字典实体" edit-type="muti-select">
+      <rel entity-code="hfmd_entity/hfmd_entity_id/hfmd_entity_name" rel-field="hfpm_program_id"/>
+    </field>
+    <field code="super_auth_filter_entity" name="超级管理员规则【实体】" edit-type="select">
+      <rel entity-code="hfmd_entity/hfmd_entity_id/hfmd_entity_name" rel-field="hfpm_program_id"/>
+    </field>
+    <field code="super_auth_filter_field" name="超级管理员规则【字段】" edit-type="select">
+      <rel entity-code="hfmd_entity_attr/hfmd_entity_attr_id/hfmd_entity_attr_name" rel-field="super_auth_filter_entity"/>
+    </field>
+    <field code="super_auth_filter_field_value" name="超级管理员规则【字段值】" edit-type="input"/>
+
+    <field code="user_login_data_set" name="用户登录数据集" edit-type="muti-select">
+      <rel entity-code="hfpm_data_set/hfpm_data_set_id/hfpm_data_set_name" rel-field="hfpm_program_id"/>
+    </field>
+
+  </fields>
+</dataset>

@@ -1,0 +1,16 @@
+<dataset>
+  <module>hframe</module>
+  <code>code_diff</code>
+  <entity></entity>
+  <name>模型差异</name>
+  <fields>
+    <field code="classDesc" name="实体名称" edit-type="input" not-null="true"/>
+    <field code="entityCode" name="实体编码" edit-type="input" not-null="true"/>
+    <field code="fieldDesc" name="实体属性名称" edit-type="input" not-null="true"/>
+    <field code="entityAttrCode" name="实体属性编码" edit-type="input" not-null="true"/>
+    <field code="className" name="JAVA类名称" edit-type="input" not-null="true"/>
+    <field code="fieldName" name="JAVA字段名" edit-type="input" not-null="true"/>
+    <field code="fieldType" name="JAVA字段类型" edit-type="input" not-null="true"/>
+    <field code="originFieldType" name="原字段类型" edit-type="input" not-null="true"/>
+  </fields>
+</dataset>

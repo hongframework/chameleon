@@ -1,0 +1,14 @@
+<mapper component-id="leftMenuTree" data-set="uc/user" data-auth="orgId=SELF.orgId">
+    <baseMapper>
+        <mapping id="menus" value="${data}">
+            <mapping id="icon" value="icon-user"></mapping>
+            <mapping id="url" value="${name}列表"></mapping>
+            <mapping id="name" value="${name}树"></mapping>
+            <mapping id="menus" value="${columns}">
+                <mapping id="icon" value="icon-user"></mapping>
+                <mapping id="url" value="${name}"></mapping>
+                <mapping id="name" value="${editType}"></mapping>
+            </mapping>
+        </mapping>
+    </baseMapper>
+</mapper>

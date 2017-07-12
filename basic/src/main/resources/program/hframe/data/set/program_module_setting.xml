@@ -1,0 +1,14 @@
+<dataset>
+  <module>hframe</module>
+  <code>program_module_setting</code>
+  <entity>hfmd_entity</entity>
+  <name>快速导航栏</name>
+  <fields>
+    <field code="hfpm_program_id_PCXT" name="项目名称" edit-type="select">
+      <rel entity-code="hfpm_program/hfpm_program_id/hfpm_program_name"/>
+    </field>
+    <field code="hfpm_module_id_PCXT" name="模块名称" edit-type="select">
+      <rel entity-code="hfpm_module/hfpm_module_id/hfpm_module_name" rel-field="hfpm_program_id_PCXT"/>
+    </field>
+  </fields>
+</dataset>

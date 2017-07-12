@@ -1,0 +1,10 @@
+<mapper component-id="leftMenuTree" data-set="hframe/hfsec_menu" data-auth="orgId=SELF.orgId">
+    <baseMapper>
+        <mapping id="menus" value="${data}">
+            <mapping id="icon" value="icon"></mapping>
+            <mapping id="url" value="url"></mapping>
+            <mapping id="name" value="hfsec_menu_name"></mapping>
+            <mapping id="menus" value="parent"></mapping>
+        </mapping>
+    </baseMapper>
+</mapper>

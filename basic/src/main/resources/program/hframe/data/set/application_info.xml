@@ -1,0 +1,14 @@
+<dataset>
+  <module>hframe</module>
+  <code>application_info</code>
+  <entity></entity>
+  <name>应用信息</name>
+  <fields>
+    <field code="hfpm_program_id" name="项目ID" edit-type="input" not-null="true"/>
+    <field code="hfpm_program_name" name="项目名称" edit-type="input" not-null="true"/>
+    <field code="hfpm_program_code" name="项目编码" edit-type="input" not-null="true"/>
+    <field code="url" name="访问连接" edit-type="input" not-null="true"/>
+    <field code="state" name="状态" edit-type="input" not-null="true"/>
+
+  </fields>
+</dataset>

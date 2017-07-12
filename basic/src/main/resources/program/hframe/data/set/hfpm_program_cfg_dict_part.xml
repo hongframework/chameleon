@@ -1,0 +1,16 @@
+<dataset>
+  <module>hframe</module>
+  <code>hfpm_program_cfg_dict_part</code>
+  <entity>hfpm_program_cfg</entity>
+  <name>项目设置</name>
+  <fields>
+    <field code="dictionary" name="系统字典实体" edit-type="input">
+      <rel entity-code="hfmd_entity/hfmd_entity_id/hfmd_entity_name"/>
+    </field>
+    <field code="dictionary_item" name="系统字典项实体" edit-type="input"/>
+    <field code="hfpm_program_id" name="项目ID" edit-type="input">
+      <rel entity-code="hfpm_program/hfpm_program_id/hfpm_program_name"/>
+    </field>
+    <field code="group_id" name="分组ID" edit-type="input"/>
+  </fields>
+</dataset>

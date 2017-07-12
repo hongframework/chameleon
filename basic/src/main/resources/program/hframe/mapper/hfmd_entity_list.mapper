@@ -1,0 +1,29 @@
+<mapper component-id="list" data-set="hframe/hfmd_entity" data-auth="orgId=SELF.orgId">
+    <baseMapper>
+        <mapping id="id" value="hfmdEntityList"></mapping>
+        <mapping id="icon" value="icon-user"></mapping>
+        <mapping id="title" value="${name}列表"></mapping>
+        <mapping id="columns" value="${columns}">
+            <mapping id="code" value="${code}"></mapping>
+            <mapping id="name" value="${name}"></mapping>
+            <mapping id="type" value="${editType}"></mapping>
+        </mapping>
+        <mapping id="data" value="${data}"></mapping>
+
+        <mapping id="pager" value="${pager}">
+            <mapping id="text" value="${text}"></mapping>
+            <mapping id="value"  value="${value}"></mapping>
+            <mapping id="disabled" value="${disabled}"></mapping>
+            <mapping id="active" value="${active}"></mapping>
+        </mapping>
+    </baseMapper>
+    <eventMapper>
+        <mapping id="id" value="hfmd_entity_id"></mapping>
+        <mapping id="ids" value="hfmd_entity_id"></mapping>
+        <mapping id="name" value="hfmd_entity_name"></mapping>
+        <mapping id="create" value="hfmd_entity_create.html"></mapping>
+        <mapping id="edit" value="hfmd_entity_edit.html"></mapping>
+        <mapping id="detail" value="hfmd_entity_detail.html"></mapping>
+        <mapping id="batchDelete" value="hfmd_entity_batchDelete.html"></mapping>
+    </eventMapper>
+</mapper>

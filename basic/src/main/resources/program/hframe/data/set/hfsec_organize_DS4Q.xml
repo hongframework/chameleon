@@ -1,0 +1,33 @@
+<dataset>
+  <module>hframe</module>
+  <code>hfsec_organize_DS4Q</code>
+  <entity>hfsec_organize</entity>
+  <name>组织【查询】</name>
+  <fields>
+    <field code="hfsec_organize_id" name="组织id" edit-type="hidden" is-key="true" not-null="true"/>
+    <field code="hfsec_organize_code" name="组织编码" edit-type="input" not-null="true"/>
+    <field code="hfsec_organize_name" name="组织名称" edit-type="input" not-null="true"/>
+    <field code="hfsec_organize_type" name="组织类型" edit-type="select">
+      <enum-class code="hfsec_organize.hfsec_organize_type"/>
+    </field>
+    <field code="status" name="状态" edit-type="input">
+      <enum-class code="hfsec_organize.status"/>
+    </field>
+    <field code="hfsec_organize_level" name="组织级别" edit-type="select">
+      <enum-class code="hfsec_organize.hfsec_organize_level"/>
+    </field>
+    <field code="creator_id" name="创建人" edit-type="hidden">
+      <rel entity-code="hfsec_user/hfsec_user_id/hfsec_user_name"/>
+    </field>
+    <field code="parent_hfsec_organize_level" name="上级组织id" edit-type="input">
+      <rel entity-code="hfsec_organize/hfsec_organize_id/hfsec_organize_name"/>
+    </field>
+    <field code="create_time_GEQ" name="创建开始时间" edit-type="hidden"/>
+    <field code="create_time_LEQ" name="创建结束时间" edit-type="hidden"/>
+    <field code="modifier_id" name="修改人" edit-type="hidden">
+      <rel entity-code="hfsec_user/hfsec_user_id/hfsec_user_name"/>
+    </field>
+    <field code="modify_time_GEQ" name="修改开始时间" edit-type="hidden"/>
+    <field code="modify_time_LEQ" name="修改结束时间" edit-type="hidden"/>
+  </fields>
+</dataset>

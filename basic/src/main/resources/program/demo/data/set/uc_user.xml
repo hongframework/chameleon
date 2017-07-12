@@ -1,0 +1,22 @@
+<dataset>
+    <!--<module>uc</module>-->
+    <!--<code>display_user</code>-->
+    <!--<name>用户</name>-->
+    <!--<entity>user</entity>-->
+    <!--<entity>org</entity>-->
+    <!--<fk activity="true" />-->
+    <!--<sql>-->
+        <!--select * from uc_user usr, user_org org where usr.org_id = org.org_id;-->
+    <!--</sql>-->
+    <!--<columns>-->
+        <!--<column name="id"  type="int(11)" value="auto_increment" entity="user"></column>-->
+        <!--<column name="name" type="varchar(100)"  entity="user"></column>-->
+        <!--<column name="gender" type="tinyint(2)" entity="user">-->
+            <!--<enum value="0" name="男"></enum>-->
+            <!--<enum value="1" name="女"></enum>-->
+        <!--</column>-->
+        <!--<column name="address" type="varchar(200)" entity="user"></column>-->
+        <!--<column name="id" alias="orgId" type="varchar(200)" entity="org"></column>-->
+        <!--<column name="name" alias="orgName" type="varchar(200)" entity="org"></column>-->
+    <!--</columns>-->
+</dataset>

@@ -1,0 +1,13 @@
+<dataset>
+  <module>hframe</module>
+  <code>hfcfg_db_connect_select_DS4Q</code>
+  <entity>hfcfg_db_connect</entity>
+  <name>数据库连接信息</name>
+  <fields>
+    <field code="hfcfg_db_connect_id" name="数据库连接信息id" edit-type="select" is-key="true" not-null="true">
+      <rel entity-code="hfcfg_db_connect/hfcfg_db_connect_id/hfcfg_db_connect_name"/>
+      <create-edit-type>text</create-edit-type>
+      <update-edit-type>text</update-edit-type>
+    </field>
+  </fields>
+</dataset>

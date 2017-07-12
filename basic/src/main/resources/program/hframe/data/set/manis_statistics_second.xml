@@ -1,0 +1,72 @@
+<dataset>
+  <module>hframe</module>
+  <code>manis_statistics_second</code>
+  <entity>manis_statistics_second</entity>
+  <name>统计-秒</name>
+  <fields>
+    <field code="PK:code" name="PK:code" edit-type="select" >
+    </field>
+    <field code="PK:id" name="PK:id" edit-type="input" >
+    </field>
+    <field code="infos:0" name="0" edit-type="input"/>
+    <field code="infos:1" name="1" edit-type="input"/>
+    <field code="infos:2" name="2" edit-type="input"/>
+    <field code="infos:3" name="3" edit-type="input"/>
+    <field code="infos:4" name="4" edit-type="input"/>
+    <field code="infos:5" name="5" edit-type="input"/>
+    <field code="infos:6" name="6" edit-type="input"/>
+    <field code="infos:7" name="7" edit-type="input"/>
+    <field code="infos:8" name="8" edit-type="input"/>
+    <field code="infos:9" name="9" edit-type="input"/>
+    <field code="infos:10" name="10" edit-type="input"/>
+    <field code="infos:11" name="11" edit-type="input"/>
+    <field code="infos:12" name="12" edit-type="input"/>
+    <field code="infos:13" name="13" edit-type="input"/>
+    <field code="infos:14" name="14" edit-type="input"/>
+    <field code="infos:15" name="15" edit-type="input"/>
+    <field code="infos:16" name="16" edit-type="input"/>
+    <field code="infos:17" name="17" edit-type="input"/>
+    <field code="infos:18" name="18" edit-type="input"/>
+    <field code="infos:19" name="19" edit-type="input"/>
+    <field code="infos:20" name="20" edit-type="input"/>
+    <field code="infos:21" name="21" edit-type="input"/>
+    <field code="infos:22" name="22" edit-type="input"/>
+    <field code="infos:23" name="23" edit-type="input"/>
+    <field code="infos:24" name="24" edit-type="input"/>
+    <field code="infos:25" name="25" edit-type="input"/>
+    <field code="infos:26" name="26" edit-type="input"/>
+    <field code="infos:27" name="27" edit-type="input"/>
+    <field code="infos:28" name="28" edit-type="input"/>
+    <field code="infos:29" name="29" edit-type="input"/>
+    <field code="infos:30" name="30" edit-type="input"/>
+    <field code="infos:31" name="31" edit-type="input"/>
+    <field code="infos:32" name="32" edit-type="input"/>
+    <field code="infos:33" name="33" edit-type="input"/>
+    <field code="infos:34" name="34" edit-type="input"/>
+    <field code="infos:35" name="35" edit-type="input"/>
+    <field code="infos:36" name="36" edit-type="input"/>
+    <field code="infos:37" name="37" edit-type="input"/>
+    <field code="infos:38" name="38" edit-type="input"/>
+    <field code="infos:39" name="39" edit-type="input"/>
+    <field code="infos:40" name="40" edit-type="input"/>
+    <field code="infos:41" name="41" edit-type="input"/>
+    <field code="infos:42" name="42" edit-type="input"/>
+    <field code="infos:43" name="43" edit-type="input"/>
+    <field code="infos:44" name="44" edit-type="input"/>
+    <field code="infos:45" name="45" edit-type="input"/>
+    <field code="infos:46" name="46" edit-type="input"/>
+    <field code="infos:47" name="47" edit-type="input"/>
+    <field code="infos:48" name="48" edit-type="input"/>
+    <field code="infos:49" name="49" edit-type="input"/>
+    <field code="infos:50" name="50" edit-type="input"/>
+    <field code="infos:51" name="51" edit-type="input"/>
+    <field code="infos:52" name="52" edit-type="input"/>
+    <field code="infos:53" name="53" edit-type="input"/>
+    <field code="infos:54" name="54" edit-type="input"/>
+    <field code="infos:55" name="55" edit-type="input"/>
+    <field code="infos:56" name="56" edit-type="input"/>
+    <field code="infos:57" name="57" edit-type="input"/>
+    <field code="infos:58" name="58" edit-type="input"/>
+    <field code="infos:59" name="59" edit-type="input"/>
+  </fields>
+</dataset>

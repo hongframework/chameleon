@@ -1,0 +1,45 @@
+<dataset>
+  <module>hframe</module>
+  <code>hfsec_role_authorize</code>
+  <entity>hfsec_role_authorize</entity>
+  <name>角色授权【默认】</name>
+  <fields>
+    <field code="hfsec_role_authorize_id" name="角色授权id" edit-type="hidden" is-key="true" not-null="true">
+      <create-edit-type>hidden</create-edit-type>
+      <update-edit-type>hidden</update-edit-type>
+    </field>
+    <field code="hfsec_role_id" name="角色id" edit-type="hidden" not-null="true">
+      <rel entity-code="hfsec_role/hfsec_role_id/hfsec_role_name"/>
+    </field>
+    <field code="hfsec_menu_id" name="菜单ID" edit-type="select">
+      <rel entity-code="hfsec_menu/hfsec_menu_id/hfsec_menu_name" rel-field="hfsec_menu_id"/>
+    </field>
+    <field code="hfsec_role_authorize_type" name="角色授权类型" edit-type="hidden">
+      <enum-class code="hfsec_role_authorize.hfsec_role_authorize_type"/>
+    </field>
+    <field code="operate_event_list" name="操作列表" edit-type="checkbox" width="2">
+      <rel url="/frame/getEventsByFuncId.json" rel-field="hfsec_menu_id" />
+    </field>
+    <field code="status" name="状态" edit-type="switch">
+      <enum-class code="hfsec_role_authorize.status"/>
+    </field>
+    <field code="creator_id" name="创建人" edit-type="hidden">
+      <rel entity-code="hfsec_user/hfsec_user_id/hfsec_user_name" add-by-global="true"/>
+      <create-edit-type>hidden</create-edit-type>
+      <update-edit-type>hidden</update-edit-type>
+    </field>
+    <field code="create_time" name="创建时间" edit-type="hidden">
+      <create-edit-type>hidden</create-edit-type>
+      <update-edit-type>hidden</update-edit-type>
+    </field>
+    <field code="modifier_id" name="修改人" edit-type="hidden">
+      <rel entity-code="hfsec_user/hfsec_user_id/hfsec_user_name"/>
+      <create-edit-type>hidden</create-edit-type>
+      <update-edit-type>hidden</update-edit-type>
+    </field>
+    <field code="modify_time" name="修改时间" edit-type="hidden">
+      <create-edit-type>hidden</create-edit-type>
+      <update-edit-type>hidden</update-edit-type>
+    </field>
+  </fields>
+</dataset>

@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hframe.dao.HfcfgLoginPageMapper" >
+  <resultMap id="BaseResultMap" type="com.hframe.domain.model.HfcfgLoginPage" >
+    <constructor >
+      <idArg column="hfcfg_login_page_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="hfcfg_login_page_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="hfcfg_login_page_code" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="snapshot_url" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="op_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="modify_op_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="modify_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="del_flag" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    hfcfg_login_page_id, hfcfg_login_page_name, hfcfg_login_page_code, snapshot_url, 
+    op_id, create_time, modify_op_id, modify_time, del_flag
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hframe.domain.model.HfcfgLoginPage_Example" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hfcfg_login_page
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitEnd != null and limitEnd != 0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from hfcfg_login_page
+    where hfcfg_login_page_id = #{hfcfgLoginPageId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from hfcfg_login_page
+    where hfcfg_login_page_id = #{hfcfgLoginPageId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hframe.domain.model.HfcfgLoginPage_Example" >
+    delete from hfcfg_login_page
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hframe.domain.model.HfcfgLoginPage" >
+    <selectKey resultType="java.lang.Long" keyProperty="hfcfgLoginPageId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into hfcfg_login_page (hfcfg_login_page_name, hfcfg_login_page_code, 
+      snapshot_url, op_id, create_time, 
+      modify_op_id, modify_time, del_flag
+      )
+    values (#{hfcfgLoginPageName,jdbcType=VARCHAR}, #{hfcfgLoginPageCode,jdbcType=VARCHAR}, 
+      #{snapshotUrl,jdbcType=VARCHAR}, #{opId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{modifyOpId,jdbcType=BIGINT}, #{modifyTime,jdbcType=TIMESTAMP}, #{delFlag,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hframe.domain.model.HfcfgLoginPage" >
+    <selectKey resultType="java.lang.Long" keyProperty="hfcfgLoginPageId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into hfcfg_login_page
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="hfcfgLoginPageName != null" >
+        hfcfg_login_page_name,
+      </if>
+      <if test="hfcfgLoginPageCode != null" >
+        hfcfg_login_page_code,
+      </if>
+      <if test="snapshotUrl != null" >
+        snapshot_url,
+      </if>
+      <if test="opId != null" >
+        op_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="modifyOpId != null" >
+        modify_op_id,
+      </if>
+      <if test="modifyTime != null" >
+        modify_time,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="hfcfgLoginPageName != null" >
+        #{hfcfgLoginPageName,jdbcType=VARCHAR},
+      </if>
+      <if test="hfcfgLoginPageCode != null" >
+        #{hfcfgLoginPageCode,jdbcType=VARCHAR},
+      </if>
+      <if test="snapshotUrl != null" >
+        #{snapshotUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="opId != null" >
+        #{opId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyOpId != null" >
+        #{modifyOpId,jdbcType=BIGINT},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hframe.domain.model.HfcfgLoginPage_Example" resultType="java.lang.Integer" >
+    select count(*) from hfcfg_login_page
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update hfcfg_login_page
+    <set >
+      <if test="record.hfcfgLoginPageId != null" >
+        hfcfg_login_page_id = #{record.hfcfgLoginPageId,jdbcType=BIGINT},
+      </if>
+      <if test="record.hfcfgLoginPageName != null" >
+        hfcfg_login_page_name = #{record.hfcfgLoginPageName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hfcfgLoginPageCode != null" >
+        hfcfg_login_page_code = #{record.hfcfgLoginPageCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.snapshotUrl != null" >
+        snapshot_url = #{record.snapshotUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.opId != null" >
+        op_id = #{record.opId,jdbcType=BIGINT},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifyOpId != null" >
+        modify_op_id = #{record.modifyOpId,jdbcType=BIGINT},
+      </if>
+      <if test="record.modifyTime != null" >
+        modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.delFlag != null" >
+        del_flag = #{record.delFlag,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update hfcfg_login_page
+    set hfcfg_login_page_id = #{record.hfcfgLoginPageId,jdbcType=BIGINT},
+      hfcfg_login_page_name = #{record.hfcfgLoginPageName,jdbcType=VARCHAR},
+      hfcfg_login_page_code = #{record.hfcfgLoginPageCode,jdbcType=VARCHAR},
+      snapshot_url = #{record.snapshotUrl,jdbcType=VARCHAR},
+      op_id = #{record.opId,jdbcType=BIGINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      modify_op_id = #{record.modifyOpId,jdbcType=BIGINT},
+      modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+      del_flag = #{record.delFlag,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hframe.domain.model.HfcfgLoginPage" >
+    update hfcfg_login_page
+    <set >
+      <if test="hfcfgLoginPageName != null" >
+        hfcfg_login_page_name = #{hfcfgLoginPageName,jdbcType=VARCHAR},
+      </if>
+      <if test="hfcfgLoginPageCode != null" >
+        hfcfg_login_page_code = #{hfcfgLoginPageCode,jdbcType=VARCHAR},
+      </if>
+      <if test="snapshotUrl != null" >
+        snapshot_url = #{snapshotUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="opId != null" >
+        op_id = #{opId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyOpId != null" >
+        modify_op_id = #{modifyOpId,jdbcType=BIGINT},
+      </if>
+      <if test="modifyTime != null" >
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=INTEGER},
+      </if>
+    </set>
+    where hfcfg_login_page_id = #{hfcfgLoginPageId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hframe.domain.model.HfcfgLoginPage" >
+    update hfcfg_login_page
+    set hfcfg_login_page_name = #{hfcfgLoginPageName,jdbcType=VARCHAR},
+      hfcfg_login_page_code = #{hfcfgLoginPageCode,jdbcType=VARCHAR},
+      snapshot_url = #{snapshotUrl,jdbcType=VARCHAR},
+      op_id = #{opId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_op_id = #{modifyOpId,jdbcType=BIGINT},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      del_flag = #{delFlag,jdbcType=INTEGER}
+    where hfcfg_login_page_id = #{hfcfgLoginPageId,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hframe.dao.HfmdEntityAttrMapper" >
+  <resultMap id="BaseResultMap" type="com.hframe.domain.model.HfmdEntityAttr" >
+    <constructor >
+      <idArg column="hfmd_entity_attr_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="hfmd_entity_attr_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="hfmd_entity_attr_code" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="hfmd_entity_attr_desc" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="attr_type" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="size" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ispk" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="nullable" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="is_busi_attr" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="is_redundant_attr" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="rel_hfmd_entity_attr_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="hfmd_enum_class_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="pri" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="hfpm_program_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="hfpm_module_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="hfmd_entity_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="op_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="modify_op_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="modify_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="del_flag" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    hfmd_entity_attr_id, hfmd_entity_attr_name, hfmd_entity_attr_code, hfmd_entity_attr_desc, 
+    attr_type, size, ispk, nullable, is_busi_attr, is_redundant_attr, rel_hfmd_entity_attr_id, 
+    hfmd_enum_class_id, pri, hfpm_program_id, hfpm_module_id, hfmd_entity_id, op_id, 
+    create_time, modify_op_id, modify_time, del_flag
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hframe.domain.model.HfmdEntityAttr_Example" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hfmd_entity_attr
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitEnd != null and limitEnd != 0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from hfmd_entity_attr
+    where hfmd_entity_attr_id = #{hfmdEntityAttrId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from hfmd_entity_attr
+    where hfmd_entity_attr_id = #{hfmdEntityAttrId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hframe.domain.model.HfmdEntityAttr_Example" >
+    delete from hfmd_entity_attr
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hframe.domain.model.HfmdEntityAttr" >
+    <selectKey resultType="java.lang.Long" keyProperty="hfmdEntityAttrId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into hfmd_entity_attr (hfmd_entity_attr_name, hfmd_entity_attr_code, 
+      hfmd_entity_attr_desc, attr_type, size, 
+      ispk, nullable, is_busi_attr, 
+      is_redundant_attr, rel_hfmd_entity_attr_id, hfmd_enum_class_id, 
+      pri, hfpm_program_id, hfpm_module_id, 
+      hfmd_entity_id, op_id, create_time, 
+      modify_op_id, modify_time, del_flag
+      )
+    values (#{hfmdEntityAttrName,jdbcType=VARCHAR}, #{hfmdEntityAttrCode,jdbcType=VARCHAR}, 
+      #{hfmdEntityAttrDesc,jdbcType=VARCHAR}, #{attrType,jdbcType=INTEGER}, #{size,jdbcType=VARCHAR}, 
+      #{ispk,jdbcType=INTEGER}, #{nullable,jdbcType=INTEGER}, #{isBusiAttr,jdbcType=INTEGER}, 
+      #{isRedundantAttr,jdbcType=INTEGER}, #{relHfmdEntityAttrId,jdbcType=BIGINT}, #{hfmdEnumClassId,jdbcType=BIGINT}, 
+      #{pri,jdbcType=DECIMAL}, #{hfpmProgramId,jdbcType=BIGINT}, #{hfpmModuleId,jdbcType=BIGINT}, 
+      #{hfmdEntityId,jdbcType=BIGINT}, #{opId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{modifyOpId,jdbcType=BIGINT}, #{modifyTime,jdbcType=TIMESTAMP}, #{delFlag,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hframe.domain.model.HfmdEntityAttr" >
+    <selectKey resultType="java.lang.Long" keyProperty="hfmdEntityAttrId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into hfmd_entity_attr
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="hfmdEntityAttrName != null" >
+        hfmd_entity_attr_name,
+      </if>
+      <if test="hfmdEntityAttrCode != null" >
+        hfmd_entity_attr_code,
+      </if>
+      <if test="hfmdEntityAttrDesc != null" >
+        hfmd_entity_attr_desc,
+      </if>
+      <if test="attrType != null" >
+        attr_type,
+      </if>
+      <if test="size != null" >
+        size,
+      </if>
+      <if test="ispk != null" >
+        ispk,
+      </if>
+      <if test="nullable != null" >
+        nullable,
+      </if>
+      <if test="isBusiAttr != null" >
+        is_busi_attr,
+      </if>
+      <if test="isRedundantAttr != null" >
+        is_redundant_attr,
+      </if>
+      <if test="relHfmdEntityAttrId != null" >
+        rel_hfmd_entity_attr_id,
+      </if>
+      <if test="hfmdEnumClassId != null" >
+        hfmd_enum_class_id,
+      </if>
+      <if test="pri != null" >
+        pri,
+      </if>
+      <if test="hfpmProgramId != null" >
+        hfpm_program_id,
+      </if>
+      <if test="hfpmModuleId != null" >
+        hfpm_module_id,
+      </if>
+      <if test="hfmdEntityId != null" >
+        hfmd_entity_id,
+      </if>
+      <if test="opId != null" >
+        op_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="modifyOpId != null" >
+        modify_op_id,
+      </if>
+      <if test="modifyTime != null" >
+        modify_time,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="hfmdEntityAttrName != null" >
+        #{hfmdEntityAttrName,jdbcType=VARCHAR},
+      </if>
+      <if test="hfmdEntityAttrCode != null" >
+        #{hfmdEntityAttrCode,jdbcType=VARCHAR},
+      </if>
+      <if test="hfmdEntityAttrDesc != null" >
+        #{hfmdEntityAttrDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="attrType != null" >
+        #{attrType,jdbcType=INTEGER},
+      </if>
+      <if test="size != null" >
+        #{size,jdbcType=VARCHAR},
+      </if>
+      <if test="ispk != null" >
+        #{ispk,jdbcType=INTEGER},
+      </if>
+      <if test="nullable != null" >
+        #{nullable,jdbcType=INTEGER},
+      </if>
+      <if test="isBusiAttr != null" >
+        #{isBusiAttr,jdbcType=INTEGER},
+      </if>
+      <if test="isRedundantAttr != null" >
+        #{isRedundantAttr,jdbcType=INTEGER},
+      </if>
+      <if test="relHfmdEntityAttrId != null" >
+        #{relHfmdEntityAttrId,jdbcType=BIGINT},
+      </if>
+      <if test="hfmdEnumClassId != null" >
+        #{hfmdEnumClassId,jdbcType=BIGINT},
+      </if>
+      <if test="pri != null" >
+        #{pri,jdbcType=DECIMAL},
+      </if>
+      <if test="hfpmProgramId != null" >
+        #{hfpmProgramId,jdbcType=BIGINT},
+      </if>
+      <if test="hfpmModuleId != null" >
+        #{hfpmModuleId,jdbcType=BIGINT},
+      </if>
+      <if test="hfmdEntityId != null" >
+        #{hfmdEntityId,jdbcType=BIGINT},
+      </if>
+      <if test="opId != null" >
+        #{opId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyOpId != null" >
+        #{modifyOpId,jdbcType=BIGINT},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hframe.domain.model.HfmdEntityAttr_Example" resultType="java.lang.Integer" >
+    select count(*) from hfmd_entity_attr
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update hfmd_entity_attr
+    <set >
+      <if test="record.hfmdEntityAttrId != null" >
+        hfmd_entity_attr_id = #{record.hfmdEntityAttrId,jdbcType=BIGINT},
+      </if>
+      <if test="record.hfmdEntityAttrName != null" >
+        hfmd_entity_attr_name = #{record.hfmdEntityAttrName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hfmdEntityAttrCode != null" >
+        hfmd_entity_attr_code = #{record.hfmdEntityAttrCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hfmdEntityAttrDesc != null" >
+        hfmd_entity_attr_desc = #{record.hfmdEntityAttrDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attrType != null" >
+        attr_type = #{record.attrType,jdbcType=INTEGER},
+      </if>
+      <if test="record.size != null" >
+        size = #{record.size,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ispk != null" >
+        ispk = #{record.ispk,jdbcType=INTEGER},
+      </if>
+      <if test="record.nullable != null" >
+        nullable = #{record.nullable,jdbcType=INTEGER},
+      </if>
+      <if test="record.isBusiAttr != null" >
+        is_busi_attr = #{record.isBusiAttr,jdbcType=INTEGER},
+      </if>
+      <if test="record.isRedundantAttr != null" >
+        is_redundant_attr = #{record.isRedundantAttr,jdbcType=INTEGER},
+      </if>
+      <if test="record.relHfmdEntityAttrId != null" >
+        rel_hfmd_entity_attr_id = #{record.relHfmdEntityAttrId,jdbcType=BIGINT},
+      </if>
+      <if test="record.hfmdEnumClassId != null" >
+        hfmd_enum_class_id = #{record.hfmdEnumClassId,jdbcType=BIGINT},
+      </if>
+      <if test="record.pri != null" >
+        pri = #{record.pri,jdbcType=DECIMAL},
+      </if>
+      <if test="record.hfpmProgramId != null" >
+        hfpm_program_id = #{record.hfpmProgramId,jdbcType=BIGINT},
+      </if>
+      <if test="record.hfpmModuleId != null" >
+        hfpm_module_id = #{record.hfpmModuleId,jdbcType=BIGINT},
+      </if>
+      <if test="record.hfmdEntityId != null" >
+        hfmd_entity_id = #{record.hfmdEntityId,jdbcType=BIGINT},
+      </if>
+      <if test="record.opId != null" >
+        op_id = #{record.opId,jdbcType=BIGINT},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifyOpId != null" >
+        modify_op_id = #{record.modifyOpId,jdbcType=BIGINT},
+      </if>
+      <if test="record.modifyTime != null" >
+        modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.delFlag != null" >
+        del_flag = #{record.delFlag,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update hfmd_entity_attr
+    set hfmd_entity_attr_id = #{record.hfmdEntityAttrId,jdbcType=BIGINT},
+      hfmd_entity_attr_name = #{record.hfmdEntityAttrName,jdbcType=VARCHAR},
+      hfmd_entity_attr_code = #{record.hfmdEntityAttrCode,jdbcType=VARCHAR},
+      hfmd_entity_attr_desc = #{record.hfmdEntityAttrDesc,jdbcType=VARCHAR},
+      attr_type = #{record.attrType,jdbcType=INTEGER},
+      size = #{record.size,jdbcType=VARCHAR},
+      ispk = #{record.ispk,jdbcType=INTEGER},
+      nullable = #{record.nullable,jdbcType=INTEGER},
+      is_busi_attr = #{record.isBusiAttr,jdbcType=INTEGER},
+      is_redundant_attr = #{record.isRedundantAttr,jdbcType=INTEGER},
+      rel_hfmd_entity_attr_id = #{record.relHfmdEntityAttrId,jdbcType=BIGINT},
+      hfmd_enum_class_id = #{record.hfmdEnumClassId,jdbcType=BIGINT},
+      pri = #{record.pri,jdbcType=DECIMAL},
+      hfpm_program_id = #{record.hfpmProgramId,jdbcType=BIGINT},
+      hfpm_module_id = #{record.hfpmModuleId,jdbcType=BIGINT},
+      hfmd_entity_id = #{record.hfmdEntityId,jdbcType=BIGINT},
+      op_id = #{record.opId,jdbcType=BIGINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      modify_op_id = #{record.modifyOpId,jdbcType=BIGINT},
+      modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+      del_flag = #{record.delFlag,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hframe.domain.model.HfmdEntityAttr" >
+    update hfmd_entity_attr
+    <set >
+      <if test="hfmdEntityAttrName != null" >
+        hfmd_entity_attr_name = #{hfmdEntityAttrName,jdbcType=VARCHAR},
+      </if>
+      <if test="hfmdEntityAttrCode != null" >
+        hfmd_entity_attr_code = #{hfmdEntityAttrCode,jdbcType=VARCHAR},
+      </if>
+      <if test="hfmdEntityAttrDesc != null" >
+        hfmd_entity_attr_desc = #{hfmdEntityAttrDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="attrType != null" >
+        attr_type = #{attrType,jdbcType=INTEGER},
+      </if>
+      <if test="size != null" >
+        size = #{size,jdbcType=VARCHAR},
+      </if>
+      <if test="ispk != null" >
+        ispk = #{ispk,jdbcType=INTEGER},
+      </if>
+      <if test="nullable != null" >
+        nullable = #{nullable,jdbcType=INTEGER},
+      </if>
+      <if test="isBusiAttr != null" >
+        is_busi_attr = #{isBusiAttr,jdbcType=INTEGER},
+      </if>
+      <if test="isRedundantAttr != null" >
+        is_redundant_attr = #{isRedundantAttr,jdbcType=INTEGER},
+      </if>
+      <if test="relHfmdEntityAttrId != null" >
+        rel_hfmd_entity_attr_id = #{relHfmdEntityAttrId,jdbcType=BIGINT},
+      </if>
+      <if test="hfmdEnumClassId != null" >
+        hfmd_enum_class_id = #{hfmdEnumClassId,jdbcType=BIGINT},
+      </if>
+      <if test="pri != null" >
+        pri = #{pri,jdbcType=DECIMAL},
+      </if>
+      <if test="hfpmProgramId != null" >
+        hfpm_program_id = #{hfpmProgramId,jdbcType=BIGINT},
+      </if>
+      <if test="hfpmModuleId != null" >
+        hfpm_module_id = #{hfpmModuleId,jdbcType=BIGINT},
+      </if>
+      <if test="hfmdEntityId != null" >
+        hfmd_entity_id = #{hfmdEntityId,jdbcType=BIGINT},
+      </if>
+      <if test="opId != null" >
+        op_id = #{opId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyOpId != null" >
+        modify_op_id = #{modifyOpId,jdbcType=BIGINT},
+      </if>
+      <if test="modifyTime != null" >
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=INTEGER},
+      </if>
+    </set>
+    where hfmd_entity_attr_id = #{hfmdEntityAttrId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hframe.domain.model.HfmdEntityAttr" >
+    update hfmd_entity_attr
+    set hfmd_entity_attr_name = #{hfmdEntityAttrName,jdbcType=VARCHAR},
+      hfmd_entity_attr_code = #{hfmdEntityAttrCode,jdbcType=VARCHAR},
+      hfmd_entity_attr_desc = #{hfmdEntityAttrDesc,jdbcType=VARCHAR},
+      attr_type = #{attrType,jdbcType=INTEGER},
+      size = #{size,jdbcType=VARCHAR},
+      ispk = #{ispk,jdbcType=INTEGER},
+      nullable = #{nullable,jdbcType=INTEGER},
+      is_busi_attr = #{isBusiAttr,jdbcType=INTEGER},
+      is_redundant_attr = #{isRedundantAttr,jdbcType=INTEGER},
+      rel_hfmd_entity_attr_id = #{relHfmdEntityAttrId,jdbcType=BIGINT},
+      hfmd_enum_class_id = #{hfmdEnumClassId,jdbcType=BIGINT},
+      pri = #{pri,jdbcType=DECIMAL},
+      hfpm_program_id = #{hfpmProgramId,jdbcType=BIGINT},
+      hfpm_module_id = #{hfpmModuleId,jdbcType=BIGINT},
+      hfmd_entity_id = #{hfmdEntityId,jdbcType=BIGINT},
+      op_id = #{opId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_op_id = #{modifyOpId,jdbcType=BIGINT},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      del_flag = #{delFlag,jdbcType=INTEGER}
+    where hfmd_entity_attr_id = #{hfmdEntityAttrId,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,33 @@
+<module code="uc">
+    <page id="userQuery1" name="用户查询" page-template="list" data-set="uc/user">
+        <component id="qForm" data-set="uc/user"></component>
+        <component id="list" data-set="uc/user"></component>
+    </page>
+    <page id="userCreate" name="用户创建" page-template="list" data-set="uc/user"></page>
+    <page id="userQuery" name="用户查询" page-template="list" data-set="uc/user">
+        <component id="qForm" data-set="uc/user">
+            <event name="delete">
+                <attach anchor="EOFR">
+                    <appendElement type="icon" param='{fillclass:"btn-success",iconclass:"icon-zoom-in"}'></appendElement>
+                </attach>
+                <source scope="CROW" param='${id}'></source>
+                <effect type="dialogTip" param='你是否删除${name}该数据!'></effect>
+                <effect type="ajaxSubmit" action="${delete}"></effect>
+                <effect type="component.reload"></effect>
+            </event>
+            <event name="delete">
+                <attach anchor="EOFR">
+                    <appendElement type="icon" param='{fillclass:"btn-success",iconclass:"icon-zoom-in"}'></appendElement>
+                </attach>
+                <source scope="CROW" param='${id}'></source>
+                <effect type="dialogTip" param='你是否删除${name}该数据!'></effect>
+                <effect type="ajaxSubmit" action="${delete}"></effect>
+                <effect type="component.reload"></effect>
+            </event>
+        </component>
+        <component id="list" data-set="uc/user">
+            <event></event>
+        </component>
+        <event></event>
+    </page>
+</module>

@@ -1,0 +1,20 @@
+<program>
+    <code>studentManageSystem</code>
+    <name>学生管理系统</name>
+    <description>改系统对学习的各项进行进行统一的管理</description>
+    <modules>
+        <module code="pc" name="产品中心"></module>
+        <module code="uc" name="用户中心"></module>
+        <module code="tc" name="订单中心"></module>
+        <module code="rc" name="资源中心"></module>
+    </modules>
+    <template>
+        <path>hframework.template.default</path>
+    </template>
+    <welcome>uc/login.html</welcome>
+    <superManager>
+        <code>admin</code>
+        <password>admin</password>
+        <name>草鸡管理员</name>
+    </superManager>
+</program>

@@ -1,0 +1,241 @@
+<module code="hframe">
+  <page id="hfmd_entity_mgr" name="实体管理" page-template="qlist" data-set="hframe/hfmd_entity">
+    <component id="qForm" data-set="hframe/hfmd_entity_DS4Q"/>
+  </page>
+  <page id="hfmd_entity_create" name="实体添加" page-template="cComb" data-set="hframe/hfmd_entity">
+    <component id="cForm" data-set="hframe/hfmd_entity"/>
+    <component id="cList" data-set="hframe/hfmd_entity_attr"/>
+  </page>
+  <page id="hfmd_entity_edit" name="实体修改" page-template="eComb" data-set="hframe/hfmd_entity">
+    <component id="eForm" data-set="hframe/hfmd_entity"/>
+    <component id="eList" data-set="hframe/hfmd_entity_attr"/>
+  </page>
+  <page id="hfmd_entity_detail" name="实体查看" page-template="dComb" data-set="hframe/hfmd_entity">
+    <component id="dForm" data-set="hframe/hfmd_entity"/>
+    <component id="qList" data-set="hframe/hfmd_entity_attr"/>
+  </page>
+  <!--<page id="hfsec_menu_mgr" name="菜单管理" page-template="qlist" data-set="hframe/hfsec_menu">-->
+    <!--<component id="qForm" data-set="hframe/hfsec_menu_DS4Q"/>-->
+  <!--</page>-->
+  <page id="hfsec_menu_create" name="菜单创建" page-template="create" data-set="hframe/hfsec_menu"/>
+  <page id="hfsec_menu_edit" name="菜单修改" page-template="edit" data-set="hframe/hfsec_menu"/>
+  <page id="hfsec_menu_detail" name="菜单明细" page-template="edit" data-set="hframe/hfsec_menu"/>
+  <!--<page id="hfpm_program_cfg_mgr" name="项目设置管理" page-template="qlist" data-set="hframe/hfpm_program_cfg">-->
+    <!--<component id="qForm" data-set="hframe/hfpm_program_cfg_DS4Q"/>-->
+  <!--</page>-->
+  <page id="hfpm_program_cfg_create" name="项目设置添加" page-template="create" data-set="hframe/hfpm_program_cfg">
+  </page>
+  <page id="hfpm_program_cfg_edit" name="项目设置修改" page-template="edit" data-set="hframe/hfpm_program_cfg">
+  </page>
+  <page id="hfpm_program_cfg_detail" name="项目设置查看" page-template="edit" data-set="hframe/hfpm_program_cfg">
+  </page>
+  <page id="hfpm_program_mgr" name="项目管理" page-template="qlist" data-set="hframe/hfpm_program">
+    <component id="qForm" data-set="hframe/hfpm_program_DS4Q"/>
+  </page>
+  <page id="hfpm_program_create" name="项目添加" page-template="cComb" data-set="hframe/hfpm_program">
+    <component id="cForm" data-set="hframe/hfpm_program"/>
+    <component id="cList" data-set="hframe/hfpm_module"/>
+  </page>
+  <page id="hfpm_program_edit" name="项目修改" page-template="eComb" data-set="hframe/hfpm_program">
+    <component id="eForm" data-set="hframe/hfpm_program"/>
+    <component id="eList" data-set="hframe/hfpm_module"/>
+  </page>
+  <page id="hfpm_program_detail" name="项目查看" page-template="dComb" data-set="hframe/hfpm_program">
+    <component id="dForm" data-set="hframe/hfpm_program"/>
+    <component id="qList" data-set="hframe/hfpm_module"/>
+  </page>
+  <page id="hfmd_enum_class_mgr" name="枚举类目管理" page-template="qlist" data-set="hframe/hfmd_enum_class">
+    <component id="qForm" data-set="hframe/hfmd_enum_class_DS4Q"/>
+  </page>
+  <page id="hfmd_enum_class_create" name="枚举类目添加" page-template="cComb" data-set="hframe/hfmd_enum_class">
+    <component id="cForm" data-set="hframe/hfmd_enum_class"/>
+    <component id="cList" data-set="hframe/hfmd_enum"/>
+  </page>
+  <page id="hfmd_enum_class_edit" name="枚举类目修改" page-template="eComb" data-set="hframe/hfmd_enum_class">
+    <component id="eForm" data-set="hframe/hfmd_enum_class"/>
+    <component id="eList" data-set="hframe/hfmd_enum"/>
+  </page>
+  <page id="hfmd_enum_class_detail" name="枚举类目查看" page-template="dComb" data-set="hframe/hfmd_enum_class">
+    <component id="dForm" data-set="hframe/hfmd_enum_class"/>
+    <component id="qList" data-set="hframe/hfmd_enum"/>
+  </page>
+  <page id="hfpm_data_set_mgr" name="数据集管理" page-template="qlist" data-set="hframe/hfpm_data_set">
+    <component id="qForm" data-set="hframe/hfpm_data_set_DS4Q"/>
+    <component id="qList" data-set="hframe/hfpm_data_set" event-extend="true">
+      <!--<event rel="#BOFC.goto.create"/>-->
+      <!--<event rel="#EOFR.goto.edit"/>-->
+      <!--<event rel="#EOFR.confirm.delete"/>-->
+
+      <event rel="#ELE.goto.detail"></event>
+    </component>
+  </page>
+  <page id="hfpm_data_set_create" name="数据集添加" page-template="cComb" data-set="hframe/hfpm_data_set">
+    <component id="cForm" data-set="hframe/hfpm_data_set"/>
+    <component id="cList" data-set="hframe/hfpm_data_field"/>
+  </page>
+  <page id="hfpm_data_set_edit" name="数据集修改" page-template="eComb" data-set="hframe/hfpm_data_set">
+    <component id="eForm" data-set="hframe/hfpm_data_set"/>
+    <component id="eList" data-set="hframe/hfpm_data_field"/>
+  </page>
+  <page id="hfpm_data_set_detail" name="数据集查看" page-template="dComb" data-set="hframe/hfpm_data_set">
+    <component id="dForm" data-set="hframe/hfpm_data_set"/>
+    <component id="qList" data-set="hframe/hfpm_data_field">
+      <event name="goto_event_page">
+        <pre-handle case="workfowModelId" when="NotBlank"></pre-handle>
+        <attach anchor="EOFR">
+          <appendElement type="icon" param='{fillclass:"btn-info",iconclass:"icon-retweet"}'></appendElement>
+        </attach>
+        <source scope="CROW" param="modelId={workfowModelId}"></source>
+        <effect type="openPage" action='/modeler.html' isStack="true"></effect>
+        <effect type="component.reload"></effect>
+      </event>
+    </component>
+  </page>
+  <page id="hfpm_page_mgr" name="页面管理" page-template="qlist" data-set="hframe/hfpm_page">
+    <component id="qForm" data-set="hframe/hfpm_page_DS4Q"/>
+    <component id="qList" data-set="hframe/hfpm_page" event-extend="false">
+      <event rel="#EOFR.goto.create"/>
+      <event rel="#EOFR.goto.edit"/>
+      <event rel="#EOFR.confirm.delete"/>
+      <event name="goto_event_page">
+        <attach anchor="EOFR">
+          <appendElement type="icon" param='{fillclass:"btn-info",iconclass:"icon-edit"}'></appendElement>
+        </attach>
+        <source scope="CROW" param="${id}"></source>
+        <effect type="pageFwd" action='${edit}' isStack="true"></effect>
+        <effect type="component.reload"></effect>
+      </event>
+      <event rel="#ELE.goto.detail"></event>
+    </component>
+  </page>
+  <page id="hfpm_page_create" name="页面添加" page-template="cComb" data-set="hframe/hfpm_page">
+    <component id="cForm" data-set="hframe/hfpm_page"/>
+    <component id="cList" data-set="hframe/hfpm_page_component"/>
+  </page>
+  <page id="hfpm_page_edit" name="页面修改" page-template="eComb" data-set="hframe/hfpm_page">
+    <component id="eForm" data-set="hframe/hfpm_page"/>
+    <component id="eList" data-set="hframe/hfpm_page_component"/>
+  </page>
+  <page id="hfpm_page_detail" name="页面查看" page-template="dComb" data-set="hframe/hfpm_page">
+    <component id="dForm" data-set="hframe/hfpm_page"/>
+    <component id="qList" data-set="hframe/hfpm_page_component"/>
+  </page>
+  <page id="hfus_entity_attr_mgr" name="常用实体属性管理" page-template="qlist" data-set="hframe/hfus_entity_attr">
+    <component id="qForm" data-set="hframe/hfus_entity_attr_DS4Q"/>
+  </page>
+  <page id="hfus_entity_attr_create" name="常用实体属性创建" page-template="create" data-set="hframe/hfus_entity_attr"/>
+  <page id="hfus_entity_attr_edit" name="常用实体属性修改" page-template="edit" data-set="hframe/hfus_entity_attr"/>
+  <page id="hfus_entity_attr_detail" name="常用实体属性明细" page-template="edit" data-set="hframe/hfus_entity_attr"/>
+  <page id="hfcfg_program_template_mgr" name="项目模板管理" page-template="qlist" data-set="hframe/hfcfg_program_template">
+    <component id="qForm" data-set="hframe/hfcfg_program_template_DS4Q"/>
+  </page>
+  <page id="hfcfg_program_template_create" name="项目模板创建" page-template="create" data-set="hframe/hfcfg_program_template"/>
+  <page id="hfcfg_program_template_edit" name="项目模板修改" page-template="edit" data-set="hframe/hfcfg_program_template"/>
+  <page id="hfcfg_program_template_detail" name="项目模板明细" page-template="edit" data-set="hframe/hfcfg_program_template"/>
+  <page id="hfcfg_page_template_mgr" name="页面模板管理" page-template="qlist" data-set="hframe/hfcfg_page_template">
+    <component id="qForm" data-set="hframe/hfcfg_page_template_DS4Q"/>
+  </page>
+  <page id="hfcfg_page_template_create" name="页面模板添加" page-template="cComb" data-set="hframe/hfcfg_page_template">
+    <component id="cForm" data-set="hframe/hfcfg_page_template"/>
+    <component id="cList" data-set="hframe/hfcfg_page_template_elements"/>
+  </page>
+  <page id="hfcfg_page_template_edit" name="页面模板修改" page-template="eComb" data-set="hframe/hfcfg_page_template">
+    <component id="eForm" data-set="hframe/hfcfg_page_template"/>
+    <component id="eList" data-set="hframe/hfcfg_page_template_elements"/>
+  </page>
+  <page id="hfcfg_page_template_detail" name="页面模板查看" page-template="dComb" data-set="hframe/hfcfg_page_template">
+    <component id="dForm" data-set="hframe/hfcfg_page_template"/>
+    <component id="qList" data-set="hframe/hfcfg_page_template_elements"/>
+  </page>
+  <page id="hfcfg_component_template_mgr" name="组件模板管理" page-template="qlist" data-set="hframe/hfcfg_component_template">
+    <component id="qForm" data-set="hframe/hfcfg_component_template_DS4Q"/>
+  </page>
+  <page id="hfcfg_component_template_create" name="组件模板创建" page-template="create" data-set="hframe/hfcfg_component_template"/>
+  <page id="hfcfg_component_template_edit" name="组件模板修改" page-template="edit" data-set="hframe/hfcfg_component_template"/>
+  <page id="hfcfg_component_template_detail" name="组件模板明细" page-template="edit" data-set="hframe/hfcfg_component_template"/>
+
+  <page id="hfsec_user_mgr" name="用户管理" page-template="qlist" data-set="hframe/hfsec_user">
+    <component id="qForm" data-set="hframe/hfsec_user_DS4Q" />
+    <component id="qList" data-set="hframe/hfsec_user" event-extend="false">
+      <event rel="#EOFR.goto.create"/>
+      <event rel="#EOFR.goto.edit"/>
+      <event rel="#EOFR.confirm.on">
+        <pre-handle case="status" when="0" then="1"></pre-handle>
+      </event>
+      <event rel="#EOFR.confirm.off">
+        <pre-handle case="status" when="1" then="0"></pre-handle>
+      </event>
+      <event rel="#ELE.goto.detail"></event>
+    </component>
+  </page>
+  <page id="hfsec_user_create" name="用户添加" page-template="cComb" data-set="hframe/hfsec_user" rel-page="hfsec_user_mgr">
+    <component id="cForm" data-set="hframe/hfsec_user"/>
+    <component id="cList" data-set="hframe/hfsec_user_authorize"/>
+  </page>
+  <page id="hfsec_user_edit" name="用户修改" page-template="eComb" data-set="hframe/hfsec_user" rel-page="hfsec_user_mgr">
+    <component id="eForm" data-set="hframe/hfsec_user"/>
+    <component id="eList" data-set="hframe/hfsec_user_authorize"/>
+  </page>
+  <page id="hfsec_user_detail" name="用户查看" page-template="dComb" data-set="hframe/hfsec_user" rel-page="hfsec_user_mgr">
+    <component id="dForm" data-set="hframe/hfsec_user"/>
+    <component id="qList" data-set="hframe/hfsec_user_authorize"/>
+  </page>
+  <page id="hfus_word_store_mgr" name="单词库管理" page-template="qlist" data-set="hframe/hfus_word_store">
+    <component id="qForm" data-set="hframe/hfus_word_store_DS4Q"/>
+  </page>
+  <page id="hfus_word_store_create" name="单词库创建" page-template="create" data-set="hframe/hfus_word_store"/>
+  <page id="hfus_word_store_edit" name="单词库修改" page-template="edit" data-set="hframe/hfus_word_store"/>
+  <page id="hfus_word_store_detail" name="单词库明细" page-template="edit" data-set="hframe/hfus_word_store"/>
+  <page id="hfcfg_db_connect_mgr" name="数据库连接信息管理" page-template="qlist" data-set="hframe/hfcfg_db_connect">
+    <component id="qForm" data-set="hframe/hfcfg_db_connect_DS4Q"/>
+  </page>
+  <page id="hfcfg_db_connect_create" name="数据库连接信息创建" page-template="create" data-set="hframe/hfcfg_db_connect"/>
+  <page id="hfcfg_db_connect_edit" name="数据库连接信息修改" page-template="edit" data-set="hframe/hfcfg_db_connect"/>
+  <page id="hfcfg_db_connect_detail" name="数据库连接信息明细" page-template="edit" data-set="hframe/hfcfg_db_connect"/>
+
+
+  <page id="hfsec_organize_create" name="组织创建" page-template="create" data-set="hframe/hfsec_organize"/>
+  <page id="hfsec_organize_edit" name="组织修改" page-template="edit" data-set="hframe/hfsec_organize"/>
+  <page id="hfsec_organize_detail" name="组织明细" page-template="edit" data-set="hframe/hfsec_organize"/>
+  <page id="hfsec_role_mgr" name="角色管理" page-template="qlist" data-set="hframe/hfsec_role">
+    <component id="qForm" data-set="hframe/hfsec_role_DS4Q"/>
+  </page>
+  <page id="hfsec_role_create" name="角色添加" page-template="cComb" data-set="hframe/hfsec_role">
+    <component id="cForm" data-set="hframe/hfsec_role"/>
+    <component id="cList" data-set="hframe/hfsec_role_authorize"/>
+  </page>
+  <page id="hfsec_role_edit" name="角色修改" page-template="dynamic" data-set="hframe/hfsec_role">
+    <component id="eForm" data-set="hframe/hfsec_role"/>
+    <component id="eTList" data-set="hframe/hfsec_role_authorize" event-extend="false">
+      <event name="submit" description="提交">
+        <attach anchor="EOFC">
+          <appendElement type="button" param='{btnclass:"btn-primary",btnText:" 提 交 "}'></appendElement>
+        </attach>
+        <source scope="EOC" param="thisForm"></source>
+        <effect type="ajaxSubmitByJson" action="ajaxSubmits.json" target-id="eForm,eTList"></effect>
+        <effect type="page.reload"></effect>
+      </event>
+    </component>
+  </page>
+  <page id="hfsec_role_detail" name="角色查看" page-template="dComb" data-set="hframe/hfsec_role">
+    <component id="dForm" data-set="hframe/hfsec_role"/>
+    <component id="qList" data-set="hframe/hfsec_role_authorize"/>
+  </page>
+
+  <page id="hfus_entity_store_mgr" name="常用实体库管理" page-template="qlist" data-set="hframe/hfus_entity_store">
+    <component id="qForm" data-set="hframe/hfus_entity_store_DS4Q"/>
+  </page>
+  <page id="hfus_entity_store_create" name="常用实体库创建" page-template="create" data-set="hframe/hfus_entity_store" rel-page="hframe/hfus_entity_store_mgr"/>
+  <page id="hfus_entity_store_edit" name="常用实体库修改" page-template="edit" data-set="hframe/hfus_entity_store" rel-page="hframe/hfus_entity_store_mgr"/>
+  <page id="hfus_entity_store_detail" name="常用实体库明细" page-template="edit" data-set="hframe/hfus_entity_store" rel-page="hframe/hfus_entity_store_mgr"/>
+
+
+  <page id="hfpm_entity_bind_rule_mgr" name="实体捆绑规则管理" page-template="qlist" data-set="hframe/hfpm_entity_bind_rule">
+    <component id="qForm" data-set="hframe/hfpm_entity_bind_rule_DS4Q"/>
+  </page>
+  <page id="hfpm_entity_bind_rule_create" name="实体捆绑规则创建" page-template="create" data-set="hframe/hfpm_entity_bind_rule" rel-page="hframe/hfpm_entity_bind_rule_mgr"/>
+  <page id="hfpm_entity_bind_rule_edit" name="实体捆绑规则修改" page-template="edit" data-set="hframe/hfpm_entity_bind_rule" rel-page="hframe/hfpm_entity_bind_rule_mgr"/>
+  <page id="hfpm_entity_bind_rule_detail" name="实体捆绑规则明细" page-template="edit" data-set="hframe/hfpm_entity_bind_rule" rel-page="hframe/hfpm_entity_bind_rule_mgr"/>
+
+
+</module>

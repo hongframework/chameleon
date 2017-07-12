@@ -1,0 +1,37 @@
+<dataset>
+  <module>hframe</module>
+  <code>hfcfg_program_template</code>
+  <entity>hfcfg_program_template</entity>
+  <name>项目模板【默认】</name>
+  <fields>
+    <field code="hfcfg_program_template_id" name="项目模板ID" edit-type="input" is-key="true">
+      <create-edit-type>hidden</create-edit-type>
+      <update-edit-type>text</update-edit-type>
+    </field>
+    <field code="program_template_name" name="项目模板名称" edit-type="input"/>
+    <field code="program_template_code" name="项目模板编码" edit-type="input"/>
+    <field code="program_template_desc" name="项目模板描述" edit-type="input"/>
+    <field code="snapshot_url" name="快照URL" edit-type="input"/>
+    <field code="op_id" name="创建人" edit-type="input">
+      <rel entity-code="hfsec_user/hfsec_user_id/hfsec_user_name"/>
+      <create-edit-type>hidden</create-edit-type>
+      <update-edit-type>text</update-edit-type>
+    </field>
+    <field code="create_time" name="创建时间" edit-type="datetime">
+      <create-edit-type>hidden</create-edit-type>
+      <update-edit-type>text</update-edit-type>
+    </field>
+    <field code="modify_op_id" name="修改人" edit-type="input">
+      <rel entity-code="hfsec_user/hfsec_user_id/hfsec_user_name"/>
+      <create-edit-type>hidden</create-edit-type>
+      <update-edit-type>hidden</update-edit-type>
+    </field>
+    <field code="modify_time" name="修改时间" edit-type="datetime">
+      <create-edit-type>hidden</create-edit-type>
+      <update-edit-type>hidden</update-edit-type>
+    </field>
+    <field code="del_flag" name="删除标识" edit-type="input">
+      <create-edit-type>hidden</create-edit-type>
+    </field>
+  </fields>
+</dataset>

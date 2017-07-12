@@ -1,0 +1,45 @@
+<dataset>
+  <module>hframe</module>
+  <code>hfpm_page_event_attr</code>
+  <entity>hfpm_page_event_attr</entity>
+  <name>页面事件属性【默认】</name>
+  <fields>
+    <field code="hfpm_page_event_attr_id" name="页面事件属性ID" edit-type="input" is-key="true">
+      <create-edit-type>hidden</create-edit-type>
+      <update-edit-type>text</update-edit-type>
+    </field>
+    <field code="hfpm_page_event_id" name="页面事件ID" edit-type="select">
+      <rel entity-code="hfpm_page_event/hfpm_page_event_id/hfpm_page_event_name"/>
+    </field>
+    <field code="hfpm_page_event_attr_type" name="页面事件属性类型        " edit-type="input"/>
+    <field code="hfmd_entity_attr_id" name="实体属性ID" edit-type="select">
+      <rel entity-code="hfmd_entity_attr/hfmd_entity_attr_id/hfmd_entity_attr_name"/>
+    </field>
+    <field code="hfmd_entity_id" name="实体ID" edit-type="select">
+      <rel entity-code="hfmd_entity/hfmd_entity_id/hfmd_entity_name"/>
+    </field>
+    <field code="value_type" name="值类型" edit-type="input"/>
+    <field code="value" name="值" edit-type="input"/>
+    <field code="op_id" name="创建人" edit-type="input">
+      <rel entity-code="hfsec_user/hfsec_user_id/hfsec_user_name"/>
+      <create-edit-type>hidden</create-edit-type>
+      <update-edit-type>text</update-edit-type>
+    </field>
+    <field code="create_time" name="创建时间" edit-type="datetime">
+      <create-edit-type>hidden</create-edit-type>
+      <update-edit-type>text</update-edit-type>
+    </field>
+    <field code="modify_op_id" name="修改人" edit-type="input">
+      <rel entity-code="hfsec_user/hfsec_user_id/hfsec_user_name"/>
+      <create-edit-type>hidden</create-edit-type>
+      <update-edit-type>hidden</update-edit-type>
+    </field>
+    <field code="modify_time" name="修改时间" edit-type="datetime">
+      <create-edit-type>hidden</create-edit-type>
+      <update-edit-type>hidden</update-edit-type>
+    </field>
+    <field code="del_flag" name="删除标识" edit-type="input">
+      <create-edit-type>hidden</create-edit-type>
+    </field>
+  </fields>
+</dataset>

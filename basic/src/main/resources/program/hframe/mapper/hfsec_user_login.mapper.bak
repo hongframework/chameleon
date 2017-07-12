@@ -1,0 +1,6 @@
+<mapper component-id="login" data-set="hframe/hfsec_user">
+    <baseMapper>
+        <mapping id="username" value="account"></mapping>
+        <mapping id="password" value="password"></mapping>
+    </baseMapper>
+</mapper>

@@ -1,0 +1,11 @@
+<helper>
+  <help-module>hframe</help-module>
+  <help-dataset>hfcfg_page_template_elements</help-dataset>
+  <help-datascore>hfcfg_page_template_id = {hfpm_page/hfcfg_page_template_id}</help-datascore>
+  <effect-module>hframe</effect-module>
+  <effect-dataset>hfpm_page_component</effect-dataset>
+  <is-dynamic>true</is-dynamic>
+  <mappings>
+    <mapping help-dataset-field="hfcfg_component_template_id" effect-dataset-field="hfcfg_component_template_id" is-compare-name="true" is-compare-key="true"/>
+  </mappings>
+</helper>

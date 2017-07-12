@@ -1,0 +1,125 @@
+<module code="hframe">
+    <page id="hfmd_entity_query" name="实体查询" page-template="qlist" data-set="hframe/hfmd_entity">
+        <component id="qForm" data-set="hframe/hfmd_entity_DS4Q"></component>
+    </page>
+    <page id="hfmd_entity_create" name="实体创建" page-template="create" data-set="hframe/hfmd_entity"></page>
+    <page id="hfmd_entity_edit" name="实体修改" page-template="edit" data-set="hframe/hfmd_entity"></page>
+    <page id="hfmd_entity_detail" name="实体明细" page-template="edit" data-set="hframe/hfmd_entity"></page>
+    <page id="hfmd_entity_edits" name="实体批量修改" page-template="elist" data-set="hframe/hfmd_entity"></page>
+
+
+    <page id="hfmd_entity_attr_query" name="实体查询" page-template="qlist" data-set="hframe/hfmd_entity_attr">
+        <component id="qForm" data-set="hframe/hfmd_entity_attr_DS4Q"></component>
+    </page>
+    <page id="hfmd_entity_attr_create" name="实体创建" page-template="create" data-set="hframe/hfmd_entity_attr"></page>
+    <page id="hfmd_entity_attr_edit" name="实体修改" page-template="edit" data-set="hframe/hfmd_entity_attr"></page>
+    <page id="hfmd_entity_attr_detail" name="实体明细" page-template="edit" data-set="hframe/hfmd_entity_attr"></page>
+
+
+    <page id="hfpm_program_query" name="项目查询" page-template="qlist" data-set="hframe/hfpm_program"></page>
+    <page id="hfpm_program_edits" name="项目批量修改" page-template="elist" data-set="hframe/hfpm_program"></page>
+
+
+    <page id="hfmd_enum_class_query" name="枚举查询" page-template="qlist" data-set="hframe/hfmd_enum_class">
+        <component id="qForm" data-set="hframe/hfmd_enum_class_DS4Q"></component>
+    </page>
+
+    <page id="hfmd_enum_class_create" name="枚举添加" page-template="cComb" data-set="hframe/hfmd_enum_class">
+        <component id="cForm" data-set="hframe/hfmd_enum_class"></component>
+        <component id="cList" data-set="hframe/hfmd_enum"></component>
+    </page>
+    <page id="hfmd_enum_class_edit" name="枚举修改" page-template="eComb" data-set="hframe/hfmd_enum_class">
+        <component id="eForm" data-set="hframe/hfmd_enum_class"></component>
+        <component id="eList" data-set="hframe/hfmd_enum"></component>
+    </page>
+    <page id="hfmd_enum_class_detail" name="枚举查看" page-template="dComb" data-set="hframe/hfmd_enum_class">
+        <component id="dForm" data-set="hframe/hfmd_enum_class"></component>
+        <component id="qList" data-set="hframe/hfmd_enum"></component>
+    </page>
+
+
+</module>
+
+<!--<module code="hfmd" name="数据建模">-->
+    <!--<page id="hfmd_entity_mgr" name="项目维护" page-template="qlist" data-set="hframe/hfmd_entity" is-main="true">-->
+        <!--<component id="qForm" data-set="hframe/hfmd_entity_DS4Q"></component>-->
+    <!--</page>-->
+    <!--<page id="hfmd_entity_mgr" name="实体维护" page-template="qlist" data-set="hframe/hfmd_entity" is-main="true">-->
+        <!--<component id="qForm" data-set="hframe/hfmd_entity_DS4Q"></component>-->
+    <!--</page>-->
+    <!--<page id="hfmd_entity_mgr" name="字典维护" page-template="edit" data-set="hframe/hfmd_entity" is-main="true">-->
+        <!--<component id="qForm" data-set="hframe/hfmd_entity_DS4Q"></component>-->
+    <!--</page>-->
+    <!--<page id="hfmd_entity_mgr" name="数据集维护" page-template="qlist" data-set="hframe/hfmd_entity" is-main="true">-->
+        <!--<component id="qForm" data-set="hframe/hfmd_entity_DS4Q"></component>-->
+    <!--</page>-->
+    <!--<page id="hfmd_entity_mgr" name="实体权限维护" page-template="edit" data-set="hframe/hfmd_entity" is-main="true">-->
+        <!--<component id="qForm" data-set="hframe/hfmd_entity_DS4Q"></component>-->
+    <!--</page>-->
+    <!--<page id="hfmd_entity_mgr" name="实体捆绑规则维护" page-template="edit" data-set="hframe/hfmd_entity" is-main="true">-->
+        <!--<component id="qForm" data-set="hframe/hfmd_entity_DS4Q"></component>-->
+    <!--</page>-->
+
+    <!--<page id="hfmd_entity_create" name="项目新增" page-template="edit" data-set="hframe/hfmd_entity"></page>-->
+    <!--<page id="hfmd_entity_create" name="实体新增" page-template="qlist" data-set="hframe/hfmd_entity"></page>-->
+    <!--<page id="hfmd_entity_create" name="字典新增" page-template="edit" data-set="hframe/hfmd_entity"></page>-->
+    <!--<page id="hfmd_entity_create" name="数据集新增" page-template="qlist" data-set="hframe/hfmd_entity"></page>-->
+    <!--<page id="hfmd_entity_create" name="实体权限新增" page-template="edit" data-set="hframe/hfmd_entity"></page>-->
+    <!--<page id="hfmd_entity_create" name="实体捆绑规则新增" page-template="edit" data-set="hframe/hfmd_entity"></page>-->
+
+    <!--<page id="hfmd_entity_edit" name="项目修改" page-template="edit" data-set="hframe/hfmd_entity"></page>-->
+    <!--<page id="hfmd_entity_edit" name="实体修改" page-template="qlist" data-set="hframe/hfmd_entity"></page>-->
+    <!--<page id="hfmd_entity_edit" name="字典修改" page-template="edit" data-set="hframe/hfmd_entity"></page>-->
+    <!--<page id="hfmd_entity_edit" name="数据集修改" page-template="qlist" data-set="hframe/hfmd_entity"></page>-->
+    <!--<page id="hfmd_entity_edit" name="实体权限修改" page-template="edit" data-set="hframe/hfmd_entity"></page>-->
+    <!--<page id="hfmd_entity_edit" name="实体捆绑规则修改" page-template="edit" data-set="hframe/hfmd_entity"></page>-->
+<!--</module>-->
+<!--<module code="hfpm" name="智能云库">-->
+    <!--<page id="hfmd_entity_mgr" name="常用实体属性" page-template="qlist" data-set="hframe/hfmd_entity" is-main="true">-->
+        <!--<component id="qForm" data-set="hframe/hfmd_entity_DS4Q"></component>-->
+    <!--</page>-->
+    <!--<page id="hfmd_entity_mgr" name="实体类型关联常用实体属性" page-template="create" data-set="hframe/hfmd_entity" is-main="true">-->
+        <!--<component id="qForm" data-set="hframe/hfmd_entity_DS4Q"></component>-->
+    <!--</page>-->
+    <!--<page id="hfmd_entity_mgr" name="项目常用实体属性" page-template="edit" data-set="hframe/hfmd_entity" is-main="true">-->
+        <!--<component id="qForm" data-set="hframe/hfmd_entity_DS4Q"></component>-->
+    <!--</page>-->
+    <!--<page id="hfmd_entity_mgr" name="单词库" page-template="edit" data-set="hframe/hfmd_entity" is-main="true">-->
+        <!--<component id="qForm" data-set="hframe/hfmd_entity_DS4Q"></component>-->
+    <!--</page>-->
+
+    <!--<page id="hfmd_entity_create" name="常用实体属性" page-template="qlist" data-set="hframe/hfmd_entity" is-main="true"></page>-->
+    <!--<page id="hfmd_entity_create" name="实体类型关联常用实体属性" page-template="create" data-set="hframe/hfmd_entity" is-main="true"></page>-->
+    <!--<page id="hfmd_entity_create" name="项目常用实体属性" page-template="edit" data-set="hframe/hfmd_entity" is-main="true"></page>-->
+    <!--<page id="hfmd_entity_create" name="单词库" page-template="edit" data-set="hframe/hfmd_entity" is-main="true"></page>-->
+
+    <!--<page id="hfmd_entity_edit" name="常用实体属性" page-template="qlist" data-set="hframe/hfmd_entity" is-main="true"></page>-->
+    <!--<page id="hfmd_entity_edit" name="实体类型关联常用实体属性" page-template="create" data-set="hframe/hfmd_entity" is-main="true"></page>-->
+    <!--<page id="hfmd_entity_edit" name="项目常用实体属性" page-template="edit" data-set="hframe/hfmd_entity" is-main="true"></page>-->
+    <!--<page id="hfmd_entity_edit" name="单词库" page-template="edit" data-set="hframe/hfmd_entity" is-main="true"></page>-->
+<!--</module>-->
+
+<!-- -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+<!--<module code="hfmd" name="数据建模">-->
+    <!--<page id="hfmd_entity_query" name="实体维护" page-template="qlist" data-set="hframe/hfmd_entity"></page>-->
+    <!--<page id="hfmd_entity_create" name="实体属性维护" page-template="create" data-set="hframe/hfmd_entity"></page>-->
+    <!--<page id="hfmd_entity_edit" name="实体关系维护" page-template="edit" data-set="hframe/hfmd_entity"></page>-->
+    <!--<page id="hfmd_entity_detail" name="枚举值维护" page-template="edit" data-set="hframe/hfmd_entity"></page>-->
+    <!--<page id="hfmd_entity_detail" name="枚举类维护" page-template="edit" data-set="hframe/hfmd_entity"></page>-->
+<!--</module>-->
+<!--<module code="hfpm" name="项目配置">-->
+    <!--<page id="hfmd_entity_query" name="数据集维护" page-template="qlist" data-set="hframe/hfmd_entity"></page>-->
+    <!--<page id="hfmd_entity_create" name="数据列维护" page-template="create" data-set="hframe/hfmd_entity"></page>-->
+    <!--<page id="hfmd_entity_edit" name="项目维护" page-template="edit" data-set="hframe/hfmd_entity"></page>-->
+    <!--<page id="hfmd_entity_edit" name="项目设置" page-template="edit" data-set="hframe/hfmd_entity"></page>-->
+    <!--<page id="hfmd_entity_detail" name="模块维护" page-template="edit" data-set="hframe/hfmd_entity"></page>-->
+    <!--<page id="hfmd_entity_detail" name="页面维护" page-template="edit" data-set="hframe/hfmd_entity"></page>-->
+    <!--<page id="hfmd_entity_detail" name="实体权限维护" page-template="edit" data-set="hframe/hfmd_entity"></page>-->
+    <!--<page id="hfmd_entity_detail" name="实体捆绑规则维护" page-template="edit" data-set="hframe/hfmd_entity"></page>-->
+<!--</module>-->
+<!--<module code="hfpm" name="智能云库">-->
+    <!--<page id="hfmd_entity_query" name="常用实体属性" page-template="qlist" data-set="hframe/hfmd_entity"></page>-->
+    <!--<page id="hfmd_entity_create" name="实体类型关联常用实体属性" page-template="create" data-set="hframe/hfmd_entity"></page>-->
+    <!--<page id="hfmd_entity_edit" name="项目常用实体属性" page-template="edit" data-set="hframe/hfmd_entity"></page>-->
+    <!--<page id="hfmd_entity_edit" name="单词库" page-template="edit" data-set="hframe/hfmd_entity"></page>-->
+<!--</module>-->

@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hframe.dao.HfpmPageComponentMapper" >
+  <resultMap id="BaseResultMap" type="com.hframe.domain.model.HfpmPageComponent" >
+    <constructor >
+      <idArg column="hfpm_page_component_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="hfpm_page_component_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="hfpm_page_component_type" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="hfpm_page_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="hfpm_data_set_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="op_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="modify_op_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="modify_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="del_flag" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="hfcfg_component_template_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    hfpm_page_component_id, hfpm_page_component_name, hfpm_page_component_type, hfpm_page_id, 
+    hfpm_data_set_id, op_id, create_time, modify_op_id, modify_time, del_flag, hfcfg_component_template_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hframe.domain.model.HfpmPageComponent_Example" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hfpm_page_component
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitEnd != null and limitEnd != 0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from hfpm_page_component
+    where hfpm_page_component_id = #{hfpmPageComponentId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from hfpm_page_component
+    where hfpm_page_component_id = #{hfpmPageComponentId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hframe.domain.model.HfpmPageComponent_Example" >
+    delete from hfpm_page_component
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hframe.domain.model.HfpmPageComponent" >
+    <selectKey resultType="java.lang.Long" keyProperty="hfpmPageComponentId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into hfpm_page_component (hfpm_page_component_name, hfpm_page_component_type, 
+      hfpm_page_id, hfpm_data_set_id, op_id, 
+      create_time, modify_op_id, modify_time, 
+      del_flag, hfcfg_component_template_id)
+    values (#{hfpmPageComponentName,jdbcType=VARCHAR}, #{hfpmPageComponentType,jdbcType=INTEGER}, 
+      #{hfpmPageId,jdbcType=BIGINT}, #{hfpmDataSetId,jdbcType=BIGINT}, #{opId,jdbcType=BIGINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{modifyOpId,jdbcType=BIGINT}, #{modifyTime,jdbcType=TIMESTAMP}, 
+      #{delFlag,jdbcType=INTEGER}, #{hfcfgComponentTemplateId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hframe.domain.model.HfpmPageComponent" >
+    <selectKey resultType="java.lang.Long" keyProperty="hfpmPageComponentId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into hfpm_page_component
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="hfpmPageComponentName != null" >
+        hfpm_page_component_name,
+      </if>
+      <if test="hfpmPageComponentType != null" >
+        hfpm_page_component_type,
+      </if>
+      <if test="hfpmPageId != null" >
+        hfpm_page_id,
+      </if>
+      <if test="hfpmDataSetId != null" >
+        hfpm_data_set_id,
+      </if>
+      <if test="opId != null" >
+        op_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="modifyOpId != null" >
+        modify_op_id,
+      </if>
+      <if test="modifyTime != null" >
+        modify_time,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+      <if test="hfcfgComponentTemplateId != null" >
+        hfcfg_component_template_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="hfpmPageComponentName != null" >
+        #{hfpmPageComponentName,jdbcType=VARCHAR},
+      </if>
+      <if test="hfpmPageComponentType != null" >
+        #{hfpmPageComponentType,jdbcType=INTEGER},
+      </if>
+      <if test="hfpmPageId != null" >
+        #{hfpmPageId,jdbcType=BIGINT},
+      </if>
+      <if test="hfpmDataSetId != null" >
+        #{hfpmDataSetId,jdbcType=BIGINT},
+      </if>
+      <if test="opId != null" >
+        #{opId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyOpId != null" >
+        #{modifyOpId,jdbcType=BIGINT},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="hfcfgComponentTemplateId != null" >
+        #{hfcfgComponentTemplateId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hframe.domain.model.HfpmPageComponent_Example" resultType="java.lang.Integer" >
+    select count(*) from hfpm_page_component
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update hfpm_page_component
+    <set >
+      <if test="record.hfpmPageComponentId != null" >
+        hfpm_page_component_id = #{record.hfpmPageComponentId,jdbcType=BIGINT},
+      </if>
+      <if test="record.hfpmPageComponentName != null" >
+        hfpm_page_component_name = #{record.hfpmPageComponentName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hfpmPageComponentType != null" >
+        hfpm_page_component_type = #{record.hfpmPageComponentType,jdbcType=INTEGER},
+      </if>
+      <if test="record.hfpmPageId != null" >
+        hfpm_page_id = #{record.hfpmPageId,jdbcType=BIGINT},
+      </if>
+      <if test="record.hfpmDataSetId != null" >
+        hfpm_data_set_id = #{record.hfpmDataSetId,jdbcType=BIGINT},
+      </if>
+      <if test="record.opId != null" >
+        op_id = #{record.opId,jdbcType=BIGINT},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifyOpId != null" >
+        modify_op_id = #{record.modifyOpId,jdbcType=BIGINT},
+      </if>
+      <if test="record.modifyTime != null" >
+        modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.delFlag != null" >
+        del_flag = #{record.delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.hfcfgComponentTemplateId != null" >
+        hfcfg_component_template_id = #{record.hfcfgComponentTemplateId,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update hfpm_page_component
+    set hfpm_page_component_id = #{record.hfpmPageComponentId,jdbcType=BIGINT},
+      hfpm_page_component_name = #{record.hfpmPageComponentName,jdbcType=VARCHAR},
+      hfpm_page_component_type = #{record.hfpmPageComponentType,jdbcType=INTEGER},
+      hfpm_page_id = #{record.hfpmPageId,jdbcType=BIGINT},
+      hfpm_data_set_id = #{record.hfpmDataSetId,jdbcType=BIGINT},
+      op_id = #{record.opId,jdbcType=BIGINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      modify_op_id = #{record.modifyOpId,jdbcType=BIGINT},
+      modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+      del_flag = #{record.delFlag,jdbcType=INTEGER},
+      hfcfg_component_template_id = #{record.hfcfgComponentTemplateId,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hframe.domain.model.HfpmPageComponent" >
+    update hfpm_page_component
+    <set >
+      <if test="hfpmPageComponentName != null" >
+        hfpm_page_component_name = #{hfpmPageComponentName,jdbcType=VARCHAR},
+      </if>
+      <if test="hfpmPageComponentType != null" >
+        hfpm_page_component_type = #{hfpmPageComponentType,jdbcType=INTEGER},
+      </if>
+      <if test="hfpmPageId != null" >
+        hfpm_page_id = #{hfpmPageId,jdbcType=BIGINT},
+      </if>
+      <if test="hfpmDataSetId != null" >
+        hfpm_data_set_id = #{hfpmDataSetId,jdbcType=BIGINT},
+      </if>
+      <if test="opId != null" >
+        op_id = #{opId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyOpId != null" >
+        modify_op_id = #{modifyOpId,jdbcType=BIGINT},
+      </if>
+      <if test="modifyTime != null" >
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="hfcfgComponentTemplateId != null" >
+        hfcfg_component_template_id = #{hfcfgComponentTemplateId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where hfpm_page_component_id = #{hfpmPageComponentId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hframe.domain.model.HfpmPageComponent" >
+    update hfpm_page_component
+    set hfpm_page_component_name = #{hfpmPageComponentName,jdbcType=VARCHAR},
+      hfpm_page_component_type = #{hfpmPageComponentType,jdbcType=INTEGER},
+      hfpm_page_id = #{hfpmPageId,jdbcType=BIGINT},
+      hfpm_data_set_id = #{hfpmDataSetId,jdbcType=BIGINT},
+      op_id = #{opId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_op_id = #{modifyOpId,jdbcType=BIGINT},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      del_flag = #{delFlag,jdbcType=INTEGER},
+      hfcfg_component_template_id = #{hfcfgComponentTemplateId,jdbcType=BIGINT}
+    where hfpm_page_component_id = #{hfpmPageComponentId,jdbcType=BIGINT}
+  </update>
+</mapper>

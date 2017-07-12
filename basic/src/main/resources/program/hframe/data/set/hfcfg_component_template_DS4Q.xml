@@ -1,0 +1,13 @@
+<dataset>
+  <module>hframe</module>
+  <code>hfcfg_component_template_DS4Q</code>
+  <entity>hfcfg_component_template</entity>
+  <name>组件模板</name>
+  <fields>
+    <field code="hfcfg_component_template_id" name="组件模板id" edit-type="input" is-key="true" not-null="true"/>
+    <field code="hfcfg_component_template_code" name="组件模板编码" edit-type="input" not-null="true"/>
+    <field code="hfcfg_component_template_name" name="组件模板名称" edit-type="input" not-null="true"/>
+    <field code="hfcfg_component_template_type" name="组件模板类型" edit-type="select"/>
+    <field code="hfcfg_component_template_desc" name="组件模板描述" edit-type="input"/>
+  </fields>
+</dataset>

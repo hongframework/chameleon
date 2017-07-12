@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hframe.dao.HfcfgDbConnectMapper" >
+  <resultMap id="BaseResultMap" type="com.hframe.domain.model.HfcfgDbConnect" >
+    <constructor >
+      <idArg column="hfcfg_db_connect_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="hfcfg_db_connect_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="password" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="url" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="user" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="creator_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="hfcfg_db_connect_code" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    hfcfg_db_connect_id, hfcfg_db_connect_name, password, url, user, creator_id, create_time, 
+    hfcfg_db_connect_code
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hframe.domain.model.HfcfgDbConnect_Example" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hfcfg_db_connect
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitEnd != null and limitEnd != 0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from hfcfg_db_connect
+    where hfcfg_db_connect_id = #{hfcfgDbConnectId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from hfcfg_db_connect
+    where hfcfg_db_connect_id = #{hfcfgDbConnectId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hframe.domain.model.HfcfgDbConnect_Example" >
+    delete from hfcfg_db_connect
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hframe.domain.model.HfcfgDbConnect" >
+    <selectKey resultType="java.lang.Long" keyProperty="hfcfgDbConnectId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into hfcfg_db_connect (hfcfg_db_connect_name, password, url, 
+      user, creator_id, create_time, 
+      hfcfg_db_connect_code)
+    values (#{hfcfgDbConnectName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
+      #{user,jdbcType=VARCHAR}, #{creatorId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{hfcfgDbConnectCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hframe.domain.model.HfcfgDbConnect" >
+    <selectKey resultType="java.lang.Long" keyProperty="hfcfgDbConnectId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into hfcfg_db_connect
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="hfcfgDbConnectName != null" >
+        hfcfg_db_connect_name,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="user != null" >
+        user,
+      </if>
+      <if test="creatorId != null" >
+        creator_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="hfcfgDbConnectCode != null" >
+        hfcfg_db_connect_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="hfcfgDbConnectName != null" >
+        #{hfcfgDbConnectName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="user != null" >
+        #{user,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorId != null" >
+        #{creatorId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="hfcfgDbConnectCode != null" >
+        #{hfcfgDbConnectCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hframe.domain.model.HfcfgDbConnect_Example" resultType="java.lang.Integer" >
+    select count(*) from hfcfg_db_connect
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update hfcfg_db_connect
+    <set >
+      <if test="record.hfcfgDbConnectId != null" >
+        hfcfg_db_connect_id = #{record.hfcfgDbConnectId,jdbcType=BIGINT},
+      </if>
+      <if test="record.hfcfgDbConnectName != null" >
+        hfcfg_db_connect_name = #{record.hfcfgDbConnectName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.url != null" >
+        url = #{record.url,jdbcType=VARCHAR},
+      </if>
+      <if test="record.user != null" >
+        user = #{record.user,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creatorId != null" >
+        creator_id = #{record.creatorId,jdbcType=BIGINT},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.hfcfgDbConnectCode != null" >
+        hfcfg_db_connect_code = #{record.hfcfgDbConnectCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update hfcfg_db_connect
+    set hfcfg_db_connect_id = #{record.hfcfgDbConnectId,jdbcType=BIGINT},
+      hfcfg_db_connect_name = #{record.hfcfgDbConnectName,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      url = #{record.url,jdbcType=VARCHAR},
+      user = #{record.user,jdbcType=VARCHAR},
+      creator_id = #{record.creatorId,jdbcType=BIGINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      hfcfg_db_connect_code = #{record.hfcfgDbConnectCode,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hframe.domain.model.HfcfgDbConnect" >
+    update hfcfg_db_connect
+    <set >
+      <if test="hfcfgDbConnectName != null" >
+        hfcfg_db_connect_name = #{hfcfgDbConnectName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="user != null" >
+        user = #{user,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorId != null" >
+        creator_id = #{creatorId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="hfcfgDbConnectCode != null" >
+        hfcfg_db_connect_code = #{hfcfgDbConnectCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where hfcfg_db_connect_id = #{hfcfgDbConnectId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hframe.domain.model.HfcfgDbConnect" >
+    update hfcfg_db_connect
+    set hfcfg_db_connect_name = #{hfcfgDbConnectName,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      user = #{user,jdbcType=VARCHAR},
+      creator_id = #{creatorId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      hfcfg_db_connect_code = #{hfcfgDbConnectCode,jdbcType=VARCHAR}
+    where hfcfg_db_connect_id = #{hfcfgDbConnectId,jdbcType=BIGINT}
+  </update>
+</mapper>

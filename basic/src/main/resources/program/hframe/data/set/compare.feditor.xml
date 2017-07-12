@@ -1,0 +1,85 @@
+<dataset>
+  <module>hffile</module>
+  <code>compare.feditor</code>
+  <name>对账配置</name>
+  <source>file</source>
+  <descriptor>
+    <node code="config">
+      <node code="global.host[]" name="全局设置" />
+      <node code="services.service" name="对账实例">
+        <node code="importers.importer[]" name="信号源">
+          <node code="file.row[]" name="数据条目" />
+          <node code="dataset.sql[]" name="SQL" />
+        </node>
+        <node code="ruleCenter.rule[]" name="对账规则">
+          <node code="datanode[]" name="数据节点"/>
+        </node>
+        <node code="exporters.exporter[]" name="输出源"/>
+      </node>
+    </node>
+
+    <fields code="config.global.host" name="主机" >
+      <field code="#id" name="主机名称" edit-type="input" />
+      <field code="datasource#type" name="数据源类型" edit-type="select">
+        <enum value="ftp" name="FTP服务器"></enum>
+        <enum value="db" name="数据库"></enum>
+      </field>
+      <field code="datasource" name="数据源地址" edit-type="input" />
+      <field code="username" name="用户名" edit-type="input" />
+      <field code="password" name="密码" edit-type="input" />
+      <field code="cxtpath" name="根路径" edit-type="input" />
+    </fields>
+
+
+    <fields code="config.services.service" name="对账实例">
+      <field code="#id" name="对账实例编码" edit-type="input" />
+      <field code="trigger#type" name="定时类型" edit-type="select">
+        <enum value="cronExpression" name="表达式"></enum>
+      </field>
+      <field code="trigger" name="定时参数" edit-type="input" />
+    </fields>
+
+
+    <fields  code="config.services.service.importers.importer"  name="信号源">
+      <field code="#type" name="信号源类型" edit-type="select">
+        <enum value="right" name="三方"></enum>
+        <enum value="left" name="自己"></enum>
+      </field>
+      <field code="host#rel" name="数据源" edit-type="input">
+        <rel fields=""/>
+      </field>
+      <field code="file#path" name="文件路径" edit-type="input" />
+      <field code="file#name" name="文件名格式" edit-type="input" />
+      <field code="file#tmpPath" name="临时目录" edit-type="input" />
+    </fields>
+    <fields code="config.services.service.importers.importer.file.row" name="数据条目">
+      <field code="#id" name="ID" edit-type="input" />
+      <field code="#separator" name="分隔符" edit-type="input" />
+      <field code="#type" name="类型" edit-type="input" />
+      <field code="#rowspan" name="行数" edit-type="input" />
+    </fields>
+    <fields code="config.services.service.importers.importer.dataset.sql" name="SQL">
+      <field code="#id" name="数据ID" edit-type="input" />
+      <field code="#" name="sql语句" edit-type="input" />
+    </fields>
+
+    <fields code="config.services.service.ruleCenter.rule" name="对账规则">
+      <field code="#leftId" name="左侧数据" edit-type="input" />
+      <field code="#rightId" name="右侧数据" edit-type="input" />
+    </fields>
+    <fields code="config.services.service.ruleCenter.rule.datanode" name="数据节点">
+      <field code="#leftName" name="左侧名称" edit-type="input" />
+      <field code="#rightName" name="右侧名称" edit-type="input" />
+    </fields>
+
+    <fields code="config.services.service.exporters.exporter" name="输出源">
+      <field code="#type" name="类型" edit-type="input" />
+      <field code="host" name="主机" edit-type="input" />
+      <field code="sql" name="sql语句" edit-type="input" />
+      <field code="dataitem" name="数据节点" edit-type="input" />
+      <field code="scope" name="范围" edit-type="input" />
+      <field code="leftId" name="左侧数据ID" edit-type="input" />
+      <field code="rightId" name="右侧数据ID" edit-type="input" />
+    </fields>
+  </descriptor>
+</dataset>

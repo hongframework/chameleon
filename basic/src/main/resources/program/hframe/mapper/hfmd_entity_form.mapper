@@ -1,0 +1,13 @@
+<mapper component-id="form" data-set="hframe/hfmd_entity" data-auth="orgId=SELF.orgId">
+    <baseMapper>
+        <mapping id="id" value="hfmdEntityQueryForm"></mapping>
+        <mapping id="icon" value="icon-user"></mapping>
+        <mapping id="title" value="${name}查询"></mapping>
+        <mapping id="columns" value="${columns}">
+            <mapping id="code" value="${code}"></mapping>
+            <mapping id="name" value="${name}"></mapping>
+            <mapping id="editType" value="${editType}"></mapping>
+        </mapping>
+        <mapping id="data" value="${data}"></mapping>
+    </baseMapper>
+</mapper>

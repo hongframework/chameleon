@@ -1,0 +1,25 @@
+<helper>
+  <help-module>hframe</help-module>
+  <help-dataset>hfmd_entity_attr</help-dataset>
+  <help-datascore>hfmd_entity_id = {hfpm_data_set/main_hfmd_entity_id}</help-datascore>
+  <effect-module>hframe</effect-module>
+  <effect-dataset>hfpm_data_field</effect-dataset>
+  <is-dynamic>true</is-dynamic>
+  <mappings>
+    <mapping help-dataset-field="hfmd_entity_attr_id" effect-dataset-field="hfpm_data_field_id"/>
+    <mapping help-dataset-field="hfmd_entity_id" effect-dataset-field="hfmd_entity_id"/>
+    <mapping help-dataset-field="hfmd_entity_attr_id" effect-dataset-field="hfmd_entity_attr_id"/>
+    <mapping help-dataset-field="hfmd_entity_attr_code" effect-dataset-field="hfpm_data_field_code"  is-compare-key="true"/>
+    <mapping help-dataset-field="hfmd_entity_attr_name" effect-dataset-field="hfpm_data_field_name"  is-compare-name="true"/>
+    <!--<mapping help-dataset-field="size" effect-dataset-field="hfpm_field_show_type_id"/>-->
+    <!--<mapping help-dataset-field="ispk" effect-dataset-field="field_show_code"/>-->
+    <!--<mapping help-dataset-field="nullable" effect-dataset-field="data_get_method"/>-->
+    <!--<mapping help-dataset-field="is_busi_attr" effect-dataset-field="hfpm_data_set_id"/>-->
+    <!--<mapping help-dataset-field="hfus_entity_attr_id" effect-dataset-field="hfmd_entity_attr_id"/>-->
+    <!--<mapping help-dataset-field="op_id" effect-dataset-field="op_id"></mapping>-->
+    <!--<mapping help-dataset-field="create_time" effect-dataset-field="create_time"></mapping>-->
+    <!--<mapping help-dataset-field="modify_op_id" effect-dataset-field="modify_op_id"></mapping>-->
+    <!--<mapping help-dataset-field="modify_time" effect-dataset-field="modify_time"></mapping>-->
+    <!--<mapping help-dataset-field="del_flag" effect-dataset-field="del_flag"></mapping>-->
+  </mappings>
+</helper>

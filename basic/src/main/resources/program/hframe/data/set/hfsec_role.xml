@@ -1,0 +1,38 @@
+<dataset>
+  <module>hframe</module>
+  <code>hfsec_role</code>
+  <entity>hfsec_role</entity>
+  <name>角色【默认】</name>
+  <fields>
+    <field code="hfsec_role_id" name="角色id" edit-type="hidden" is-key="true" not-null="true">
+      <create-edit-type>hidden</create-edit-type>
+      <update-edit-type>text</update-edit-type>
+    </field>
+    <field code="hfsec_role_code" name="角色编码" edit-type="input" not-null="true"/>
+    <field code="hfsec_role_name" name="角色名称" edit-type="input" not-null="true" is-name="true"/>
+    <field code="hfsec_role_type" name="角色类型" edit-type="select">
+      <enum-class code="hfsec_role.hfsec_role_type"/>
+    </field>
+    <field code="status" name="状态" edit-type="select">
+      <enum-class code="hfsec_role.status"/>
+    </field>
+    <field code="creator_id" name="创建人" edit-type="hidden">
+      <rel entity-code="hfsec_user/hfsec_user_id/hfsec_user_name"/>
+      <create-edit-type>hidden</create-edit-type>
+      <update-edit-type>text</update-edit-type>
+    </field>
+    <field code="create_time" name="创建时间" edit-type="hidden">
+      <create-edit-type>hidden</create-edit-type>
+      <update-edit-type>text</update-edit-type>
+    </field>
+    <field code="modifier_id" name="修改人" edit-type="hidden">
+      <rel entity-code="hfsec_user/hfsec_user_id/hfsec_user_name"/>
+      <create-edit-type>hidden</create-edit-type>
+      <update-edit-type>hidden</update-edit-type>
+    </field>
+    <field code="modify_time" name="修改时间" edit-type="hidden">
+      <create-edit-type>hidden</create-edit-type>
+      <update-edit-type>hidden</update-edit-type>
+    </field>
+  </fields>
+</dataset>

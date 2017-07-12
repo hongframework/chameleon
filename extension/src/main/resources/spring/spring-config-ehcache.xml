@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd">
+    <diskStore path="java.io.tmpdir" />
+    <defaultCache eternal="false" maxElementsInMemory="1000"
+                  overflowToDisk="false" diskPersistent="false" timeToIdleSeconds="0"
+                  timeToLiveSeconds="600" memoryStoreEvictionPolicy="LRU" />
+    <cache name="ENTITY_CACHE" eternal="false" maxElementsInMemory="1000"
+           overflowToDisk="false" diskPersistent="false"  memoryStoreEvictionPolicy="LRU" />
+    <cache name="DS_CREATE_CACHE" eternal="false" maxElementsInMemory="10000"
+           overflowToDisk="false" diskPersistent="false"  memoryStoreEvictionPolicy="LRU" />
+    <cache name="DS_MODIFY_CACHE" eternal="false" maxElementsInMemory="10000"
+           overflowToDisk="false" diskPersistent="false" memoryStoreEvictionPolicy="LRU" />
+    <cache name="DS_SHOW_CACHE" eternal="false" maxElementsInMemory="10000"
+           overflowToDisk="false" diskPersistent="false"  memoryStoreEvictionPolicy="LRU" />
+    <cache name="DS_LIST_CACHE" eternal="false" maxElementsInMemory="10000"
+           overflowToDisk="false" diskPersistent="false" memoryStoreEvictionPolicy="LRU" />
+    <cache name="DS_TREE_CACHE" eternal="false" maxElementsInMemory="10000"
+           overflowToDisk="false" diskPersistent="false" memoryStoreEvictionPolicy="LRU" />
+
+</ehcache>

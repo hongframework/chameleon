@@ -1,0 +1,18 @@
+<ruler>
+  <module>hframe</module>
+  <entity>hfpm_data_set</entity>
+  <rule>
+    <rule-type>2</rule-type>
+    <source-code>main_hfmd_entity_id</source-code>
+    <target-code>hfpm_data_set_name</target-code>
+    <target-value>{object.hfmd_entity_name}</target-value>
+    <editable>true</editable>
+  </rule>
+  <rule>
+    <rule-type>2</rule-type>
+    <source-code>main_hfmd_entity_id</source-code>
+    <target-code>hfpm_data_set_code</target-code>
+    <target-value>{object.hfmd_entity_code}</target-value>
+    <editable>true</editable>
+  </rule>
+</ruler>

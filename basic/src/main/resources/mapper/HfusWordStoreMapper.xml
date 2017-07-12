@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hframe.dao.HfusWordStoreMapper" >
+  <resultMap id="BaseResultMap" type="com.hframe.domain.model.HfusWordStore" >
+    <constructor >
+      <idArg column="hfus_word_store_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="chinese_chars" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="english_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="english_short_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="op_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="modify_op_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="modify_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="del_flag" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    hfus_word_store_id, chinese_chars, english_name, english_short_name, op_id, create_time, 
+    modify_op_id, modify_time, del_flag
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hframe.domain.model.HfusWordStore_Example" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hfus_word_store
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitEnd != null and limitEnd != 0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from hfus_word_store
+    where hfus_word_store_id = #{hfusWordStoreId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from hfus_word_store
+    where hfus_word_store_id = #{hfusWordStoreId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hframe.domain.model.HfusWordStore_Example" >
+    delete from hfus_word_store
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hframe.domain.model.HfusWordStore" >
+    <selectKey resultType="java.lang.Long" keyProperty="hfusWordStoreId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into hfus_word_store (chinese_chars, english_name, english_short_name, 
+      op_id, create_time, modify_op_id, 
+      modify_time, del_flag)
+    values (#{chineseChars,jdbcType=VARCHAR}, #{englishName,jdbcType=VARCHAR}, #{englishShortName,jdbcType=VARCHAR}, 
+      #{opId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{modifyOpId,jdbcType=BIGINT}, 
+      #{modifyTime,jdbcType=TIMESTAMP}, #{delFlag,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hframe.domain.model.HfusWordStore" >
+    <selectKey resultType="java.lang.Long" keyProperty="hfusWordStoreId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into hfus_word_store
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="chineseChars != null" >
+        chinese_chars,
+      </if>
+      <if test="englishName != null" >
+        english_name,
+      </if>
+      <if test="englishShortName != null" >
+        english_short_name,
+      </if>
+      <if test="opId != null" >
+        op_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="modifyOpId != null" >
+        modify_op_id,
+      </if>
+      <if test="modifyTime != null" >
+        modify_time,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="chineseChars != null" >
+        #{chineseChars,jdbcType=VARCHAR},
+      </if>
+      <if test="englishName != null" >
+        #{englishName,jdbcType=VARCHAR},
+      </if>
+      <if test="englishShortName != null" >
+        #{englishShortName,jdbcType=VARCHAR},
+      </if>
+      <if test="opId != null" >
+        #{opId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyOpId != null" >
+        #{modifyOpId,jdbcType=BIGINT},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hframe.domain.model.HfusWordStore_Example" resultType="java.lang.Integer" >
+    select count(*) from hfus_word_store
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update hfus_word_store
+    <set >
+      <if test="record.hfusWordStoreId != null" >
+        hfus_word_store_id = #{record.hfusWordStoreId,jdbcType=BIGINT},
+      </if>
+      <if test="record.chineseChars != null" >
+        chinese_chars = #{record.chineseChars,jdbcType=VARCHAR},
+      </if>
+      <if test="record.englishName != null" >
+        english_name = #{record.englishName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.englishShortName != null" >
+        english_short_name = #{record.englishShortName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.opId != null" >
+        op_id = #{record.opId,jdbcType=BIGINT},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifyOpId != null" >
+        modify_op_id = #{record.modifyOpId,jdbcType=BIGINT},
+      </if>
+      <if test="record.modifyTime != null" >
+        modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.delFlag != null" >
+        del_flag = #{record.delFlag,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update hfus_word_store
+    set hfus_word_store_id = #{record.hfusWordStoreId,jdbcType=BIGINT},
+      chinese_chars = #{record.chineseChars,jdbcType=VARCHAR},
+      english_name = #{record.englishName,jdbcType=VARCHAR},
+      english_short_name = #{record.englishShortName,jdbcType=VARCHAR},
+      op_id = #{record.opId,jdbcType=BIGINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      modify_op_id = #{record.modifyOpId,jdbcType=BIGINT},
+      modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+      del_flag = #{record.delFlag,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hframe.domain.model.HfusWordStore" >
+    update hfus_word_store
+    <set >
+      <if test="chineseChars != null" >
+        chinese_chars = #{chineseChars,jdbcType=VARCHAR},
+      </if>
+      <if test="englishName != null" >
+        english_name = #{englishName,jdbcType=VARCHAR},
+      </if>
+      <if test="englishShortName != null" >
+        english_short_name = #{englishShortName,jdbcType=VARCHAR},
+      </if>
+      <if test="opId != null" >
+        op_id = #{opId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyOpId != null" >
+        modify_op_id = #{modifyOpId,jdbcType=BIGINT},
+      </if>
+      <if test="modifyTime != null" >
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=INTEGER},
+      </if>
+    </set>
+    where hfus_word_store_id = #{hfusWordStoreId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hframe.domain.model.HfusWordStore" >
+    update hfus_word_store
+    set chinese_chars = #{chineseChars,jdbcType=VARCHAR},
+      english_name = #{englishName,jdbcType=VARCHAR},
+      english_short_name = #{englishShortName,jdbcType=VARCHAR},
+      op_id = #{opId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_op_id = #{modifyOpId,jdbcType=BIGINT},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      del_flag = #{delFlag,jdbcType=INTEGER}
+    where hfus_word_store_id = #{hfusWordStoreId,jdbcType=BIGINT}
+  </update>
+</mapper>

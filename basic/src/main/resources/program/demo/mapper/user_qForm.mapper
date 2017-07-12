@@ -1,0 +1,13 @@
+<mapper component-id="qForm" data-set="uc/user" data-auth="orgId=SELF.orgId">
+    <baseMapper>
+        <mapping id="id" value="userList"></mapping>
+        <mapping id="icon" value="icon-user"></mapping>
+        <mapping id="title" value="${name}列表"></mapping>
+        <mapping id="columns" value="${columns}">
+            <mapping id="code" value="${code}"></mapping>
+            <mapping id="name" value="${name}"></mapping>
+            <mapping id="type" value="${editType}"></mapping>
+        </mapping>
+        <mapping id="data" value="${data}"></mapping>
+    </baseMapper>
+</mapper>

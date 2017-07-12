@@ -1,0 +1,23 @@
+<webtempalte>
+    <name>chaxua3233</name>
+    <root>chahua3233-高</root>
+    <staticResources>
+        <value id="">./css/**</value>
+        <value id="">./font/**</value>
+        <value id="icons">./ico/**</value>
+        <value id="">./img/**</value>
+        <value id="">./js/**</value>
+    </staticResources>
+
+    <datasets>
+        <dataset id="defaultList">
+            <pager>
+                <total type="int"></total>
+                <pageSize type="int"></pageSize>
+                <pageNo type="int"></pageNo>
+            </pager>
+            <columns type="array"></columns>
+            <data type="array2"></data>
+        </dataset>
+    </datasets>
+</webtempalte>

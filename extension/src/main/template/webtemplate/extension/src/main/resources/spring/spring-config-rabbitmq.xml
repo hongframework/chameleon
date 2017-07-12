@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xmlns:task="http://www.springframework.org/schema/task" xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/rabbit
+       http://www.springframework.org/schema/rabbit/spring-rabbit-1.4.xsd
+       http://www.springframework.org/schema/task
+    http://www.springframework.org/schema/task/spring-task-4.1.xsd
+    http://www.springframework.org/schema/util
+    http://www.springframework.org/schema/util/spring-util.xsd"
+       default-autowire="byName">
+
+    <!-- queue litener 观察 监听模式 当有消息到达时会通知监听在对应的队列上的监听对象 -->
+    <rabbit:annotation-driven />
+
+    <!-- 异步的线程池，线程池的最在数不能设定太小，不然<rabbit:listener/>/@RabbitListener太多的话，会出现发无法正常消费问题 -->
+    <task:executor id="taskExecutor" pool-size="4-256" queue-capacity="128" />
+
+    <bean id="rabbitConnectionFactory" class="com.rabbitmq.client.ConnectionFactory">
+        <property name="host" value="${rabbitmq.host}" />
+        <property name="port" value="${rabbitmq.port}" />
+        <property name="username" value="${rabbitmq.username}" />
+        <property name="password" value="${rabbitmq.password}" />
+        <property name="virtualHost" value="${rabbitmq.vhost}" />
+        <property name="connectionTimeout" value="${rabbitmq.connection.timeout}" />
+    </bean>
+
+    <bean id="rabbitConnFactory" class="org.springframework.amqp.rabbit.connection.CachingConnectionFactory">
+        <constructor-arg ref="rabbitConnectionFactory" />
+        <property name="channelCacheSize" value="25" />
+        <property name="executor" ref="taskExecutor" />
+    </bean>
+
+    <!-- rabbit:admin用于管理（创建和删除） exchanges, queues and bindings等 -->
+    <rabbit:admin connection-factory="rabbitConnFactory" id="rabbitAdmin" />
+
+    <!-- 180秒 -->
+    <rabbit:template id="amqpTemplate" reply-timeout="1000" connection-factory="rabbitConnFactory" message-converter="jsonMessageConverter" />
+
+    <bean id="rabbitListenerContainerFactory" class="org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory">
+        <property name="connectionFactory" ref="rabbitConnFactory" />
+        <property name="transactionManager" ref="transactionManager" />
+        <property name="concurrentConsumers" value="1" />
+        <property name="maxConcurrentConsumers" value="10" />
+        <property name="messageConverter" ref="jsonMessageConverter" />
+        <property name="taskExecutor" ref="taskExecutor" />
+        <property name="channelTransacted" value="true" />
+        <property name="adviceChain">
+            <array>
+                <ref bean="retryInterceptor" />
+            </array>
+        </property>
+    </bean>
+
+    <!-- 定义接收异常消息的exchange和queue -->
+    <util:map id="dlxNaming" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="zkcloud.subsystem.dlx.queue" value="#{'$dlx_queue_'+(T(com.zkteco.timecube.zkcloud.core.utils.PropertiesUtil).getValue('zkcloud.subsystem.code'))}" />
+        <entry key="zkcloud.subsystem.dlx.exchange" value="#{'$dlx_ex_'+(T(com.zkteco.timecube.zkcloud.core.utils.PropertiesUtil).getValue('zkcloud.subsystem.code'))}" />
+    </util:map>
+
+    <rabbit:queue id="zkcloud.subsystem.dlx.queue" name="#{dlxNaming['zkcloud.subsystem.dlx.queue']}">
+        <rabbit:queue-arguments>
+            <entry key="x-message-ttl">
+                <value type="java.lang.Long">86400000</value>
+            </entry>
+            <entry key="x-max-length">
+                <value type="java.lang.Long">100</value>
+            </entry>
+        </rabbit:queue-arguments>
+    </rabbit:queue>
+
+    <rabbit:fanout-exchange id="zkcloud.subsystem.dlx.exchange" name="#{dlxNaming['zkcloud.subsystem.dlx.exchange']}">
+        <rabbit:bindings>
+            <rabbit:binding queue="zkcloud.subsystem.dlx.queue" />
+        </rabbit:bindings>
+    </rabbit:fanout-exchange>
+
+    <rabbit:queue id="queue_one" durable="true" auto-delete="false"
+                  name="queue_one">
+    </rabbit:queue>
+    <rabbit:direct-exchange name="my-mq-exchange"
+                            durable="true" auto-delete="false" id="my-mq-exchange">
+        <rabbit:bindings>
+            <rabbit:binding queue="queue_one" key="queue_one_key" />
+        </rabbit:bindings>
+    </rabbit:direct-exchange>
+
+
+    <rabbit:queue id="queue_two" durable="true" auto-delete="false"
+                  exclusive="false" name="queue_two" />
+    <rabbit:direct-exchange name="my-mq-exchange1"
+                            durable="true" auto-delete="false" id="my-mq-exchange1">
+        <rabbit:bindings>
+            <rabbit:binding queue="queue_two" key="queue_two_key" />
+        </rabbit:bindings>
+    </rabbit:direct-exchange>
+</beans>

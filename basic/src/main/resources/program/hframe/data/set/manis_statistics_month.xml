@@ -1,0 +1,24 @@
+<dataset>
+  <module>hframe</module>
+  <code>manis_statistics_month</code>
+  <entity>manis_statistics_month</entity>
+  <name>统计-月</name>
+  <fields>
+    <field code="PK:code" name="PK:code" edit-type="select" >
+    </field>
+    <field code="PK:id" name="PK:id" edit-type="input" >
+    </field>
+    <field code="infos:1" name="1" edit-type="input"/>
+    <field code="infos:2" name="2" edit-type="input"/>
+    <field code="infos:3" name="3" edit-type="input"/>
+    <field code="infos:4" name="4" edit-type="input"/>
+    <field code="infos:5" name="5" edit-type="input"/>
+    <field code="infos:6" name="6" edit-type="input"/>
+    <field code="infos:7" name="7" edit-type="input"/>
+    <field code="infos:8" name="8" edit-type="input"/>
+    <field code="infos:9" name="9" edit-type="input"/>
+    <field code="infos:10" name="10" edit-type="input"/>
+    <field code="infos:11" name="11" edit-type="input"/>
+    <field code="infos:12" name="12" edit-type="input"/>
+  </fields>
+</dataset>

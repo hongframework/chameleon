@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="OFF" >
+	<Properties>
+		<Property name="logs">logs</Property>
+		<Property name="pattern">%d{yyyy-MM-dd HH:mm:ss} %-5level [%t] %logger{36} (%M:%L) - %msg%n</Property>
+		<Property name="filePattern">%d{yyyy-MM-dd}_%i</Property>
+	</Properties>
+	<Appenders>
+		<Console name="console" target="SYSTEM_OUT">
+			<PatternLayout pattern="${pattern}"/>
+		</Console>
+		<RollingFile name="debug_file" fileName="${logs}/debug.log" filePattern="${logs}/debug_${filePattern}.log">
+			<Filters>
+				<ThresholdFilter level="info" onMatch="DENY" onMismatch="NEUTRAL"/>
+				<ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY"/>
+			</Filters>
+			<PatternLayout pattern="${pattern}"/>
+			<Policies>
+                <TimeBasedTriggeringPolicy interval="24"/>
+                <SizeBasedTriggeringPolicy size="50 MB"/>
+            </Policies>
+		</RollingFile>
+		<RollingFile name="info_file" fileName="${logs}/info.log" filePattern="${logs}/info_${filePattern}.log">
+			<Filters>
+				<ThresholdFilter level="warn" onMatch="DENY" onMismatch="NEUTRAL"/>
+				<ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+			</Filters>
+			<PatternLayout pattern="${pattern}"/>
+			<Policies>
+                <TimeBasedTriggeringPolicy interval="24" />
+                <SizeBasedTriggeringPolicy size="50 MB"/>
+            </Policies>
+		</RollingFile>
+		<RollingFile name="error_file" fileName="${logs}/error.log" filePattern="${logs}/error_${filePattern}.log">
+			<ThresholdFilter level="warn" onMatch="ACCEPT" onMismatch="DENY"/>
+			<PatternLayout pattern="${pattern}"/>
+			<Policies>
+                <TimeBasedTriggeringPolicy interval="24" />
+                <SizeBasedTriggeringPolicy size="50 MB"/>
+            </Policies>
+		</RollingFile>
+		
+	</Appenders>
+	<Loggers>
+		<Root level="debug">
+			<Appender-ref ref="console" />
+			<Appender-ref ref="debug_file" />
+			<Appender-ref ref="info_file" />
+			<Appender-ref ref="error_file" />
+		</Root>
+	</Loggers>
+</configuration>
+

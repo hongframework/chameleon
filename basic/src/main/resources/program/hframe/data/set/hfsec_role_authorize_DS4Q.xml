@@ -1,0 +1,31 @@
+<dataset>
+  <module>hframe</module>
+  <code>hfsec_role_authorize_DS4Q</code>
+  <entity>hfsec_role_authorize</entity>
+  <name>角色授权【查询】</name>
+  <fields>
+    <field code="hfsec_role_authorize_id" name="角色授权id" edit-type="hidden" is-key="true" not-null="true"/>
+    <field code="hfsec_role_authorize_type" name="角色授权类型" edit-type="select">
+      <enum-class code="hfsec_role_authorize.hfsec_role_authorize_type"/>
+    </field>
+    <field code="hfsec_role_id" name="角色id" edit-type="hidden" not-null="true">
+      <rel entity-code="hfsec_role/hfsec_role_id/hfsec_role_name"/>
+    </field>
+    <field code="hfsec_menu_id" name="菜单ID" edit-type="select">
+      <rel entity-code="hfsec_menu/hfsec_menu_id/hfsec_menu_name" rel-field="hfsec_menu_id"/>
+    </field>
+    <field code="status" name="状态" edit-type="select">
+      <enum-class code="hfsec_role_authorize.status"/>
+    </field>
+    <field code="creator_id" name="创建人" edit-type="hidden">
+      <rel entity-code="hfsec_user/hfsec_user_id/hfsec_user_name"/>
+    </field>
+    <field code="create_time_GEQ" name="创建开始时间" edit-type="hidden"/>
+    <field code="create_time_LEQ" name="创建结束时间" edit-type="hidden"/>
+    <field code="modifier_id" name="修改人" edit-type="hidden">
+      <rel entity-code="hfsec_user/hfsec_user_id/hfsec_user_name"/>
+    </field>
+    <field code="modify_time_GEQ" name="修改开始时间" edit-type="hidden"/>
+    <field code="modify_time_LEQ" name="修改结束时间" edit-type="hidden"/>
+  </fields>
+</dataset>

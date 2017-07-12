@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hframe.dao.HfpmTestMapper" >
+  <resultMap id="BaseResultMap" type="com.hframe.domain.model.HfpmTest" >
+    <constructor >
+      <idArg column="hfpm_test_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="hfpm_test_code" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="hfpm_test_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="hfpm_program_cfg_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="hfcfg_program_template_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    hfpm_test_id, hfpm_test_code, hfpm_test_name, hfpm_program_cfg_id, hfcfg_program_template_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hframe.domain.model.HfpmTest_Example" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hfpm_test
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitEnd != null and limitEnd != 0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from hfpm_test
+    where hfpm_test_id = #{hfpmTestId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from hfpm_test
+    where hfpm_test_id = #{hfpmTestId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hframe.domain.model.HfpmTest_Example" >
+    delete from hfpm_test
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hframe.domain.model.HfpmTest" >
+    <selectKey resultType="java.lang.Long" keyProperty="hfpmTestId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into hfpm_test (hfpm_test_code, hfpm_test_name, hfpm_program_cfg_id, 
+      hfcfg_program_template_id)
+    values (#{hfpmTestCode,jdbcType=VARCHAR}, #{hfpmTestName,jdbcType=VARCHAR}, #{hfpmProgramCfgId,jdbcType=BIGINT}, 
+      #{hfcfgProgramTemplateId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hframe.domain.model.HfpmTest" >
+    <selectKey resultType="java.lang.Long" keyProperty="hfpmTestId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into hfpm_test
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="hfpmTestCode != null" >
+        hfpm_test_code,
+      </if>
+      <if test="hfpmTestName != null" >
+        hfpm_test_name,
+      </if>
+      <if test="hfpmProgramCfgId != null" >
+        hfpm_program_cfg_id,
+      </if>
+      <if test="hfcfgProgramTemplateId != null" >
+        hfcfg_program_template_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="hfpmTestCode != null" >
+        #{hfpmTestCode,jdbcType=VARCHAR},
+      </if>
+      <if test="hfpmTestName != null" >
+        #{hfpmTestName,jdbcType=VARCHAR},
+      </if>
+      <if test="hfpmProgramCfgId != null" >
+        #{hfpmProgramCfgId,jdbcType=BIGINT},
+      </if>
+      <if test="hfcfgProgramTemplateId != null" >
+        #{hfcfgProgramTemplateId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hframe.domain.model.HfpmTest_Example" resultType="java.lang.Integer" >
+    select count(*) from hfpm_test
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update hfpm_test
+    <set >
+      <if test="record.hfpmTestId != null" >
+        hfpm_test_id = #{record.hfpmTestId,jdbcType=BIGINT},
+      </if>
+      <if test="record.hfpmTestCode != null" >
+        hfpm_test_code = #{record.hfpmTestCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hfpmTestName != null" >
+        hfpm_test_name = #{record.hfpmTestName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hfpmProgramCfgId != null" >
+        hfpm_program_cfg_id = #{record.hfpmProgramCfgId,jdbcType=BIGINT},
+      </if>
+      <if test="record.hfcfgProgramTemplateId != null" >
+        hfcfg_program_template_id = #{record.hfcfgProgramTemplateId,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update hfpm_test
+    set hfpm_test_id = #{record.hfpmTestId,jdbcType=BIGINT},
+      hfpm_test_code = #{record.hfpmTestCode,jdbcType=VARCHAR},
+      hfpm_test_name = #{record.hfpmTestName,jdbcType=VARCHAR},
+      hfpm_program_cfg_id = #{record.hfpmProgramCfgId,jdbcType=BIGINT},
+      hfcfg_program_template_id = #{record.hfcfgProgramTemplateId,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hframe.domain.model.HfpmTest" >
+    update hfpm_test
+    <set >
+      <if test="hfpmTestCode != null" >
+        hfpm_test_code = #{hfpmTestCode,jdbcType=VARCHAR},
+      </if>
+      <if test="hfpmTestName != null" >
+        hfpm_test_name = #{hfpmTestName,jdbcType=VARCHAR},
+      </if>
+      <if test="hfpmProgramCfgId != null" >
+        hfpm_program_cfg_id = #{hfpmProgramCfgId,jdbcType=BIGINT},
+      </if>
+      <if test="hfcfgProgramTemplateId != null" >
+        hfcfg_program_template_id = #{hfcfgProgramTemplateId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where hfpm_test_id = #{hfpmTestId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hframe.domain.model.HfpmTest" >
+    update hfpm_test
+    set hfpm_test_code = #{hfpmTestCode,jdbcType=VARCHAR},
+      hfpm_test_name = #{hfpmTestName,jdbcType=VARCHAR},
+      hfpm_program_cfg_id = #{hfpmProgramCfgId,jdbcType=BIGINT},
+      hfcfg_program_template_id = #{hfcfgProgramTemplateId,jdbcType=BIGINT}
+    where hfpm_test_id = #{hfpmTestId,jdbcType=BIGINT}
+  </update>
+</mapper>

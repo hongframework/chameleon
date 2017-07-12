@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+       default-autowire="byName">
+
+    <!-- dataSource -->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="driverClass" value="${jdbc.driverClass}"/>
+        <property name="jdbcUrl" value="${jdbc.url}"/>
+        <property name="user" value="${jdbc.user}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <!-- 连接池中保留的最小连接数 -->
+        <property name="minPoolSize" value="${jdbc.minPoolSize}"/>
+        <!-- 连接池中保留的最大连接数 -->
+        <property name="maxPoolSize" value="${jdbc.maxPoolSize}"/>
+        <!--最大空闲时间,300秒内未使用则连接被丢弃。若为0则永不丢弃 -->
+        <property name="maxIdleTime" value="${jdbc.maxIdleTime}"/>
+        <!-- 当连接池中的连接耗尽的时候c3p0一次同时获取的连接数 -->
+        <property name="acquireIncrement" value="${jdbc.acquireIncrement}"/>
+        <!-- JDBC的标准参数，用以控制数据源内加载的PreparedStatements数量。但由于预缓存的statements　
+        属于单个connection而不是整个连接池。所以设置这个参数需要考虑到多方面的因素。　
+        如果maxStatements与maxStatementsPerConnection均为0，则缓存被关闭。Default:0 -->
+        <property name="maxStatements" value="${jdbc.maxStatements}"/>
+        <!-- 初始化时获取的连接数，取值应在minPoolSize与maxPoolSize之间 -->
+        <property name="initialPoolSize" value="${jdbc.initialPoolSize}"/>
+        <!-- 每300秒检查所有连接池中的空闲连接 -->
+        <property name="idleConnectionTestPeriod" value="${jdbc.idleConnectionTestPeriod}"/>
+        <!-- 定义在从数据库获取新连接失败后重复尝试的次数 -->
+        <property name="acquireRetryAttempts" value="${jdbc.acquireRetryAttempts}"/>
+    </bean>
+
+    <!-- dataSource -->
+    <bean id="dynamicDataSource" class="com.hframework.common.springext.datasource.DynamicDataSource">
+        <property name="targetDataSources">
+            <map></map>
+        </property>
+        <property name="defaultTargetDataSource" ref="dataSource"></property>
+    </bean>
+
+
+    <bean id="jdbcTempalte" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+
+</beans>

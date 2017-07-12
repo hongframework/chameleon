@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:int-kafka="http://www.springframework.org/schema/integration/kafka"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/integration/kafka http://www.springframework.org/schema/integration/kafka/spring-integration-kafka.xsd"
+       default-autowire="byName">
+
+    <int-kafka:message-driven-channel-adapter
+            id="kafkaMessageDrivenChannelAdapter"
+            listener-container="kafkaMessageListenerContainer"
+            auto-startup="true"
+            phase="100"
+            send-timeout="5000"
+            channel="nullChannel"
+            message-converter="messagingMessageConverter"
+            error-channel="errorChannel"/>
+
+    <bean id="messagingMessageConverter" class="org.springframework.kafka.support.converter.MessagingMessageConverter"/>
+
+    <bean id="kafkaMessageListenerContainer" class="org.springframework.kafka.listener.KafkaMessageListenerContainer">
+        <constructor-arg>
+            <bean class="org.springframework.kafka.core.DefaultKafkaConsumerFactory">
+                <constructor-arg>
+                    <map>
+                        <entry key="bootstrap.servers" value="${kafka.consumer.bootstrap.servers}"/>
+                        <entry key="group.id" value="${kafka.consumer.group.id}"/>
+                        <entry key="enable.auto.commit" value="${kafka.consumer.enable.auto.commit}"/>
+                        <entry key="auto.commit.interval.ms" value="${kafka.consumer.auto.commit.interval.ms}"/>
+                        <entry key="session.timeout.ms" value="${kafka.consumer.session.timeout.ms}"/>
+                        <entry key="key.deserializer" value="${kafka.consumer.key.deserializer}"/>
+                        <entry key="value.deserializer" value="${kafka.consumer.value.deserializer}"/>
+                    </map>
+                </constructor-arg>
+            </bean>
+        </constructor-arg>
+        <constructor-arg>
+            <bean class="org.springframework.kafka.listener.config.ContainerProperties">
+                <constructor-arg name="topics" value="writeBackLemmaRecordTopic"/>
+            </bean>
+        </constructor-arg>
+    </bean>
+
+    <!-- 实际执行消息消费的类 -->
+    <bean id="kafkaConsumerService"
+          class="com.hframework.common.client.kafka.KafkaConsumer"/>
+
+</beans>

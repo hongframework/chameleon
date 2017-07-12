@@ -1,0 +1,28 @@
+<dataset>
+  <module>hframe</module>
+  <code>hfmd_enum_class_DS4Q</code>
+  <entity>hfmd_enum_class</entity>
+  <name>枚举类目【查询】</name>
+  <fields>
+    <field code="hfmd_enum_class_id" name="枚举类目ID" edit-type="input" is-key="true"/>
+    <field code="hfmd_enum_class_name" name="枚举类目名称" edit-type="input"/>
+    <field code="hfmd_enum_class_code" name="枚举类目编码" edit-type="input"/>
+    <field code="hfmd_enum_class_desc" name="枚举类目描述" edit-type="input"/>
+    <field code="ext1" name="扩展字段1" edit-type="input"/>
+    <field code="ext2" name="扩展字段2" edit-type="input"/>
+    <field code="hfpm_program_id" name="项目ID" edit-type="select">
+      <rel entity-code="hfpm_program/hfpm_program_id/hfpm_program_name"/>
+    </field>
+    <field code="op_id" name="创建人" edit-type="input">
+      <rel entity-code="hfsec_user/hfsec_user_id/hfsec_user_name"/>
+    </field>
+    <field code="create_time_GEQ" name="创建开始时间" edit-type="datetime"/>
+    <field code="create_time_LEQ" name="创建结束时间" edit-type="datetime"/>
+    <field code="modify_op_id" name="修改人" edit-type="input">
+      <rel entity-code="hfsec_user/hfsec_user_id/hfsec_user_name"/>
+    </field>
+    <field code="modify_time_GEQ" name="修改开始时间" edit-type="datetime"/>
+    <field code="modify_time_LEQ" name="修改结束时间" edit-type="datetime"/>
+    <field code="del_flag" name="删除标识" edit-type="input"/>
+  </fields>
+</dataset>

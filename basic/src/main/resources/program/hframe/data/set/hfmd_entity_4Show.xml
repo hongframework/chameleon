@@ -1,0 +1,34 @@
+<dataset>
+    <module>hframe</module>
+    <code>hfmd_entity_4Show</code>
+    <icon>hfmd_entity_4Show</icon>
+    <entity is-main="true">hfmd_entity</entity>
+    <entity>hfmd_entity_page</entity>
+    <name>实体</name>
+    <fields>
+        <field code="hfmd_entity_id" name="实体ID" edit-type="hidden"></field>
+        <field code="hfmd_entity_code" name="实体编码" edit-type="input">
+            <update-edit-type>text</update-edit-type>
+        </field>
+        <field code="hfmd_entity_name" name="实体名称" edit-type="input"></field>
+        <field code="hfmd_entity_type" name="实体类型" edit-type="select">
+            <enum value="0" name="业务类"></enum>
+            <enum value="1" name="配置类"></enum>
+            <enum value="2" name="关系类"></enum>
+            <enum value="3" name="扩展类"></enum>
+        </field>
+        <field code="hfmd_entity_desc" name="实体描述" edit-type="textarea" action="fdsfdsfds"></field>
+        <field code="del_flag" name="删除标识" edit-type="radio">
+            <create-edit-type>hidden</create-edit-type>
+            <enum-class code="GLOBAL.BOOLEAN"></enum-class>
+        </field>
+        <field code="op_id" name="创建人" edit-type="hidden">
+            <update-edit-type>text</update-edit-type>
+        </field>
+        <field code="create_time" name="创建时间" edit-type="hidden">
+            <update-edit-type>text</update-edit-type>
+        </field>
+        <field code="modify_op_id" name="修改人" edit-type="hidden"></field>
+        <field code="modify_time" name="修改时间" edit-type="hidden"></field>
+    </fields>
+</dataset>

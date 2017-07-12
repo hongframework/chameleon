@@ -1,0 +1,21 @@
+<dataset>
+    <module>hfmd</module>
+    <code>hfmd_entity_4QueryForm</code>
+    <entity is-main="true">hfmd_entity</entity>
+    <entity>hfmd_entity_page</entity>
+    <name>实体</name>
+    <fields>
+        <field code="hfpm_program_id" name="项目ID" edit-type="select"></field>
+        <field code="hfpm_module_id" name="模块ID" edit-type="select"></field>
+        <field code="hfmd_entity_id" name="实体ID" edit-type="likeSelect"></field>
+
+        <field code="code" name="实体编码"></field>
+        <field code="name_LK" name="实体名称"></field>
+        <field code="type" name="实体类型"></field>
+        <field code="desc_LK" name="实体描述" edit-type="input"></field>
+        <field code="del_flag" name="删除标识" edit-type="checkbox"> </field>
+        <field code="op_id" name="创建人" edit-type="dialog" action=""></field>
+        <field code="modify_time_LEQ" name="创建开始时间" edit-type="datetime"></field>
+        <field code="create_time_GEQ" name="创建结束时间" edit-type="datetime"></field>
+    </fields>
+</dataset>

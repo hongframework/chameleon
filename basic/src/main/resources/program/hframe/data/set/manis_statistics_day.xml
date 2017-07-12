@@ -1,0 +1,43 @@
+<dataset>
+  <module>hframe</module>
+  <code>manis_statistics_day</code>
+  <entity>manis_statistics_day</entity>
+  <name>统计-天</name>
+  <fields>
+    <field code="PK:code" name="PK:code" edit-type="select" >
+    </field>
+    <field code="PK:id" name="PK:id" edit-type="input" >
+    </field>
+    <field code="infos:1" name="1" edit-type="input"/>
+    <field code="infos:2" name="2" edit-type="input"/>
+    <field code="infos:3" name="3" edit-type="input"/>
+    <field code="infos:4" name="4" edit-type="input"/>
+    <field code="infos:5" name="5" edit-type="input"/>
+    <field code="infos:6" name="6" edit-type="input"/>
+    <field code="infos:7" name="7" edit-type="input"/>
+    <field code="infos:8" name="8" edit-type="input"/>
+    <field code="infos:9" name="9" edit-type="input"/>
+    <field code="infos:10" name="10" edit-type="input"/>
+    <field code="infos:11" name="11" edit-type="input"/>
+    <field code="infos:12" name="12" edit-type="input"/>
+    <field code="infos:13" name="13" edit-type="input"/>
+    <field code="infos:14" name="14" edit-type="input"/>
+    <field code="infos:15" name="15" edit-type="input"/>
+    <field code="infos:16" name="16" edit-type="input"/>
+    <field code="infos:17" name="17" edit-type="input"/>
+    <field code="infos:18" name="18" edit-type="input"/>
+    <field code="infos:19" name="19" edit-type="input"/>
+    <field code="infos:20" name="20" edit-type="input"/>
+    <field code="infos:21" name="21" edit-type="input"/>
+    <field code="infos:22" name="22" edit-type="input"/>
+    <field code="infos:23" name="23" edit-type="input"/>
+    <field code="infos:24" name="24" edit-type="input"/>
+    <field code="infos:25" name="25" edit-type="input"/>
+    <field code="infos:26" name="26" edit-type="input"/>
+    <field code="infos:27" name="27" edit-type="input"/>
+    <field code="infos:28" name="28" edit-type="input"/>
+    <field code="infos:29" name="29" edit-type="input"/>
+    <field code="infos:30" name="30" edit-type="input"/>
+    <field code="infos:31" name="31" edit-type="input"/>
+  </fields>
+</dataset>

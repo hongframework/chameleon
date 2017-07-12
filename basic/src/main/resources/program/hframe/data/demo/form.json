@@ -1,0 +1,17 @@
+{
+  id:"mylist",
+  icon:"icon-user",
+  title:"新增用户",
+  columns:[
+    {code:"id",name:"学号",editType:"hidden"},
+    {code:"name",name:"姓名",editType:"input"},
+    {code:"age",name:"年龄",editType:"select"},
+    {code:"gender",name:"性别",editType:"radio"},
+    {code:"address",name:"地址",editType:"input"},
+    {code:"remark",name:"备注",editType:"textarea"}
+  ],
+  data:{id:"1001",name:"张三",age:29,gender:"女",address:"四川成都",remark:""},
+  memo:{
+    "dataset":"user"
+  }
+}

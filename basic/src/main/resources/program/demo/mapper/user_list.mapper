@@ -1,0 +1,28 @@
+<mapper component-id="list" data-set="uc/user" data-auth="orgId=SELF.orgId">
+    <baseMapper>
+        <mapping id="id" value="userList"></mapping>
+        <mapping id="icon" value="icon-user"></mapping>
+        <mapping id="title" value="${name}列表"></mapping>
+        <mapping id="columns" value="${columns}">
+            <mapping id="code" value="${code}"></mapping>
+            <mapping id="name" value="${name}"></mapping>
+            <mapping id="type" value="${editType}"></mapping>
+        </mapping>
+        <mapping id="data" value="${data}"></mapping>
+
+        <mapping id="pager" type="${pager}">
+            <mapping id="text" value="${value}"></mapping>
+            <mapping id="value"  value="${value}"></mapping>
+            <mapping id="disabled" value="${disabled}"></mapping>
+            <mapping id="active" value="${active}"></mapping>
+        </mapping>
+    </baseMapper>
+    <eventMapper>
+        <mapping id="id" value="user_id"></mapping>
+        <mapping id="ids" value="user_id"></mapping>
+        <mapping id="create" value="create"></mapping>
+        <mapping id="edit" value="edit"></mapping>
+        <mapping id="detail" value="detail"></mapping>
+        <mapping id="batchDelete" value="batchDelete"></mapping>
+    </eventMapper>
+</mapper>

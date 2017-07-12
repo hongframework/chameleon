@@ -1,0 +1,29 @@
+<dataset>
+  <module>hframe</module>
+  <code>hfsec_menu_DS4Q</code>
+  <entity>hfsec_menu</entity>
+  <name>菜单【查询】</name>
+  <fields>
+    <field code="hfsec_menu_id" name="菜单ID" edit-type="input" is-key="true"/>
+    <field code="hfsec_menu_code" name="菜单编码" edit-type="input"/>
+    <field code="hfsec_menu_name" name="菜单名称" edit-type="input"/>
+    <field code="hfsec_menu_desc" name="菜单描述" edit-type="input"/>
+    <field code="menu_level" name="菜单级别" edit-type="select">
+      <enum-class code="hfsec_menu.menu_level"/>
+    </field>
+    <field code="icon" name="图标" edit-type="select">
+      <enum-class code="hfsec_menu.icon"/>
+    </field>
+    <field code="url" name="地址" edit-type="input"/>
+    <field code="parent_hfsec_menu_id" name="上级菜单ID" edit-type="select">
+      <rel entity-code="hfsec_menu/hfsec_menu_id/hfsec_menu_name" rel-field="parent_hfsec_menu_id"/>
+    </field>
+    <field code="creator_id" name="创建人" edit-type="input"/>
+    <field code="create_time_GEQ" name="创建开始时间" edit-type="datetime"/>
+    <field code="create_time_LEQ" name="创建结束时间" edit-type="datetime"/>
+    <field code="modifier_id" name="修改人" edit-type="hidden"/>
+    <field code="modify_time_GEQ" name="修改开始时间" edit-type="datetime"/>
+    <field code="modify_time_LEQ" name="修改结束时间" edit-type="datetime"/>
+    <field code="del_flag" name="删除标识" edit-type="input"/>
+  </fields>
+</dataset>

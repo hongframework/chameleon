@@ -1,0 +1,20 @@
+.settings
+.buildpath
+.project
+
+#OS files
+.DS_Store
+.DS_Store?
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*.iml
+*.ipr
+*.iws
+.idea
+.class
+target
+*/target/
+*/*/target/
+gerrit

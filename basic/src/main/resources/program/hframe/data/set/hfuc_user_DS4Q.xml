@@ -1,0 +1,26 @@
+<dataset>
+  <module>hframe</module>
+  <code>hfuc_user_DS4Q</code>
+  <entity>hfuc_user</entity>
+  <name>用户【查询】</name>
+  <fields>
+    <field code="hfuc_user_id" name="用户ID" edit-type="input"/>
+    <field code="hfuc_user_name" name="用户名称" edit-type="input"/>
+    <field code="account" name="用户账号" edit-type="input"/>
+    <field code="password" name="用户密码" edit-type="input"/>
+    <field code="gender" name="性别" edit-type="input"/>
+    <field code="mobile" name="手机号" edit-type="input"/>
+    <field code="email" name="邮箱" edit-type="input"/>
+    <field code="addr" name="地址" edit-type="input"/>
+    <field code="last_login_time" name="上次登录时间" edit-type="input"/>
+    <field code="status" name="状态" edit-type="input"/>
+    <field code="hfuc_org_id" name="归属组织ID" edit-type="input"/>
+    <field code="creator_id" name="创建人" edit-type="input"/>
+    <field code="create_time_GEQ" name="创建开始时间" edit-type="input"/>
+    <field code="create_time_LEQ" name="创建结束时间" edit-type="input"/>
+    <field code="modifier_id" name="修改人" edit-type="input"/>
+    <field code="modify_time_GEQ" name="修改开始时间" edit-type="input"/>
+    <field code="modify_time_LEQ" name="修改结束时间" edit-type="input"/>
+    <field code="del_flag" name="删除标识" edit-type="input"/>
+  </fields>
+</dataset>

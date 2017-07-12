@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:ehcache="http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring
+         http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring/ehcache-spring-1.1.xsd"
+       default-autowire="byName">
+
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxTotal" value="2048" />
+        <property name="maxIdle" value="200" />
+        <property name="numTestsPerEvictionRun" value="1024" />
+        <property name="timeBetweenEvictionRunsMillis" value="30000" />
+        <property name="minEvictableIdleTimeMillis" value="-1" />
+        <property name="softMinEvictableIdleTimeMillis" value="10000" />
+        <property name="maxWaitMillis" value="1500" />
+        <property name="testOnBorrow" value="true" />
+        <property name="testWhileIdle" value="true" />
+        <property name="testOnReturn" value="false" />
+        <property name="jmxEnabled" value="true" />
+        <property name="blockWhenExhausted" value="false" />
+    </bean>
+
+    <bean id="redisSentinelConfiguration"
+          class="org.springframework.data.redis.connection.RedisSentinelConfiguration">
+        <property name="master">
+            <bean class="org.springframework.data.redis.connection.RedisNode">
+                <property name="name" value="def_master">
+                </property>
+            </bean>
+        </property>
+        <property name="sentinels">
+            <set>
+                <bean class="org.springframework.data.redis.connection.RedisNode">
+                    <constructor-arg name="host" value="127.0.0.1" />
+                    <constructor-arg name="port" value="26479" />
+                </bean>
+            </set>
+        </property>
+    </bean>
+    <bean id="redisSentinelConnectionFactory"
+          class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+        <constructor-arg name="sentinelConfig" ref="redisSentinelConfiguration"></constructor-arg>
+        <constructor-arg name="poolConfig" ref="jedisPoolConfig"></constructor-arg>
+        <property name="database" value="1"></property>
+    </bean>
+    <bean id="redisSentinelTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+        <property name="connectionFactory" ref="redisSentinelConnectionFactory" />
+    </bean>
+    <bean id="redisSentinelService" class="com.hframework.common.client.redis.RedisService" >
+        <property name="redisTemplate">
+            <ref bean="redisSentinelTemplate"/>
+        </property>
+    </bean>
+
+</beans>

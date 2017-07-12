@@ -1,0 +1,41 @@
+<dataset>
+  <module>hframe</module>
+  <code>hfsec_menu</code>
+  <entity>hfsec_menu</entity>
+  <name>菜单</name>
+  <fields>
+    <field code="hfsec_menu_id" name="菜单ID" edit-type="input" is-key="true">
+      <create-edit-type>hidden</create-edit-type>
+      <update-edit-type>text</update-edit-type>
+    </field>
+    <field code="hfsec_menu_code" name="菜单编码" edit-type="input"/>
+    <field code="hfsec_menu_name" name="菜单名称" edit-type="input"  is-name="true"/>
+    <field code="hfsec_menu_desc" name="菜单描述" edit-type="input"/>
+    <field code="menu_level" name="菜单级别" edit-type="select">
+      <enum-class code="hfsec_menu.menu_level"/>
+    </field>
+    <field code="icon" name="图标" edit-type="select" not-null="true">
+      <enum-class code="hfsec_menu.icon"/>
+    </field>
+    <field code="url" name="地址" edit-type="input" not-null="true"/>
+    <field code="parent_hfsec_menu_id" name="上级菜单ID" edit-type="select">
+      <rel entity-code="hfsec_menu/hfsec_menu_id/hfsec_menu_name"/>
+    </field>
+    <field code="pri" name="优先级" edit-type="hidden" not-null="true">
+      <create-edit-type>hidden</create-edit-type>
+    </field>
+    <field code="creator_id" name="创建人" edit-type="input"/>
+    <field code="create_time" name="创建时间" edit-type="input">
+      <create-edit-type>hidden</create-edit-type>
+      <update-edit-type>text</update-edit-type>
+    </field>
+    <field code="modifier_id" name="修改人" edit-type="hidden" not-null="true"/>
+    <field code="modify_time" name="修改时间" edit-type="input">
+      <create-edit-type>hidden</create-edit-type>
+      <update-edit-type>hidden</update-edit-type>
+    </field>
+    <field code="del_flag" name="删除标识" edit-type="input">
+      <create-edit-type>hidden</create-edit-type>
+    </field>
+  </fields>
+</dataset>

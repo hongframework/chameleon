@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.1.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.0.xsd
+		">
+
+    <!-- 静态资源映射 -->
+    <!--<mvc:resources mapping="/static/**" location="/WEB-INF/static/" />-->
+    <mvc:resources mapping="/VAADIN/**" location="/VAADIN/" />
+
+    <!-- 组件自动扫描 （注解） -->
+    <context:component-scan base-package="com">
+        <context:include-filter type="regex" expression="
+        com.hframework.controller.*;
+        com.hframework.interceptor.*;
+        com.hframe.controller.*;"/>
+    </context:component-scan>
+    <!-- Configures support for @Controllers -->
+    <mvc:annotation-driven  conversion-service="conversionService">
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>application/json; charset=UTF-8</value>
+                        <value>text/html; charset=UTF-8</value>
+                        <value>application/x-www-form-urlencoded; charset=UTF-8</value>
+                    </list>
+                </property>
+                <property name="objectMapper" ref="mvcObjectMapper"/>
+            </bean>
+        </mvc:message-converters>
+
+    </mvc:annotation-driven>
+    <!--<mvc:annotation-driven conversion-service=""/>-->
+    <!-- 对静态资源文件的访问 -->
+    <mvc:default-servlet-handler/>
+
+    <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+    <!--<bean class="com.hframework.interceptor.DataSetJoinInvokeInterceptor"></bean>-->
+    <bean class="org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator" />
+
+
+    <!--说明：设置Jackson日期格式化后对于String，Date的互换按照指定格式要求，否则需求使用DateJsonDeserializer，DateJsonSerializer注解标识每个DTO中date对象-->
+    <bean id="mvcObjectMapper" class="com.fasterxml.jackson.databind.ObjectMapper">
+        <property name="dateFormat">
+            <bean class="java.text.SimpleDateFormat" >
+                <constructor-arg value="yyyy-MM-dd HH:mm:ss"/>
+            </bean>
+        </property>
+    </bean>
+
+    <!-- spring表单提交，对象spring标签输出时候格式化与封装配置 -->
+    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <bean class="com.hframework.common.springext.converter.DateConverter" >
+                    <constructor-arg value="yyyy-MM-dd HH:mm:ss"/>
+                </bean>
+            </set>
+        </property>
+        <!-- 格式化显示的配置-->
+        <property name="formatters">
+            <set>
+                <bean class="org.springframework.format.datetime.DateFormatter" >
+                    <constructor-arg value="yyyy-MM-dd HH:mm:ss"/>
+                </bean>
+            </set>
+        </property>
+    </bean>
+
+    <!-- 模板信息设置 -->
+    <bean id="velocityConfigurer"
+          class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+        <property name="resourceLoaderPath"  value="WEB-INF/page" /><!-- 設置模板访问位置-->
+        <property name="velocityProperties">
+            <props>
+                <prop key="directive.foreach.counter.name">loopCounter</prop>
+                <prop key="directive.foreach.counter.initial.value">0</prop>
+                <prop key="input.encoding">UTF-8</prop><!-- 指定模板引擎进行模板处理的编码 -->
+                <prop key="output.encoding">UTF-8</prop><!-- 指定输出流的编码 -->
+            </props>
+        </property>
+    </bean>
+
+    <!-- 设置视图解析工具 -->
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
+        <property name="suffix" value=".vm" />
+        <!-- 避免乱码 -->
+        <property name="contentType" value="text/html;charset=UTF-8" />
+        <property name="dateToolAttribute" value="dateTool" />
+        <property name="numberToolAttribute" value="numberTool" />
+        <property name="exposeRequestAttributes" value="true" />
+        <property name="exposeSessionAttributes" value="true" />
+    </bean>
+
+    <!--<bean id="dataSetLoaderService" class="com.hframework.base.service.DataSetLoaderService"></bean>-->
+    <!--<bean id="modelLoaderService" class="com.hframework.base.service.ModelLoaderService"></bean>-->
+
+    <!-- ①注册ConversionService -->
+    <!-- ②使用 ConfigurableWebBindingInitializer 注册conversionService -->
+    <bean class="org.springframework.web.bind.support.ConfigurableWebBindingInitializer">
+        <property name="conversionService" ref="conversionService" />
+    </bean>
+
+    <!--<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">-->
+        <!--<property name="messageConverters">-->
+            <!--<list>-->
+                <!--<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">-->
+                    <!--<property name="supportedMediaTypes">-->
+                        <!--<list>-->
+                            <!--<value>application/json; charset=UTF-8</value>-->
+                            <!--<value>text/html; charset=UTF-8</value>-->
+                        <!--</list>-->
+                    <!--</property>-->
+                    <!--<property name="objectMapper" >-->
+                        <!--<bean class="com.fasterxml.jackson.databind.ObjectMapper">-->
+                            <!--<property name="dateFormat">-->
+                                <!--<bean class="java.text.SimpleDateFormat" >-->
+                                    <!--<constructor-arg value="yyyy-MM-dd HH:mm:ss"/>-->
+                                <!--</bean>-->
+                            <!--</property>-->
+                        <!--</bean>-->
+                    <!--</property>-->
+                <!--</bean>-->
+                <!--<bean class="org.springframework.http.converter.FormHttpMessageConverter"/>-->
+            <!--</list>-->
+        <!--</property>-->
+        <!--&lt;!&ndash;<property name="webBindingInitializer" ref="webBindingInitializer"/>&ndash;&gt;-->
+    <!--</bean>-->
+
+    <!--&lt;!&ndash; 视图解释类 &ndash;&gt;-->
+    <!--<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
+    <!--<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>-->
+    <!--&lt;!&ndash;<property name="prefix" value="/WEB-INF/page/"/>&ndash;&gt;-->
+    <!--<property name="prefix" value="/page/"/>-->
+    <!--&lt;!&ndash;可为空,方便实现自已的依据扩展名来选择视图解释类的逻辑  &ndash;&gt;-->
+    <!--<property name="suffix" value=".jsp"/>-->
+    <!--</bean>-->
+
+
+    <!-- 文件上传类 -->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="utf-8"/>
+        <property name="maxUploadSize" value="10485760000"/>
+        <property name="maxInMemorySize" value="40960"/>
+    </bean>
+    <!--微信业务异常处理-->
+    <!-- TODO
+    <bean id="weixinExceptionResolver" class="com.ourangel.box.mvc.interceptor.WeixinExceptionResolver" />
+    -->
+    <!-- 查询分页拦截器 TODO
+    <aop:config proxy-target-class="true">
+        <aop:pointcut id="methodPointcut" expression="execution (* com.ourangel.box.mvc.controller..*(..))"/>
+        <aop:advisor advice-ref="methodInterceptorBySpring" pointcut-ref="methodPointcut"/>
+    </aop:config>
+-->
+    <!-- 拦截器 TODO
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/platformedm/*" />
+            <mvc:mapping path="/platformstore/*" />
+            <mvc:mapping path="/platformuser/*" />
+            <mvc:mapping path="/platformAddress/*" />
+            <mvc:mapping path="/platformcenter/*" />
+            <bean class="com.ourangel.box.mvc.interceptor.PlatformUserInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**" />
+            <bean class="com.hframework.web.interceptor.ThreadContextInterceptor" />
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/**/*.json" />
+            <bean class="com.hframework.web.interceptor.WorkflowInterceptor" />
+        </mvc:interceptor>
+        <!--<mvc:interceptor>-->
+            <!--<mvc:mapping path="/**" />-->
+            <!--<bean class="com.ucf.first.interceptors.ReqCheckInterceptor" ></bean>-->
+        <!--</mvc:interceptor>-->
+    </mvc:interceptors>
+</beans>

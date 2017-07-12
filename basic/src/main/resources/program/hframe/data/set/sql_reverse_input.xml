@@ -1,0 +1,9 @@
+<dataset>
+  <module>hframe</module>
+  <code>sql_reverse_input</code>
+  <entity>hfcfg_page_template</entity>
+  <name>SQL语句</name>
+  <fields>
+    <field code="sql" name="sql" edit-type="textarea"/>
+  </fields>
+</dataset>

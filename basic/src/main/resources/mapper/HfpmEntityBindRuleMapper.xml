@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hframe.dao.HfpmEntityBindRuleMapper" >
+  <resultMap id="BaseResultMap" type="com.hframe.domain.model.HfpmEntityBindRule" >
+    <constructor >
+      <idArg column="hfpm_entity_bind_rule_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="bind_type" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="src_hfmd_entity_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="src_hfmd_entity_attr_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="dest_hfmd_entity_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="dest_hfmd_entity_attr_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="op_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="modify_op_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="modify_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="del_flag" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    hfpm_entity_bind_rule_id, bind_type, src_hfmd_entity_id, src_hfmd_entity_attr_id, 
+    dest_hfmd_entity_id, dest_hfmd_entity_attr_id, op_id, create_time, modify_op_id, 
+    modify_time, del_flag
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hframe.domain.model.HfpmEntityBindRule_Example" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hfpm_entity_bind_rule
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitEnd != null and limitEnd != 0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from hfpm_entity_bind_rule
+    where hfpm_entity_bind_rule_id = #{hfpmEntityBindRuleId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from hfpm_entity_bind_rule
+    where hfpm_entity_bind_rule_id = #{hfpmEntityBindRuleId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hframe.domain.model.HfpmEntityBindRule_Example" >
+    delete from hfpm_entity_bind_rule
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hframe.domain.model.HfpmEntityBindRule" >
+    <selectKey resultType="java.lang.Long" keyProperty="hfpmEntityBindRuleId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into hfpm_entity_bind_rule (bind_type, src_hfmd_entity_id, src_hfmd_entity_attr_id, 
+      dest_hfmd_entity_id, dest_hfmd_entity_attr_id, op_id, 
+      create_time, modify_op_id, modify_time, 
+      del_flag)
+    values (#{bindType,jdbcType=INTEGER}, #{srcHfmdEntityId,jdbcType=BIGINT}, #{srcHfmdEntityAttrId,jdbcType=BIGINT}, 
+      #{destHfmdEntityId,jdbcType=BIGINT}, #{destHfmdEntityAttrId,jdbcType=BIGINT}, #{opId,jdbcType=BIGINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{modifyOpId,jdbcType=BIGINT}, #{modifyTime,jdbcType=TIMESTAMP}, 
+      #{delFlag,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hframe.domain.model.HfpmEntityBindRule" >
+    <selectKey resultType="java.lang.Long" keyProperty="hfpmEntityBindRuleId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into hfpm_entity_bind_rule
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="bindType != null" >
+        bind_type,
+      </if>
+      <if test="srcHfmdEntityId != null" >
+        src_hfmd_entity_id,
+      </if>
+      <if test="srcHfmdEntityAttrId != null" >
+        src_hfmd_entity_attr_id,
+      </if>
+      <if test="destHfmdEntityId != null" >
+        dest_hfmd_entity_id,
+      </if>
+      <if test="destHfmdEntityAttrId != null" >
+        dest_hfmd_entity_attr_id,
+      </if>
+      <if test="opId != null" >
+        op_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="modifyOpId != null" >
+        modify_op_id,
+      </if>
+      <if test="modifyTime != null" >
+        modify_time,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="bindType != null" >
+        #{bindType,jdbcType=INTEGER},
+      </if>
+      <if test="srcHfmdEntityId != null" >
+        #{srcHfmdEntityId,jdbcType=BIGINT},
+      </if>
+      <if test="srcHfmdEntityAttrId != null" >
+        #{srcHfmdEntityAttrId,jdbcType=BIGINT},
+      </if>
+      <if test="destHfmdEntityId != null" >
+        #{destHfmdEntityId,jdbcType=BIGINT},
+      </if>
+      <if test="destHfmdEntityAttrId != null" >
+        #{destHfmdEntityAttrId,jdbcType=BIGINT},
+      </if>
+      <if test="opId != null" >
+        #{opId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyOpId != null" >
+        #{modifyOpId,jdbcType=BIGINT},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hframe.domain.model.HfpmEntityBindRule_Example" resultType="java.lang.Integer" >
+    select count(*) from hfpm_entity_bind_rule
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update hfpm_entity_bind_rule
+    <set >
+      <if test="record.hfpmEntityBindRuleId != null" >
+        hfpm_entity_bind_rule_id = #{record.hfpmEntityBindRuleId,jdbcType=BIGINT},
+      </if>
+      <if test="record.bindType != null" >
+        bind_type = #{record.bindType,jdbcType=INTEGER},
+      </if>
+      <if test="record.srcHfmdEntityId != null" >
+        src_hfmd_entity_id = #{record.srcHfmdEntityId,jdbcType=BIGINT},
+      </if>
+      <if test="record.srcHfmdEntityAttrId != null" >
+        src_hfmd_entity_attr_id = #{record.srcHfmdEntityAttrId,jdbcType=BIGINT},
+      </if>
+      <if test="record.destHfmdEntityId != null" >
+        dest_hfmd_entity_id = #{record.destHfmdEntityId,jdbcType=BIGINT},
+      </if>
+      <if test="record.destHfmdEntityAttrId != null" >
+        dest_hfmd_entity_attr_id = #{record.destHfmdEntityAttrId,jdbcType=BIGINT},
+      </if>
+      <if test="record.opId != null" >
+        op_id = #{record.opId,jdbcType=BIGINT},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifyOpId != null" >
+        modify_op_id = #{record.modifyOpId,jdbcType=BIGINT},
+      </if>
+      <if test="record.modifyTime != null" >
+        modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.delFlag != null" >
+        del_flag = #{record.delFlag,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update hfpm_entity_bind_rule
+    set hfpm_entity_bind_rule_id = #{record.hfpmEntityBindRuleId,jdbcType=BIGINT},
+      bind_type = #{record.bindType,jdbcType=INTEGER},
+      src_hfmd_entity_id = #{record.srcHfmdEntityId,jdbcType=BIGINT},
+      src_hfmd_entity_attr_id = #{record.srcHfmdEntityAttrId,jdbcType=BIGINT},
+      dest_hfmd_entity_id = #{record.destHfmdEntityId,jdbcType=BIGINT},
+      dest_hfmd_entity_attr_id = #{record.destHfmdEntityAttrId,jdbcType=BIGINT},
+      op_id = #{record.opId,jdbcType=BIGINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      modify_op_id = #{record.modifyOpId,jdbcType=BIGINT},
+      modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+      del_flag = #{record.delFlag,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hframe.domain.model.HfpmEntityBindRule" >
+    update hfpm_entity_bind_rule
+    <set >
+      <if test="bindType != null" >
+        bind_type = #{bindType,jdbcType=INTEGER},
+      </if>
+      <if test="srcHfmdEntityId != null" >
+        src_hfmd_entity_id = #{srcHfmdEntityId,jdbcType=BIGINT},
+      </if>
+      <if test="srcHfmdEntityAttrId != null" >
+        src_hfmd_entity_attr_id = #{srcHfmdEntityAttrId,jdbcType=BIGINT},
+      </if>
+      <if test="destHfmdEntityId != null" >
+        dest_hfmd_entity_id = #{destHfmdEntityId,jdbcType=BIGINT},
+      </if>
+      <if test="destHfmdEntityAttrId != null" >
+        dest_hfmd_entity_attr_id = #{destHfmdEntityAttrId,jdbcType=BIGINT},
+      </if>
+      <if test="opId != null" >
+        op_id = #{opId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyOpId != null" >
+        modify_op_id = #{modifyOpId,jdbcType=BIGINT},
+      </if>
+      <if test="modifyTime != null" >
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=INTEGER},
+      </if>
+    </set>
+    where hfpm_entity_bind_rule_id = #{hfpmEntityBindRuleId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hframe.domain.model.HfpmEntityBindRule" >
+    update hfpm_entity_bind_rule
+    set bind_type = #{bindType,jdbcType=INTEGER},
+      src_hfmd_entity_id = #{srcHfmdEntityId,jdbcType=BIGINT},
+      src_hfmd_entity_attr_id = #{srcHfmdEntityAttrId,jdbcType=BIGINT},
+      dest_hfmd_entity_id = #{destHfmdEntityId,jdbcType=BIGINT},
+      dest_hfmd_entity_attr_id = #{destHfmdEntityAttrId,jdbcType=BIGINT},
+      op_id = #{opId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_op_id = #{modifyOpId,jdbcType=BIGINT},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      del_flag = #{delFlag,jdbcType=INTEGER}
+    where hfpm_entity_bind_rule_id = #{hfpmEntityBindRuleId,jdbcType=BIGINT}
+  </update>
+</mapper>

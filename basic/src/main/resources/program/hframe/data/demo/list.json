@@ -1,0 +1,51 @@
+{
+  id:"mylist",
+  icon:'icon-user',
+  title:"我的列表",
+  columns:[{code:"id",name:"学号"},
+    {code:"name",name:"姓名"},
+    {code:"age",name:"年龄"},
+    {code:"gender",name:"性别"},
+    {code:"address",name:"地址"},
+    {code:"remark",name:"备注"}],
+  data:[
+    [1001,"张三",29,"女","四川成都",''],
+    [1002,"李四",31,"女","北京",'']
+  ],
+  pagination:{
+    pageSize:2,
+    pageIndex:1,
+    total:100,
+    pageCount:50
+  },
+  memo:{
+    "dataset":"user"
+  },
+  order:{
+    "name":"DESC",
+    "age":"ASC"
+  },
+  pager:[
+    ["上一页","1","disabled",""],
+    ["1","1","disabled","active"],
+    ["2","2","",""],
+    ["3","3","",""],
+    ["4","4","",""],
+    ["下一页","5","",""]
+  ],
+  BOFR:[
+    {component:"<input type=\"checkbox\" name=\"ids\", value=\"${id}\">",params:"user_id"}
+  ],
+  EOFR:[
+    {component:"<i class=\"icon-zoom-in\"></i>",fillclass:"btn-success",params:"userId={1}",action:"{\"pageFwd\":{\"action\":\"uc/user/create\",\"isStack\":true}}"},
+    {component:"<i class=\"icon-edit\"></i>",fillclass:"btn-info",params:"userName={2}",action:"{\"dialog\":{\"action\":\"blank.html\",\"isStack\":true}}"},
+    {component:"<i class=\"icon-trash\"></i>",fillclass:"btn-danger",params:"userId={1}",action:"{\"confirm\":{\"content\":\"您确定需要删除用户【{2}】吗？\"},\"ajaxSubmit\":{\"action\":\"uc/user/create\"}}"}
+  ],
+  EOF:[
+    {component:"<button type=\"submit\" class=\"btn btn-primary\">创建</button>",action:"{\"pageFwd\":{\"action\":\"uc/user/create\",\"isStack\":true}}"},
+    {component:"<button type=\"submit\" class=\"btn btn-primary\">批量删除</button>",action:"{\"pageFwd\":{\"action\":\"uc/user/batchDel\",\"isStack\":true}}"}
+  ],
+  ELE:{
+    "name":{params:"userName={2}",action:"{\"pageFwd\":{\"action\":\"uc/user/edit\",\"isStack\":true}}"}
+  }
+}

@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hframe.dao.HfsecOrganizeMapper" >
+  <resultMap id="BaseResultMap" type="com.hframe.domain.model.HfsecOrganize" >
+    <constructor >
+      <idArg column="hfsec_organize_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="hfsec_organize_code" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="hfsec_organize_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="hfsec_organize_type" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="hfsec_organize_level" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="status" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="creator_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="modifier_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="modify_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="parent_hfsec_organize_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    hfsec_organize_id, hfsec_organize_code, hfsec_organize_name, hfsec_organize_type, 
+    hfsec_organize_level, status, creator_id, create_time, modifier_id, modify_time, 
+    parent_hfsec_organize_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hframe.domain.model.HfsecOrganize_Example" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hfsec_organize
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitEnd != null and limitEnd != 0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from hfsec_organize
+    where hfsec_organize_id = #{hfsecOrganizeId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from hfsec_organize
+    where hfsec_organize_id = #{hfsecOrganizeId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hframe.domain.model.HfsecOrganize_Example" >
+    delete from hfsec_organize
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hframe.domain.model.HfsecOrganize" >
+    <selectKey resultType="java.lang.Long" keyProperty="hfsecOrganizeId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into hfsec_organize (hfsec_organize_code, hfsec_organize_name, 
+      hfsec_organize_type, hfsec_organize_level, 
+      status, creator_id, create_time, 
+      modifier_id, modify_time, parent_hfsec_organize_id
+      )
+    values (#{hfsecOrganizeCode,jdbcType=VARCHAR}, #{hfsecOrganizeName,jdbcType=VARCHAR}, 
+      #{hfsecOrganizeType,jdbcType=TINYINT}, #{hfsecOrganizeLevel,jdbcType=TINYINT}, 
+      #{status,jdbcType=TINYINT}, #{creatorId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{modifierId,jdbcType=BIGINT}, #{modifyTime,jdbcType=TIMESTAMP}, #{parentHfsecOrganizeId,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hframe.domain.model.HfsecOrganize" >
+    <selectKey resultType="java.lang.Long" keyProperty="hfsecOrganizeId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into hfsec_organize
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="hfsecOrganizeCode != null" >
+        hfsec_organize_code,
+      </if>
+      <if test="hfsecOrganizeName != null" >
+        hfsec_organize_name,
+      </if>
+      <if test="hfsecOrganizeType != null" >
+        hfsec_organize_type,
+      </if>
+      <if test="hfsecOrganizeLevel != null" >
+        hfsec_organize_level,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="creatorId != null" >
+        creator_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="modifierId != null" >
+        modifier_id,
+      </if>
+      <if test="modifyTime != null" >
+        modify_time,
+      </if>
+      <if test="parentHfsecOrganizeId != null" >
+        parent_hfsec_organize_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="hfsecOrganizeCode != null" >
+        #{hfsecOrganizeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="hfsecOrganizeName != null" >
+        #{hfsecOrganizeName,jdbcType=VARCHAR},
+      </if>
+      <if test="hfsecOrganizeType != null" >
+        #{hfsecOrganizeType,jdbcType=TINYINT},
+      </if>
+      <if test="hfsecOrganizeLevel != null" >
+        #{hfsecOrganizeLevel,jdbcType=TINYINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="creatorId != null" >
+        #{creatorId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifierId != null" >
+        #{modifierId,jdbcType=BIGINT},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="parentHfsecOrganizeId != null" >
+        #{parentHfsecOrganizeId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hframe.domain.model.HfsecOrganize_Example" resultType="java.lang.Integer" >
+    select count(*) from hfsec_organize
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update hfsec_organize
+    <set >
+      <if test="record.hfsecOrganizeId != null" >
+        hfsec_organize_id = #{record.hfsecOrganizeId,jdbcType=BIGINT},
+      </if>
+      <if test="record.hfsecOrganizeCode != null" >
+        hfsec_organize_code = #{record.hfsecOrganizeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hfsecOrganizeName != null" >
+        hfsec_organize_name = #{record.hfsecOrganizeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hfsecOrganizeType != null" >
+        hfsec_organize_type = #{record.hfsecOrganizeType,jdbcType=TINYINT},
+      </if>
+      <if test="record.hfsecOrganizeLevel != null" >
+        hfsec_organize_level = #{record.hfsecOrganizeLevel,jdbcType=TINYINT},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
+      <if test="record.creatorId != null" >
+        creator_id = #{record.creatorId,jdbcType=BIGINT},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifierId != null" >
+        modifier_id = #{record.modifierId,jdbcType=BIGINT},
+      </if>
+      <if test="record.modifyTime != null" >
+        modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.parentHfsecOrganizeId != null" >
+        parent_hfsec_organize_id = #{record.parentHfsecOrganizeId,jdbcType=BIGINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update hfsec_organize
+    set hfsec_organize_id = #{record.hfsecOrganizeId,jdbcType=BIGINT},
+      hfsec_organize_code = #{record.hfsecOrganizeCode,jdbcType=VARCHAR},
+      hfsec_organize_name = #{record.hfsecOrganizeName,jdbcType=VARCHAR},
+      hfsec_organize_type = #{record.hfsecOrganizeType,jdbcType=TINYINT},
+      hfsec_organize_level = #{record.hfsecOrganizeLevel,jdbcType=TINYINT},
+      status = #{record.status,jdbcType=TINYINT},
+      creator_id = #{record.creatorId,jdbcType=BIGINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      modifier_id = #{record.modifierId,jdbcType=BIGINT},
+      modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+      parent_hfsec_organize_id = #{record.parentHfsecOrganizeId,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hframe.domain.model.HfsecOrganize" >
+    update hfsec_organize
+    <set >
+      <if test="hfsecOrganizeCode != null" >
+        hfsec_organize_code = #{hfsecOrganizeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="hfsecOrganizeName != null" >
+        hfsec_organize_name = #{hfsecOrganizeName,jdbcType=VARCHAR},
+      </if>
+      <if test="hfsecOrganizeType != null" >
+        hfsec_organize_type = #{hfsecOrganizeType,jdbcType=TINYINT},
+      </if>
+      <if test="hfsecOrganizeLevel != null" >
+        hfsec_organize_level = #{hfsecOrganizeLevel,jdbcType=TINYINT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="creatorId != null" >
+        creator_id = #{creatorId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifierId != null" >
+        modifier_id = #{modifierId,jdbcType=BIGINT},
+      </if>
+      <if test="modifyTime != null" >
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="parentHfsecOrganizeId != null" >
+        parent_hfsec_organize_id = #{parentHfsecOrganizeId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where hfsec_organize_id = #{hfsecOrganizeId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hframe.domain.model.HfsecOrganize" >
+    update hfsec_organize
+    set hfsec_organize_code = #{hfsecOrganizeCode,jdbcType=VARCHAR},
+      hfsec_organize_name = #{hfsecOrganizeName,jdbcType=VARCHAR},
+      hfsec_organize_type = #{hfsecOrganizeType,jdbcType=TINYINT},
+      hfsec_organize_level = #{hfsecOrganizeLevel,jdbcType=TINYINT},
+      status = #{status,jdbcType=TINYINT},
+      creator_id = #{creatorId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modifier_id = #{modifierId,jdbcType=BIGINT},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      parent_hfsec_organize_id = #{parentHfsecOrganizeId,jdbcType=BIGINT}
+    where hfsec_organize_id = #{hfsecOrganizeId,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,17 @@
+<dataset>
+  <module>hframe</module>
+  <code>hfpm_test_DS4Q</code>
+  <entity>hfpm_test</entity>
+  <name>hfpm_test【查询】</name>
+  <fields>
+    <field code="hfpm_test_id" name="hfpm_testid" edit-type="input" is-key="true" not-null="true"/>
+    <field code="hfpm_test_code" name="hfpm_test编码" edit-type="hidden" not-null="true"/>
+    <field code="hfpm_program_cfg_id" name="项目配置ID" edit-type="select">
+      <rel entity-code="hfpm_program_cfg/hfpm_program_cfg_id/show_name"/>
+    </field>
+    <field code="hfpm_test_name" name="hfpm_test名称" edit-type="hidden" not-null="true"/>
+    <field code="hfcfg_program_template_id" name="项目模板ID" edit-type="select">
+      <rel entity-code="hfcfg_program_template/hfcfg_program_template_id/program_template_name"/>
+    </field>
+  </fields>
+</dataset>

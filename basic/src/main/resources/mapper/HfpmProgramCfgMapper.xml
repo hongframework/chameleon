@@ -1,0 +1,504 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hframe.dao.HfpmProgramCfgMapper" >
+  <resultMap id="BaseResultMap" type="com.hframe.domain.model.HfpmProgramCfg" >
+    <constructor >
+      <idArg column="hfpm_program_cfg_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="show_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="hfcfg_program_template_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="hfcfg_program_skin_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="hfcfg_login_page_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="bg_img_url" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="op_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="modify_op_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="modify_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="del_flag" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="hfcfg_db_connect_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="hfpm_program_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="data_entity_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="dictionarys" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="func_auth_path" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="func_entity_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="user_auth_path" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="user_entity_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="super_auth_filter_entity" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="super_auth_filter_field" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="super_auth_filter_field_value" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="user_login_data_set" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    hfpm_program_cfg_id, show_name, hfcfg_program_template_id, hfcfg_program_skin_id, 
+    hfcfg_login_page_id, bg_img_url, op_id, create_time, modify_op_id, modify_time, del_flag, 
+    hfcfg_db_connect_id, hfpm_program_id, data_entity_name, dictionarys, func_auth_path, 
+    func_entity_name, user_auth_path, user_entity_name, super_auth_filter_entity, super_auth_filter_field, 
+    super_auth_filter_field_value, user_login_data_set
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hframe.domain.model.HfpmProgramCfg_Example" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hfpm_program_cfg
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitEnd != null and limitEnd != 0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from hfpm_program_cfg
+    where hfpm_program_cfg_id = #{hfpmProgramCfgId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from hfpm_program_cfg
+    where hfpm_program_cfg_id = #{hfpmProgramCfgId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hframe.domain.model.HfpmProgramCfg_Example" >
+    delete from hfpm_program_cfg
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hframe.domain.model.HfpmProgramCfg" >
+    <selectKey resultType="java.lang.Long" keyProperty="hfpmProgramCfgId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into hfpm_program_cfg (show_name, hfcfg_program_template_id, 
+      hfcfg_program_skin_id, hfcfg_login_page_id, bg_img_url, 
+      op_id, create_time, modify_op_id, 
+      modify_time, del_flag, hfcfg_db_connect_id, 
+      hfpm_program_id, data_entity_name, dictionarys, 
+      func_auth_path, func_entity_name, user_auth_path, 
+      user_entity_name, super_auth_filter_entity, super_auth_filter_field, 
+      super_auth_filter_field_value, user_login_data_set
+      )
+    values (#{showName,jdbcType=VARCHAR}, #{hfcfgProgramTemplateId,jdbcType=BIGINT}, 
+      #{hfcfgProgramSkinId,jdbcType=BIGINT}, #{hfcfgLoginPageId,jdbcType=BIGINT}, #{bgImgUrl,jdbcType=VARCHAR}, 
+      #{opId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{modifyOpId,jdbcType=BIGINT}, 
+      #{modifyTime,jdbcType=TIMESTAMP}, #{delFlag,jdbcType=INTEGER}, #{hfcfgDbConnectId,jdbcType=BIGINT}, 
+      #{hfpmProgramId,jdbcType=BIGINT}, #{dataEntityName,jdbcType=VARCHAR}, #{dictionarys,jdbcType=VARCHAR}, 
+      #{funcAuthPath,jdbcType=VARCHAR}, #{funcEntityName,jdbcType=VARCHAR}, #{userAuthPath,jdbcType=VARCHAR}, 
+      #{userEntityName,jdbcType=VARCHAR}, #{superAuthFilterEntity,jdbcType=BIGINT}, #{superAuthFilterField,jdbcType=BIGINT}, 
+      #{superAuthFilterFieldValue,jdbcType=VARCHAR}, #{userLoginDataSet,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hframe.domain.model.HfpmProgramCfg" >
+    <selectKey resultType="java.lang.Long" keyProperty="hfpmProgramCfgId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into hfpm_program_cfg
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="showName != null" >
+        show_name,
+      </if>
+      <if test="hfcfgProgramTemplateId != null" >
+        hfcfg_program_template_id,
+      </if>
+      <if test="hfcfgProgramSkinId != null" >
+        hfcfg_program_skin_id,
+      </if>
+      <if test="hfcfgLoginPageId != null" >
+        hfcfg_login_page_id,
+      </if>
+      <if test="bgImgUrl != null" >
+        bg_img_url,
+      </if>
+      <if test="opId != null" >
+        op_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="modifyOpId != null" >
+        modify_op_id,
+      </if>
+      <if test="modifyTime != null" >
+        modify_time,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+      <if test="hfcfgDbConnectId != null" >
+        hfcfg_db_connect_id,
+      </if>
+      <if test="hfpmProgramId != null" >
+        hfpm_program_id,
+      </if>
+      <if test="dataEntityName != null" >
+        data_entity_name,
+      </if>
+      <if test="dictionarys != null" >
+        dictionarys,
+      </if>
+      <if test="funcAuthPath != null" >
+        func_auth_path,
+      </if>
+      <if test="funcEntityName != null" >
+        func_entity_name,
+      </if>
+      <if test="userAuthPath != null" >
+        user_auth_path,
+      </if>
+      <if test="userEntityName != null" >
+        user_entity_name,
+      </if>
+      <if test="superAuthFilterEntity != null" >
+        super_auth_filter_entity,
+      </if>
+      <if test="superAuthFilterField != null" >
+        super_auth_filter_field,
+      </if>
+      <if test="superAuthFilterFieldValue != null" >
+        super_auth_filter_field_value,
+      </if>
+      <if test="userLoginDataSet != null" >
+        user_login_data_set,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="showName != null" >
+        #{showName,jdbcType=VARCHAR},
+      </if>
+      <if test="hfcfgProgramTemplateId != null" >
+        #{hfcfgProgramTemplateId,jdbcType=BIGINT},
+      </if>
+      <if test="hfcfgProgramSkinId != null" >
+        #{hfcfgProgramSkinId,jdbcType=BIGINT},
+      </if>
+      <if test="hfcfgLoginPageId != null" >
+        #{hfcfgLoginPageId,jdbcType=BIGINT},
+      </if>
+      <if test="bgImgUrl != null" >
+        #{bgImgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="opId != null" >
+        #{opId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyOpId != null" >
+        #{modifyOpId,jdbcType=BIGINT},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="hfcfgDbConnectId != null" >
+        #{hfcfgDbConnectId,jdbcType=BIGINT},
+      </if>
+      <if test="hfpmProgramId != null" >
+        #{hfpmProgramId,jdbcType=BIGINT},
+      </if>
+      <if test="dataEntityName != null" >
+        #{dataEntityName,jdbcType=VARCHAR},
+      </if>
+      <if test="dictionarys != null" >
+        #{dictionarys,jdbcType=VARCHAR},
+      </if>
+      <if test="funcAuthPath != null" >
+        #{funcAuthPath,jdbcType=VARCHAR},
+      </if>
+      <if test="funcEntityName != null" >
+        #{funcEntityName,jdbcType=VARCHAR},
+      </if>
+      <if test="userAuthPath != null" >
+        #{userAuthPath,jdbcType=VARCHAR},
+      </if>
+      <if test="userEntityName != null" >
+        #{userEntityName,jdbcType=VARCHAR},
+      </if>
+      <if test="superAuthFilterEntity != null" >
+        #{superAuthFilterEntity,jdbcType=BIGINT},
+      </if>
+      <if test="superAuthFilterField != null" >
+        #{superAuthFilterField,jdbcType=BIGINT},
+      </if>
+      <if test="superAuthFilterFieldValue != null" >
+        #{superAuthFilterFieldValue,jdbcType=VARCHAR},
+      </if>
+      <if test="userLoginDataSet != null" >
+        #{userLoginDataSet,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hframe.domain.model.HfpmProgramCfg_Example" resultType="java.lang.Integer" >
+    select count(*) from hfpm_program_cfg
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update hfpm_program_cfg
+    <set >
+      <if test="record.hfpmProgramCfgId != null" >
+        hfpm_program_cfg_id = #{record.hfpmProgramCfgId,jdbcType=BIGINT},
+      </if>
+      <if test="record.showName != null" >
+        show_name = #{record.showName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hfcfgProgramTemplateId != null" >
+        hfcfg_program_template_id = #{record.hfcfgProgramTemplateId,jdbcType=BIGINT},
+      </if>
+      <if test="record.hfcfgProgramSkinId != null" >
+        hfcfg_program_skin_id = #{record.hfcfgProgramSkinId,jdbcType=BIGINT},
+      </if>
+      <if test="record.hfcfgLoginPageId != null" >
+        hfcfg_login_page_id = #{record.hfcfgLoginPageId,jdbcType=BIGINT},
+      </if>
+      <if test="record.bgImgUrl != null" >
+        bg_img_url = #{record.bgImgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.opId != null" >
+        op_id = #{record.opId,jdbcType=BIGINT},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifyOpId != null" >
+        modify_op_id = #{record.modifyOpId,jdbcType=BIGINT},
+      </if>
+      <if test="record.modifyTime != null" >
+        modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.delFlag != null" >
+        del_flag = #{record.delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.hfcfgDbConnectId != null" >
+        hfcfg_db_connect_id = #{record.hfcfgDbConnectId,jdbcType=BIGINT},
+      </if>
+      <if test="record.hfpmProgramId != null" >
+        hfpm_program_id = #{record.hfpmProgramId,jdbcType=BIGINT},
+      </if>
+      <if test="record.dataEntityName != null" >
+        data_entity_name = #{record.dataEntityName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dictionarys != null" >
+        dictionarys = #{record.dictionarys,jdbcType=VARCHAR},
+      </if>
+      <if test="record.funcAuthPath != null" >
+        func_auth_path = #{record.funcAuthPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.funcEntityName != null" >
+        func_entity_name = #{record.funcEntityName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userAuthPath != null" >
+        user_auth_path = #{record.userAuthPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userEntityName != null" >
+        user_entity_name = #{record.userEntityName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.superAuthFilterEntity != null" >
+        super_auth_filter_entity = #{record.superAuthFilterEntity,jdbcType=BIGINT},
+      </if>
+      <if test="record.superAuthFilterField != null" >
+        super_auth_filter_field = #{record.superAuthFilterField,jdbcType=BIGINT},
+      </if>
+      <if test="record.superAuthFilterFieldValue != null" >
+        super_auth_filter_field_value = #{record.superAuthFilterFieldValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userLoginDataSet != null" >
+        user_login_data_set = #{record.userLoginDataSet,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update hfpm_program_cfg
+    set hfpm_program_cfg_id = #{record.hfpmProgramCfgId,jdbcType=BIGINT},
+      show_name = #{record.showName,jdbcType=VARCHAR},
+      hfcfg_program_template_id = #{record.hfcfgProgramTemplateId,jdbcType=BIGINT},
+      hfcfg_program_skin_id = #{record.hfcfgProgramSkinId,jdbcType=BIGINT},
+      hfcfg_login_page_id = #{record.hfcfgLoginPageId,jdbcType=BIGINT},
+      bg_img_url = #{record.bgImgUrl,jdbcType=VARCHAR},
+      op_id = #{record.opId,jdbcType=BIGINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      modify_op_id = #{record.modifyOpId,jdbcType=BIGINT},
+      modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+      del_flag = #{record.delFlag,jdbcType=INTEGER},
+      hfcfg_db_connect_id = #{record.hfcfgDbConnectId,jdbcType=BIGINT},
+      hfpm_program_id = #{record.hfpmProgramId,jdbcType=BIGINT},
+      data_entity_name = #{record.dataEntityName,jdbcType=VARCHAR},
+      dictionarys = #{record.dictionarys,jdbcType=VARCHAR},
+      func_auth_path = #{record.funcAuthPath,jdbcType=VARCHAR},
+      func_entity_name = #{record.funcEntityName,jdbcType=VARCHAR},
+      user_auth_path = #{record.userAuthPath,jdbcType=VARCHAR},
+      user_entity_name = #{record.userEntityName,jdbcType=VARCHAR},
+      super_auth_filter_entity = #{record.superAuthFilterEntity,jdbcType=BIGINT},
+      super_auth_filter_field = #{record.superAuthFilterField,jdbcType=BIGINT},
+      super_auth_filter_field_value = #{record.superAuthFilterFieldValue,jdbcType=VARCHAR},
+      user_login_data_set = #{record.userLoginDataSet,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hframe.domain.model.HfpmProgramCfg" >
+    update hfpm_program_cfg
+    <set >
+      <if test="showName != null" >
+        show_name = #{showName,jdbcType=VARCHAR},
+      </if>
+      <if test="hfcfgProgramTemplateId != null" >
+        hfcfg_program_template_id = #{hfcfgProgramTemplateId,jdbcType=BIGINT},
+      </if>
+      <if test="hfcfgProgramSkinId != null" >
+        hfcfg_program_skin_id = #{hfcfgProgramSkinId,jdbcType=BIGINT},
+      </if>
+      <if test="hfcfgLoginPageId != null" >
+        hfcfg_login_page_id = #{hfcfgLoginPageId,jdbcType=BIGINT},
+      </if>
+      <if test="bgImgUrl != null" >
+        bg_img_url = #{bgImgUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="opId != null" >
+        op_id = #{opId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyOpId != null" >
+        modify_op_id = #{modifyOpId,jdbcType=BIGINT},
+      </if>
+      <if test="modifyTime != null" >
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="hfcfgDbConnectId != null" >
+        hfcfg_db_connect_id = #{hfcfgDbConnectId,jdbcType=BIGINT},
+      </if>
+      <if test="hfpmProgramId != null" >
+        hfpm_program_id = #{hfpmProgramId,jdbcType=BIGINT},
+      </if>
+      <if test="dataEntityName != null" >
+        data_entity_name = #{dataEntityName,jdbcType=VARCHAR},
+      </if>
+      <if test="dictionarys != null" >
+        dictionarys = #{dictionarys,jdbcType=VARCHAR},
+      </if>
+      <if test="funcAuthPath != null" >
+        func_auth_path = #{funcAuthPath,jdbcType=VARCHAR},
+      </if>
+      <if test="funcEntityName != null" >
+        func_entity_name = #{funcEntityName,jdbcType=VARCHAR},
+      </if>
+      <if test="userAuthPath != null" >
+        user_auth_path = #{userAuthPath,jdbcType=VARCHAR},
+      </if>
+      <if test="userEntityName != null" >
+        user_entity_name = #{userEntityName,jdbcType=VARCHAR},
+      </if>
+      <if test="superAuthFilterEntity != null" >
+        super_auth_filter_entity = #{superAuthFilterEntity,jdbcType=BIGINT},
+      </if>
+      <if test="superAuthFilterField != null" >
+        super_auth_filter_field = #{superAuthFilterField,jdbcType=BIGINT},
+      </if>
+      <if test="superAuthFilterFieldValue != null" >
+        super_auth_filter_field_value = #{superAuthFilterFieldValue,jdbcType=VARCHAR},
+      </if>
+      <if test="userLoginDataSet != null" >
+        user_login_data_set = #{userLoginDataSet,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where hfpm_program_cfg_id = #{hfpmProgramCfgId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hframe.domain.model.HfpmProgramCfg" >
+    update hfpm_program_cfg
+    set show_name = #{showName,jdbcType=VARCHAR},
+      hfcfg_program_template_id = #{hfcfgProgramTemplateId,jdbcType=BIGINT},
+      hfcfg_program_skin_id = #{hfcfgProgramSkinId,jdbcType=BIGINT},
+      hfcfg_login_page_id = #{hfcfgLoginPageId,jdbcType=BIGINT},
+      bg_img_url = #{bgImgUrl,jdbcType=VARCHAR},
+      op_id = #{opId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_op_id = #{modifyOpId,jdbcType=BIGINT},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      del_flag = #{delFlag,jdbcType=INTEGER},
+      hfcfg_db_connect_id = #{hfcfgDbConnectId,jdbcType=BIGINT},
+      hfpm_program_id = #{hfpmProgramId,jdbcType=BIGINT},
+      data_entity_name = #{dataEntityName,jdbcType=VARCHAR},
+      dictionarys = #{dictionarys,jdbcType=VARCHAR},
+      func_auth_path = #{funcAuthPath,jdbcType=VARCHAR},
+      func_entity_name = #{funcEntityName,jdbcType=VARCHAR},
+      user_auth_path = #{userAuthPath,jdbcType=VARCHAR},
+      user_entity_name = #{userEntityName,jdbcType=VARCHAR},
+      super_auth_filter_entity = #{superAuthFilterEntity,jdbcType=BIGINT},
+      super_auth_filter_field = #{superAuthFilterField,jdbcType=BIGINT},
+      super_auth_filter_field_value = #{superAuthFilterFieldValue,jdbcType=VARCHAR},
+      user_login_data_set = #{userLoginDataSet,jdbcType=VARCHAR}
+    where hfpm_program_cfg_id = #{hfpmProgramCfgId,jdbcType=BIGINT}
+  </update>
+</mapper>

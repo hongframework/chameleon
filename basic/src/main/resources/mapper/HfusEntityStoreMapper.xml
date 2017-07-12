@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hframe.dao.HfusEntityStoreMapper" >
+  <resultMap id="BaseResultMap" type="com.hframe.domain.model.HfusEntityStore" >
+    <constructor >
+      <idArg column="hfus_entity_store_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="hfus_entity_store_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="hfus_entity_store_code" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="entity_group" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="hfus_entity_store_type" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="creator_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="modifier_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="modify_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.hframe.domain.model.HfusEntityStore" >
+    <constructor >
+      <idArg column="hfus_entity_store_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="hfus_entity_store_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="hfus_entity_store_code" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="entity_group" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="hfus_entity_store_type" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="creator_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="modifier_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="modify_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="sql_content" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    hfus_entity_store_id, hfus_entity_store_name, hfus_entity_store_code, entity_group, 
+    hfus_entity_store_type, creator_id, create_time, modifier_id, modify_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    sql_content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.hframe.domain.model.HfusEntityStore_Example" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from hfus_entity_store
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hframe.domain.model.HfusEntityStore_Example" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hfus_entity_store
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitEnd != null and limitEnd != 0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from hfus_entity_store
+    where hfus_entity_store_id = #{hfusEntityStoreId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from hfus_entity_store
+    where hfus_entity_store_id = #{hfusEntityStoreId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hframe.domain.model.HfusEntityStore_Example" >
+    delete from hfus_entity_store
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hframe.domain.model.HfusEntityStore" >
+    <selectKey resultType="java.lang.Long" keyProperty="hfusEntityStoreId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into hfus_entity_store (hfus_entity_store_name, hfus_entity_store_code, 
+      entity_group, hfus_entity_store_type, creator_id, 
+      create_time, modifier_id, modify_time, 
+      sql_content)
+    values (#{hfusEntityStoreName,jdbcType=VARCHAR}, #{hfusEntityStoreCode,jdbcType=VARCHAR}, 
+      #{entityGroup,jdbcType=TINYINT}, #{hfusEntityStoreType,jdbcType=TINYINT}, #{creatorId,jdbcType=BIGINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{modifierId,jdbcType=BIGINT}, #{modifyTime,jdbcType=TIMESTAMP}, 
+      #{sqlContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hframe.domain.model.HfusEntityStore" >
+    <selectKey resultType="java.lang.Long" keyProperty="hfusEntityStoreId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into hfus_entity_store
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="hfusEntityStoreName != null" >
+        hfus_entity_store_name,
+      </if>
+      <if test="hfusEntityStoreCode != null" >
+        hfus_entity_store_code,
+      </if>
+      <if test="entityGroup != null" >
+        entity_group,
+      </if>
+      <if test="hfusEntityStoreType != null" >
+        hfus_entity_store_type,
+      </if>
+      <if test="creatorId != null" >
+        creator_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="modifierId != null" >
+        modifier_id,
+      </if>
+      <if test="modifyTime != null" >
+        modify_time,
+      </if>
+      <if test="sqlContent != null" >
+        sql_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="hfusEntityStoreName != null" >
+        #{hfusEntityStoreName,jdbcType=VARCHAR},
+      </if>
+      <if test="hfusEntityStoreCode != null" >
+        #{hfusEntityStoreCode,jdbcType=VARCHAR},
+      </if>
+      <if test="entityGroup != null" >
+        #{entityGroup,jdbcType=TINYINT},
+      </if>
+      <if test="hfusEntityStoreType != null" >
+        #{hfusEntityStoreType,jdbcType=TINYINT},
+      </if>
+      <if test="creatorId != null" >
+        #{creatorId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifierId != null" >
+        #{modifierId,jdbcType=BIGINT},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sqlContent != null" >
+        #{sqlContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hframe.domain.model.HfusEntityStore_Example" resultType="java.lang.Integer" >
+    select count(*) from hfus_entity_store
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update hfus_entity_store
+    <set >
+      <if test="record.hfusEntityStoreId != null" >
+        hfus_entity_store_id = #{record.hfusEntityStoreId,jdbcType=BIGINT},
+      </if>
+      <if test="record.hfusEntityStoreName != null" >
+        hfus_entity_store_name = #{record.hfusEntityStoreName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hfusEntityStoreCode != null" >
+        hfus_entity_store_code = #{record.hfusEntityStoreCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.entityGroup != null" >
+        entity_group = #{record.entityGroup,jdbcType=TINYINT},
+      </if>
+      <if test="record.hfusEntityStoreType != null" >
+        hfus_entity_store_type = #{record.hfusEntityStoreType,jdbcType=TINYINT},
+      </if>
+      <if test="record.creatorId != null" >
+        creator_id = #{record.creatorId,jdbcType=BIGINT},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifierId != null" >
+        modifier_id = #{record.modifierId,jdbcType=BIGINT},
+      </if>
+      <if test="record.modifyTime != null" >
+        modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sqlContent != null" >
+        sql_content = #{record.sqlContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update hfus_entity_store
+    set hfus_entity_store_id = #{record.hfusEntityStoreId,jdbcType=BIGINT},
+      hfus_entity_store_name = #{record.hfusEntityStoreName,jdbcType=VARCHAR},
+      hfus_entity_store_code = #{record.hfusEntityStoreCode,jdbcType=VARCHAR},
+      entity_group = #{record.entityGroup,jdbcType=TINYINT},
+      hfus_entity_store_type = #{record.hfusEntityStoreType,jdbcType=TINYINT},
+      creator_id = #{record.creatorId,jdbcType=BIGINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      modifier_id = #{record.modifierId,jdbcType=BIGINT},
+      modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+      sql_content = #{record.sqlContent,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update hfus_entity_store
+    set hfus_entity_store_id = #{record.hfusEntityStoreId,jdbcType=BIGINT},
+      hfus_entity_store_name = #{record.hfusEntityStoreName,jdbcType=VARCHAR},
+      hfus_entity_store_code = #{record.hfusEntityStoreCode,jdbcType=VARCHAR},
+      entity_group = #{record.entityGroup,jdbcType=TINYINT},
+      hfus_entity_store_type = #{record.hfusEntityStoreType,jdbcType=TINYINT},
+      creator_id = #{record.creatorId,jdbcType=BIGINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      modifier_id = #{record.modifierId,jdbcType=BIGINT},
+      modify_time = #{record.modifyTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hframe.domain.model.HfusEntityStore" >
+    update hfus_entity_store
+    <set >
+      <if test="hfusEntityStoreName != null" >
+        hfus_entity_store_name = #{hfusEntityStoreName,jdbcType=VARCHAR},
+      </if>
+      <if test="hfusEntityStoreCode != null" >
+        hfus_entity_store_code = #{hfusEntityStoreCode,jdbcType=VARCHAR},
+      </if>
+      <if test="entityGroup != null" >
+        entity_group = #{entityGroup,jdbcType=TINYINT},
+      </if>
+      <if test="hfusEntityStoreType != null" >
+        hfus_entity_store_type = #{hfusEntityStoreType,jdbcType=TINYINT},
+      </if>
+      <if test="creatorId != null" >
+        creator_id = #{creatorId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifierId != null" >
+        modifier_id = #{modifierId,jdbcType=BIGINT},
+      </if>
+      <if test="modifyTime != null" >
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sqlContent != null" >
+        sql_content = #{sqlContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where hfus_entity_store_id = #{hfusEntityStoreId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hframe.domain.model.HfusEntityStore" >
+    update hfus_entity_store
+    set hfus_entity_store_name = #{hfusEntityStoreName,jdbcType=VARCHAR},
+      hfus_entity_store_code = #{hfusEntityStoreCode,jdbcType=VARCHAR},
+      entity_group = #{entityGroup,jdbcType=TINYINT},
+      hfus_entity_store_type = #{hfusEntityStoreType,jdbcType=TINYINT},
+      creator_id = #{creatorId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modifier_id = #{modifierId,jdbcType=BIGINT},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      sql_content = #{sqlContent,jdbcType=LONGVARCHAR}
+    where hfus_entity_store_id = #{hfusEntityStoreId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hframe.domain.model.HfusEntityStore" >
+    update hfus_entity_store
+    set hfus_entity_store_name = #{hfusEntityStoreName,jdbcType=VARCHAR},
+      hfus_entity_store_code = #{hfusEntityStoreCode,jdbcType=VARCHAR},
+      entity_group = #{entityGroup,jdbcType=TINYINT},
+      hfus_entity_store_type = #{hfusEntityStoreType,jdbcType=TINYINT},
+      creator_id = #{creatorId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modifier_id = #{modifierId,jdbcType=BIGINT},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+    where hfus_entity_store_id = #{hfusEntityStoreId,jdbcType=BIGINT}
+  </update>
+</mapper>

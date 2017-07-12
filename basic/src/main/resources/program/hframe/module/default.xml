@@ -1,0 +1,26 @@
+<module code="">
+    <page>
+        <element id="programName" value="#program.name#"></element>
+        <!--<element id="centerUrl" value="hframe/center.html"></element>-->
+        <!--<element id="settingUrl" value="hframe/setting.html"></element>-->
+        <!--<element id="messageUrl" value="hframe/message.html"></element>-->
+        <!--<element id="logoutUrl" value="hframe/logout.html"></element>-->
+
+        <component id="leftMenuTree" data-set="#program.auth-instance.function#"></component>
+        <component id="login" data-set="#program.auth-instance.user#"></component>
+        <component id="personal" data-set="#program.auth-instance.user#"></component>
+        <component id="breadcrumb" data-set="hframe/program_module_setting">
+            <event name="onchange">
+                <attach anchor="hfpm_module_id_PCXT"></attach>
+                <source scope="EOC" param="thisForm"></source>
+                <effect type="page.reload"></effect>
+            </event>
+        </component>
+
+
+        <!--<component id="topFastMenu" data-set="hframe/hfsec_menu"></component>-->
+    </page>
+
+    <page id="login" name="登录页" page-template="login" data-set="#program.login.data-set#"></page>
+    <page id="index" name="首页" page-template="default" data-set="#program.auth-instance.user#"></page>
+</module>

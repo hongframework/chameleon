@@ -1,0 +1,15 @@
+<dataset>
+  <module>hffile</module>
+  <code>folder.tree.feditor</code>
+  <name>对账配置</name>
+  <source>file</source>
+  <fields>
+    <field code="id" name="ID" edit-type="input" />
+    <field code="pid" name="上级ID" edit-type="input" >
+      <rel entity-code="folder.tree.feditor/path/id"/>
+    </field>
+    <field code="filename" name="文件名称" edit-type="input"/>
+    <field code="fullname" name="路径" edit-type="input" />
+    <field code="pri" name="优先级" edit-type="input" />
+  </fields>
+</dataset>

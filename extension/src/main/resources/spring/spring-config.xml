@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:ehcache="http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring
+         http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring/ehcache-spring-1.1.xsd
+         http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop-2.5.xsd"
+       default-autowire="byName">
+
+    <!-- 组件自动扫描 （注解） -->
+    <context:component-scan base-package="com.hframe">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+    <context:component-scan base-package="com.hframework.base.service" />
+    <context:annotation-config/>
+    <context:component-scan base-package="org.activiti.hframework.bridge.explorer" />
+    <context:annotation-config/>
+    <context:component-scan base-package="org.activiti.explorer" />
+    <context:annotation-config/>
+
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <!-- ehcache配置开始 -->
+    <ehcache:annotation-driven />
+    <ehcache:config cache-manager="cacheManager">
+        <ehcache:evict-expired-elements interval="60"/>
+    </ehcache:config>
+
+    <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+        <property name="configLocation"  value="classpath:spring/spring-config-ehcache.xml"/>
+    </bean>
+    <!-- ehcache配置结束 -->
+
+    <bean class="com.hframework.common.springext.properties.PropertyConfigurerUtils">
+        <property name="locations">
+            <list>
+                <value>classpath:hframe.properties</value>
+                <value>classpath:properties/dataSource.properties</value>
+                <value>classpath:properties/hframe-init.properties</value>
+                <value>classpath:properties/hframe-generator-init.properties</value>
+                <!--<value>classpath:db.properties</value>-->
+                <value>classpath:ui.properties</value>
+                <value>classpath:properties/redis.properties</value>
+                <value>classpath:properties/kafka-producer.properties</value>
+                <value>classpath:properties/kafka-consumer.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <import resource="classpath:spring/spring-config-dataSource.xml"/>
+    <import resource="classpath:spring/spring-config-dao.xml"/>
+    <import resource="classpath:spring/spring-config-service.xml"/>
+    <import resource="classpath:spring/spring-config-redis.xml"/>
+    <!--<import resource="classpath:spring/spring-config-redis-sentinel.xml"/>-->
+    <import resource="classpath:spring/spring-config-kafka-producer.xml"/>
+    <!--<import resource="classpath:spring/spring-config-activiti.xml"/>-->
+    <!--<import resource="classpath:spring/spring-config-kafka-consumer.xml"/>-->
+</beans>

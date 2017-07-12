@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>WEBTEMPLATE</artifactId>
+        <groupId>com.hframework</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>basic</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.github.hongframework</groupId>
+            <artifactId>hframe-common</artifactId>
+            <version>${hframe.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.servlet</groupId>
+                    <artifactId>servlet-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.github.hongframework</groupId>
+            <artifactId>hframe-beans</artifactId>
+            <version>${hframe.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.hongframework</groupId>
+            <artifactId>hframe-webcore</artifactId>
+            <version>${hframe.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.servlet</groupId>
+                    <artifactId>servlet-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
+    <build>
+        <!--<filters>-->
+            <!--<filter>${project.parent.basedir}/src/main/filters/${env}.properties</filter>-->
+        <!--</filters>-->
+        <!--<resources>-->
+            <!--<resource>-->
+                <!--<directory>${project.basedir}/src/main/resources</directory>-->
+                <!--<filtering>true</filtering>-->
+            <!--</resource>-->
+        <!--</resources>-->
+    </build>
+</project>

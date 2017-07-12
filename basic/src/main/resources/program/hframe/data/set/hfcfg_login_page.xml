@@ -1,0 +1,36 @@
+<dataset>
+  <module>hframe</module>
+  <code>hfcfg_login_page</code>
+  <entity>hfcfg_login_page</entity>
+  <name>登陆页面【默认】</name>
+  <fields>
+    <field code="hfcfg_login_page_id" name="登陆页面ID" edit-type="input" is-key="true">
+      <create-edit-type>hidden</create-edit-type>
+      <update-edit-type>text</update-edit-type>
+    </field>
+    <field code="hfcfg_login_page_name" name="登陆页面名称" edit-type="input"/>
+    <field code="hfcfg_login_page_code" name="登陆页面编码" edit-type="input"/>
+    <field code="snapshot_url" name="页面快照URL" edit-type="input"/>
+    <field code="op_id" name="创建人" edit-type="input">
+      <rel entity-code="hfsec_user/hfsec_user_id/hfsec_user_name"/>
+      <create-edit-type>hidden</create-edit-type>
+      <update-edit-type>text</update-edit-type>
+    </field>
+    <field code="create_time" name="创建时间" edit-type="datetime">
+      <create-edit-type>hidden</create-edit-type>
+      <update-edit-type>text</update-edit-type>
+    </field>
+    <field code="modify_op_id" name="修改人" edit-type="input">
+      <rel entity-code="hfsec_user/hfsec_user_id/hfsec_user_name"/>
+      <create-edit-type>hidden</create-edit-type>
+      <update-edit-type>hidden</update-edit-type>
+    </field>
+    <field code="modify_time" name="修改时间" edit-type="datetime">
+      <create-edit-type>hidden</create-edit-type>
+      <update-edit-type>hidden</update-edit-type>
+    </field>
+    <field code="del_flag" name="删除标识" edit-type="input">
+      <create-edit-type>hidden</create-edit-type>
+    </field>
+  </fields>
+</dataset>

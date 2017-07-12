@@ -1,0 +1,20 @@
+<dataset>
+  <module>hframe</module>
+  <code>hfpm_program_cfg_dbinfo_DS4Save</code>
+  <entity>hfpm_program_cfg</entity>
+  <name>项目设置</name>
+  <fields>
+    <field code="hfpm_program_cfg_id" name="项目配置ID" edit-type="hidden" is-key="true" not-null="true">
+      <create-edit-type>hidden</create-edit-type>
+      <update-edit-type>hidden</update-edit-type>
+    </field>
+    <field code="hfcfg_db_connect_id" name="数据库连接信息id" edit-type="select" not-null="true">
+      <rel entity-code="hfcfg_db_connect/hfcfg_db_connect_id/hfcfg_db_connect_name"/>
+    </field>
+    <field code="hfpm_program_id" name="项目ID" edit-type="select">
+      <rel entity-code="hfpm_program/hfpm_program_id/hfpm_program_name"/>
+      <create-edit-type>hidden</create-edit-type>
+      <update-edit-type>hidden</update-edit-type>
+    </field>
+  </fields>
+</dataset>

@@ -1,0 +1,18 @@
+<mapper component-id="dynTree" data-set="hffile/folder.tree.feditor" data-auth="orgId=SELF.orgId">
+    <baseMapper>
+        <mapping id="id" value="${code}_tree"></mapping>
+        <mapping id="icon" value="${icon}"></mapping>
+        <mapping id="title" value="${name}列表"></mapping>
+        <mapping id="children" value="${data}">
+            <mapping id="id" value="id"></mapping>
+            <mapping id="icon" value="filename"></mapping>
+            <mapping id="url" value="filename"></mapping>
+            <mapping id="name" value="filename"></mapping>
+            <mapping id="children"></mapping>
+        </mapping>
+    </baseMapper>
+    <eventMapper>
+        <mapping id="id" value="path"></mapping>
+        <mapping id="name" value="filename"></mapping>
+    </eventMapper>
+</mapper>

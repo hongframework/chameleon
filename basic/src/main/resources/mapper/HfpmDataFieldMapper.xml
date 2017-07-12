@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hframe.dao.HfpmDataFieldMapper" >
+  <resultMap id="BaseResultMap" type="com.hframe.domain.model.HfpmDataField" >
+    <constructor >
+      <idArg column="hfpm_data_field_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="hfpm_data_field_code" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="hfpm_field_show_type_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="field_show_code" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="hfmd_entity_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="hfmd_entity_attr_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="data_get_method" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="hfpm_data_field_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="hfpm_data_set_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="pri" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="op_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="modify_op_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="modify_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="del_flag" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="create_edit_auth" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="detail_show_auth" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="list_show_auth" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="update_edit_auth" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="workfow_model_id" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    hfpm_data_field_id, hfpm_data_field_code, hfpm_field_show_type_id, field_show_code, 
+    hfmd_entity_id, hfmd_entity_attr_id, data_get_method, hfpm_data_field_name, hfpm_data_set_id, 
+    pri, op_id, create_time, modify_op_id, modify_time, del_flag, create_edit_auth, detail_show_auth, 
+    list_show_auth, update_edit_auth, workfow_model_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.hframe.domain.model.HfpmDataField_Example" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hfpm_data_field
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitEnd != null and limitEnd != 0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from hfpm_data_field
+    where hfpm_data_field_id = #{hfpmDataFieldId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from hfpm_data_field
+    where hfpm_data_field_id = #{hfpmDataFieldId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.hframe.domain.model.HfpmDataField_Example" >
+    delete from hfpm_data_field
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.hframe.domain.model.HfpmDataField" >
+    <selectKey resultType="java.lang.Long" keyProperty="hfpmDataFieldId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into hfpm_data_field (hfpm_data_field_code, hfpm_field_show_type_id, 
+      field_show_code, hfmd_entity_id, hfmd_entity_attr_id, 
+      data_get_method, hfpm_data_field_name, hfpm_data_set_id, 
+      pri, op_id, create_time, 
+      modify_op_id, modify_time, del_flag, 
+      create_edit_auth, detail_show_auth, list_show_auth, 
+      update_edit_auth, workfow_model_id)
+    values (#{hfpmDataFieldCode,jdbcType=VARCHAR}, #{hfpmFieldShowTypeId,jdbcType=VARCHAR}, 
+      #{fieldShowCode,jdbcType=VARCHAR}, #{hfmdEntityId,jdbcType=BIGINT}, #{hfmdEntityAttrId,jdbcType=BIGINT}, 
+      #{dataGetMethod,jdbcType=INTEGER}, #{hfpmDataFieldName,jdbcType=VARCHAR}, #{hfpmDataSetId,jdbcType=BIGINT}, 
+      #{pri,jdbcType=DECIMAL}, #{opId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{modifyOpId,jdbcType=BIGINT}, #{modifyTime,jdbcType=TIMESTAMP}, #{delFlag,jdbcType=INTEGER}, 
+      #{createEditAuth,jdbcType=TINYINT}, #{detailShowAuth,jdbcType=TINYINT}, #{listShowAuth,jdbcType=TINYINT}, 
+      #{updateEditAuth,jdbcType=TINYINT}, #{workfowModelId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hframe.domain.model.HfpmDataField" >
+    <selectKey resultType="java.lang.Long" keyProperty="hfpmDataFieldId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into hfpm_data_field
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="hfpmDataFieldCode != null" >
+        hfpm_data_field_code,
+      </if>
+      <if test="hfpmFieldShowTypeId != null" >
+        hfpm_field_show_type_id,
+      </if>
+      <if test="fieldShowCode != null" >
+        field_show_code,
+      </if>
+      <if test="hfmdEntityId != null" >
+        hfmd_entity_id,
+      </if>
+      <if test="hfmdEntityAttrId != null" >
+        hfmd_entity_attr_id,
+      </if>
+      <if test="dataGetMethod != null" >
+        data_get_method,
+      </if>
+      <if test="hfpmDataFieldName != null" >
+        hfpm_data_field_name,
+      </if>
+      <if test="hfpmDataSetId != null" >
+        hfpm_data_set_id,
+      </if>
+      <if test="pri != null" >
+        pri,
+      </if>
+      <if test="opId != null" >
+        op_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="modifyOpId != null" >
+        modify_op_id,
+      </if>
+      <if test="modifyTime != null" >
+        modify_time,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+      <if test="createEditAuth != null" >
+        create_edit_auth,
+      </if>
+      <if test="detailShowAuth != null" >
+        detail_show_auth,
+      </if>
+      <if test="listShowAuth != null" >
+        list_show_auth,
+      </if>
+      <if test="updateEditAuth != null" >
+        update_edit_auth,
+      </if>
+      <if test="workfowModelId != null" >
+        workfow_model_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="hfpmDataFieldCode != null" >
+        #{hfpmDataFieldCode,jdbcType=VARCHAR},
+      </if>
+      <if test="hfpmFieldShowTypeId != null" >
+        #{hfpmFieldShowTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldShowCode != null" >
+        #{fieldShowCode,jdbcType=VARCHAR},
+      </if>
+      <if test="hfmdEntityId != null" >
+        #{hfmdEntityId,jdbcType=BIGINT},
+      </if>
+      <if test="hfmdEntityAttrId != null" >
+        #{hfmdEntityAttrId,jdbcType=BIGINT},
+      </if>
+      <if test="dataGetMethod != null" >
+        #{dataGetMethod,jdbcType=INTEGER},
+      </if>
+      <if test="hfpmDataFieldName != null" >
+        #{hfpmDataFieldName,jdbcType=VARCHAR},
+      </if>
+      <if test="hfpmDataSetId != null" >
+        #{hfpmDataSetId,jdbcType=BIGINT},
+      </if>
+      <if test="pri != null" >
+        #{pri,jdbcType=DECIMAL},
+      </if>
+      <if test="opId != null" >
+        #{opId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyOpId != null" >
+        #{modifyOpId,jdbcType=BIGINT},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="createEditAuth != null" >
+        #{createEditAuth,jdbcType=TINYINT},
+      </if>
+      <if test="detailShowAuth != null" >
+        #{detailShowAuth,jdbcType=TINYINT},
+      </if>
+      <if test="listShowAuth != null" >
+        #{listShowAuth,jdbcType=TINYINT},
+      </if>
+      <if test="updateEditAuth != null" >
+        #{updateEditAuth,jdbcType=TINYINT},
+      </if>
+      <if test="workfowModelId != null" >
+        #{workfowModelId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.hframe.domain.model.HfpmDataField_Example" resultType="java.lang.Integer" >
+    select count(*) from hfpm_data_field
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update hfpm_data_field
+    <set >
+      <if test="record.hfpmDataFieldId != null" >
+        hfpm_data_field_id = #{record.hfpmDataFieldId,jdbcType=BIGINT},
+      </if>
+      <if test="record.hfpmDataFieldCode != null" >
+        hfpm_data_field_code = #{record.hfpmDataFieldCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hfpmFieldShowTypeId != null" >
+        hfpm_field_show_type_id = #{record.hfpmFieldShowTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fieldShowCode != null" >
+        field_show_code = #{record.fieldShowCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hfmdEntityId != null" >
+        hfmd_entity_id = #{record.hfmdEntityId,jdbcType=BIGINT},
+      </if>
+      <if test="record.hfmdEntityAttrId != null" >
+        hfmd_entity_attr_id = #{record.hfmdEntityAttrId,jdbcType=BIGINT},
+      </if>
+      <if test="record.dataGetMethod != null" >
+        data_get_method = #{record.dataGetMethod,jdbcType=INTEGER},
+      </if>
+      <if test="record.hfpmDataFieldName != null" >
+        hfpm_data_field_name = #{record.hfpmDataFieldName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hfpmDataSetId != null" >
+        hfpm_data_set_id = #{record.hfpmDataSetId,jdbcType=BIGINT},
+      </if>
+      <if test="record.pri != null" >
+        pri = #{record.pri,jdbcType=DECIMAL},
+      </if>
+      <if test="record.opId != null" >
+        op_id = #{record.opId,jdbcType=BIGINT},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifyOpId != null" >
+        modify_op_id = #{record.modifyOpId,jdbcType=BIGINT},
+      </if>
+      <if test="record.modifyTime != null" >
+        modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.delFlag != null" >
+        del_flag = #{record.delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.createEditAuth != null" >
+        create_edit_auth = #{record.createEditAuth,jdbcType=TINYINT},
+      </if>
+      <if test="record.detailShowAuth != null" >
+        detail_show_auth = #{record.detailShowAuth,jdbcType=TINYINT},
+      </if>
+      <if test="record.listShowAuth != null" >
+        list_show_auth = #{record.listShowAuth,jdbcType=TINYINT},
+      </if>
+      <if test="record.updateEditAuth != null" >
+        update_edit_auth = #{record.updateEditAuth,jdbcType=TINYINT},
+      </if>
+      <if test="record.workfowModelId != null" >
+        workfow_model_id = #{record.workfowModelId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update hfpm_data_field
+    set hfpm_data_field_id = #{record.hfpmDataFieldId,jdbcType=BIGINT},
+      hfpm_data_field_code = #{record.hfpmDataFieldCode,jdbcType=VARCHAR},
+      hfpm_field_show_type_id = #{record.hfpmFieldShowTypeId,jdbcType=VARCHAR},
+      field_show_code = #{record.fieldShowCode,jdbcType=VARCHAR},
+      hfmd_entity_id = #{record.hfmdEntityId,jdbcType=BIGINT},
+      hfmd_entity_attr_id = #{record.hfmdEntityAttrId,jdbcType=BIGINT},
+      data_get_method = #{record.dataGetMethod,jdbcType=INTEGER},
+      hfpm_data_field_name = #{record.hfpmDataFieldName,jdbcType=VARCHAR},
+      hfpm_data_set_id = #{record.hfpmDataSetId,jdbcType=BIGINT},
+      pri = #{record.pri,jdbcType=DECIMAL},
+      op_id = #{record.opId,jdbcType=BIGINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      modify_op_id = #{record.modifyOpId,jdbcType=BIGINT},
+      modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+      del_flag = #{record.delFlag,jdbcType=INTEGER},
+      create_edit_auth = #{record.createEditAuth,jdbcType=TINYINT},
+      detail_show_auth = #{record.detailShowAuth,jdbcType=TINYINT},
+      list_show_auth = #{record.listShowAuth,jdbcType=TINYINT},
+      update_edit_auth = #{record.updateEditAuth,jdbcType=TINYINT},
+      workfow_model_id = #{record.workfowModelId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hframe.domain.model.HfpmDataField" >
+    update hfpm_data_field
+    <set >
+      <if test="hfpmDataFieldCode != null" >
+        hfpm_data_field_code = #{hfpmDataFieldCode,jdbcType=VARCHAR},
+      </if>
+      <if test="hfpmFieldShowTypeId != null" >
+        hfpm_field_show_type_id = #{hfpmFieldShowTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldShowCode != null" >
+        field_show_code = #{fieldShowCode,jdbcType=VARCHAR},
+      </if>
+      <if test="hfmdEntityId != null" >
+        hfmd_entity_id = #{hfmdEntityId,jdbcType=BIGINT},
+      </if>
+      <if test="hfmdEntityAttrId != null" >
+        hfmd_entity_attr_id = #{hfmdEntityAttrId,jdbcType=BIGINT},
+      </if>
+      <if test="dataGetMethod != null" >
+        data_get_method = #{dataGetMethod,jdbcType=INTEGER},
+      </if>
+      <if test="hfpmDataFieldName != null" >
+        hfpm_data_field_name = #{hfpmDataFieldName,jdbcType=VARCHAR},
+      </if>
+      <if test="hfpmDataSetId != null" >
+        hfpm_data_set_id = #{hfpmDataSetId,jdbcType=BIGINT},
+      </if>
+      <if test="pri != null" >
+        pri = #{pri,jdbcType=DECIMAL},
+      </if>
+      <if test="opId != null" >
+        op_id = #{opId,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyOpId != null" >
+        modify_op_id = #{modifyOpId,jdbcType=BIGINT},
+      </if>
+      <if test="modifyTime != null" >
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=INTEGER},
+      </if>
+      <if test="createEditAuth != null" >
+        create_edit_auth = #{createEditAuth,jdbcType=TINYINT},
+      </if>
+      <if test="detailShowAuth != null" >
+        detail_show_auth = #{detailShowAuth,jdbcType=TINYINT},
+      </if>
+      <if test="listShowAuth != null" >
+        list_show_auth = #{listShowAuth,jdbcType=TINYINT},
+      </if>
+      <if test="updateEditAuth != null" >
+        update_edit_auth = #{updateEditAuth,jdbcType=TINYINT},
+      </if>
+      <if test="workfowModelId != null" >
+        workfow_model_id = #{workfowModelId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where hfpm_data_field_id = #{hfpmDataFieldId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hframe.domain.model.HfpmDataField" >
+    update hfpm_data_field
+    set hfpm_data_field_code = #{hfpmDataFieldCode,jdbcType=VARCHAR},
+      hfpm_field_show_type_id = #{hfpmFieldShowTypeId,jdbcType=VARCHAR},
+      field_show_code = #{fieldShowCode,jdbcType=VARCHAR},
+      hfmd_entity_id = #{hfmdEntityId,jdbcType=BIGINT},
+      hfmd_entity_attr_id = #{hfmdEntityAttrId,jdbcType=BIGINT},
+      data_get_method = #{dataGetMethod,jdbcType=INTEGER},
+      hfpm_data_field_name = #{hfpmDataFieldName,jdbcType=VARCHAR},
+      hfpm_data_set_id = #{hfpmDataSetId,jdbcType=BIGINT},
+      pri = #{pri,jdbcType=DECIMAL},
+      op_id = #{opId,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_op_id = #{modifyOpId,jdbcType=BIGINT},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      del_flag = #{delFlag,jdbcType=INTEGER},
+      create_edit_auth = #{createEditAuth,jdbcType=TINYINT},
+      detail_show_auth = #{detailShowAuth,jdbcType=TINYINT},
+      list_show_auth = #{listShowAuth,jdbcType=TINYINT},
+      update_edit_auth = #{updateEditAuth,jdbcType=TINYINT},
+      workfow_model_id = #{workfowModelId,jdbcType=VARCHAR}
+    where hfpm_data_field_id = #{hfpmDataFieldId,jdbcType=BIGINT}
+  </update>
+</mapper>

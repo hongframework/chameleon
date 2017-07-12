@@ -1,0 +1,39 @@
+<dataset>
+  <module>hframe</module>
+  <code>hfus_entity_store</code>
+  <entity>hfus_entity_store</entity>
+  <name>常用实体库</name>
+  <fields>
+    <field code="hfus_entity_store_id" name="常用实体库id" edit-type="hidden" is-key="true" not-null="true">
+      <create-edit-type>hidden</create-edit-type>
+      <update-edit-type>text</update-edit-type>
+    </field>
+    <field code="hfus_entity_store_name" name="常用实体库名称" edit-type="input" not-null="true"/>
+    <field code="hfus_entity_store_code" name="常用实体库编码" edit-type="input" not-null="true"/>
+    <field code="sql_content" name="SQL建表语句" edit-type="input" not-null="true"/>
+    <field code="entity_group" name="分组" edit-type="select">
+      <enum-class code="hfus_entity_store.group"/>
+    </field>
+    <field code="hfus_entity_store_type" name="常用实体库类型" edit-type="select">
+      <enum-class code="hfus_entity_store.hfus_entity_store_type"/>
+    </field>
+    <field code="creator_id" name="创建人" edit-type="hidden">
+      <rel entity-code="hfsec_user/hfsec_user_id/hfsec_user_name"/>
+      <create-edit-type>hidden</create-edit-type>
+      <update-edit-type>text</update-edit-type>
+    </field>
+    <field code="create_time" name="创建时间" edit-type="hidden">
+      <create-edit-type>hidden</create-edit-type>
+      <update-edit-type>text</update-edit-type>
+    </field>
+    <field code="modifier_id" name="修改人" edit-type="hidden">
+      <rel entity-code="hfsec_user/hfsec_user_id/hfsec_user_name"/>
+      <create-edit-type>hidden</create-edit-type>
+      <update-edit-type>hidden</update-edit-type>
+    </field>
+    <field code="modify_time" name="修改时间" edit-type="hidden">
+      <create-edit-type>hidden</create-edit-type>
+      <update-edit-type>hidden</update-edit-type>
+    </field>
+  </fields>
+</dataset>

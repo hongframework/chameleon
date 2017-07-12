@@ -1,0 +1,330 @@
+<module code="hframe" is-extend="true">
+    <page id="sql_reverse" name="反向工程" page-template="dynamic" >
+        <component id="eForm" data-set="hframe/sql_reverse_input"   title="SQL录入">
+            <event name="dbChange">
+                <attach anchor="EOFC">
+                    <appendElement type="button" param='{btnclass:"btn-primary",btnText:"提交"}'></appendElement>
+                </attach>
+                <source scope="EOC" param="thisForm"></source>
+                <!--<effect type="ajaxSubmit" action='${batchDelete}' param="ids" isStack="true"></effect>-->
+                <!--<effect type="ajaxSubmit" action='/extend/sql_reverse_input.json' isStack="true"></effect>-->
+                <effect type="pageFwdWithData" action='/hframe/sql_reverse_diff.html' isStack="true"></effect>
+            </event>
+        </component>
+    </page>
+    <page id="general_entity_add" name="常用实体添加" page-template="dynamic" >
+        <component id="qList" data-set="hframe/hfpm_program_cfg_auth_part" dataid="hfpmProgramCfgAuthPart" title="设置权限模型">
+            <event name="save">
+                <attach anchor="EOFC">
+                    <appendElement type="button" param='{btnclass:"btn-primary",btnText:"预执行"}'></appendElement>
+                </attach>
+                <source scope="BOFR" param="checkIds" >
+                    <appendElement type="checkbox" param='groupId'></appendElement>
+                </source>
+                <effect type="pageFwd" action='/hframe/general_entity_add_diff.html' isStack="true"></effect>
+            </event>
+        </component>
+        <component id="qList" data-set="hframe/hfpm_program_cfg_dict_part" dataid="hfpmProgramCfgDictPart" title="设置字典模型">
+            <event name="save">
+                <attach anchor="EOFC">
+                    <appendElement type="button" param='{btnclass:"btn-primary",btnText:"预执行"}'></appendElement>
+                </attach>
+                <source scope="BOFR" param="checkIds" >
+                    <appendElement type="checkbox" param='groupId'></appendElement>
+                </source>
+                <effect type="pageFwd" action='/hframe/general_entity_add_diff.html' isStack="true"></effect>
+            </event>
+        </component>
+    </page>
+    <page id="general_entity_add_diff" name="快速模型差异" page-template="dynamic" >
+        <component id="qList" data-set="hframe/sql"  dataid="sql"  title="快速模型-差异结果">
+            <event name="dbChange">
+                <attach anchor="EOFC">
+                    <appendElement type="button" param='{btnclass:"btn-primary",btnText:"生成实体信息"}'></appendElement>
+                </attach>
+                <source scope="BOFR" param="checkIds" >
+                    <appendElement type="checkbox" param='sql'></appendElement>
+                </source>
+                <!--<effect type="ajaxSubmit" action='${batchDelete}' param="ids" isStack="true"></effect>-->
+                <effect type="ajaxSubmit" action='/extend/sql_reverse_execute.json' isStack="true"></effect>
+                <effect type="page.reload.static"></effect>
+            </event>
+        </component>
+        <component id="qList" data-set="hframe/hfmd_entity" dataid="NewEntityId" title="新增实体信息"></component>
+        <component id="qList" data-set="hframe/hfmd_entity_attr" dataid="NewEntityAttrId"  title="新增实体属性信息"></component>
+        <component id="qList" data-set="hframe/hfmd_entity" dataid="ModEntityId"  title="修改实体属性信息"></component>
+        <component id="qList" data-set="hframe/hfmd_entity_attr"  dataid="ModEntityAttrId"  title="修改实体属性信息" />
+    </page>
+    <page id="sql_reverse_diff" name="反向工程差异结果" page-template="dynamic" >
+        <component id="qList" data-set="hframe/sql"  dataid="sql"  title="SQL反向-差异结果">
+            <event name="dbChange">
+                <attach anchor="EOFC">
+                    <appendElement type="button" param='{btnclass:"btn-primary",btnText:"生成实体信息"}'></appendElement>
+                </attach>
+                <source scope="BOFR" param="checkIds" >
+                    <appendElement type="checkbox" param='sql'></appendElement>
+                </source>
+                <!--<effect type="ajaxSubmit" action='${batchDelete}' param="ids" isStack="true"></effect>-->
+                <effect type="ajaxSubmit" action='/extend/sql_reverse_execute.json' isStack="true"></effect>
+                <effect type="page.reload.static"></effect>
+            </event>
+        </component>
+        <component id="qList" data-set="hframe/hfmd_entity" dataid="NewEntityId" title="新增实体信息"></component>
+        <component id="qList" data-set="hframe/hfmd_entity_attr" dataid="NewEntityAttrId"  title="新增实体属性信息"></component>
+        <component id="qList" data-set="hframe/hfmd_entity" dataid="ModEntityId"  title="修改实体属性信息"></component>
+        <component id="qList" data-set="hframe/hfmd_entity_attr"  dataid="ModEntityAttrId"  title="修改实体属性信息" />
+    </page>
+    <page id="hfpm_program_cfg_mgr" name="项目设置" page-template="dynamic" >
+        <component id="eForm" data-set="hframe/hfpm_program_cfg" name="项目设置" >
+            <event name="createOrUpdate">
+                <attach anchor="EOFC">
+                    <appendElement type="button" param='{btnclass:"btn-primary",btnText:" 提 交 "}'></appendElement>
+                </attach>
+                <source scope="EOC" param="thisForm"></source>
+                <effect type="ajaxSubmit" action="${saveOrUpdateByAjax}"></effect>
+                <effect type="page.reload"></effect>
+            </event>
+        </component>
+    </page>
+
+    <page id="model_diff" name="模型差异分析" page-template="dynamic" >
+        <component id="eForm" data-set="hframe/hfpm_program_cfg_dbinfo_DS4Save"   title="选择数据库">
+            <event name="onchange">
+                <attach anchor="hfcfg_db_connect_id"></attach>
+                <source scope="EOC" param="thisForm"></source>
+                <effect type="ajaxSubmit" action="${saveOrUpdateByAjax}"></effect>
+                <effect type="page.reload"></effect>
+            </event>
+        </component>
+        <component id="qList" data-set="hframe/sql"  dataid="sql"  title="SQL">
+            <event name="dbChange">
+                <attach anchor="EOFC">
+                    <appendElement type="button" param='{btnclass:"btn-primary",btnText:"DB变更"}'></appendElement>
+                </attach>
+                <source scope="BOFR" param="checkIds" >
+                    <appendElement type="checkbox" param='sql'></appendElement>
+                </source>
+                <!--<effect type="ajaxSubmit" action='${batchDelete}' param="ids" isStack="true"></effect>-->
+                <effect type="ajaxSubmit" action='/extend/model_execute.json' isStack="true"></effect>
+                <effect type="page.reload"></effect>
+            </event>
+        </component>
+        <component id="qList" data-set="hframe/hfmd_entity" dataid="NewEntityId" title="新增实体信息"></component>
+        <component id="qList" data-set="hframe/hfmd_entity_attr" dataid="NewEntityAttrId"  title="新增实体属性信息"></component>
+        <component id="qList" data-set="hframe/hfmd_entity" dataid="ModEntityId"  title="修改实体属性信息"></component>
+        <component id="qList" data-set="hframe/hfmd_entity_attr"  dataid="ModEntityAttrId"  title="修改实体属性信息" />
+
+    </page>
+
+    <page id="application_manage" name="应用管理" page-template="dynamic" >
+        <component id="qList" data-set="hframe/application_info" dataid="applicationInfo" title="应用信息">
+            <event name="start">
+                <pre-handle case="state" when="未启动" then="1"></pre-handle>
+                <attach anchor="EOFR">
+                    <appendElement type="icon" param='{fillclass:"btn-success",iconclass:"icon-play"}'></appendElement>
+                </attach>
+                <source scope="CROW" param="id={hfpmProgramId}&amp;type=1"></source>
+                <effect type="confirm" content="是否启动该应用?"></effect>
+                <effect type="ajaxSubmit" action="/extend/application_operate.json"></effect>
+                <effect type="component.reload"></effect>
+            </event>
+            <event name="restart">
+                <pre-handle case="state" when="已启动" then="2"></pre-handle>
+                <attach anchor="EOFR">
+                    <appendElement type="icon" param='{fillclass:"btn-info",iconclass:"icon-refresh"}'></appendElement>
+                </attach>
+                <source scope="CROW" param="id={hfpmProgramId}&amp;type=2"></source>
+                <effect type="confirm" content="是否重启该应用?"></effect>
+                <effect type="ajaxSubmit" action="/extend/application_operate.json"></effect>
+                <effect type="component.reload"></effect>
+            </event>
+            <event name="stop">
+                <pre-handle case="state" when="已启动" then="3"></pre-handle>
+                <attach anchor="EOFR">
+                    <appendElement type="icon" param='{fillclass:"btn-danger",iconclass:"icon-stop"}'></appendElement>
+                </attach>
+                <source scope="CROW" param="id={hfpmProgramId}&amp;type=3"></source>
+                <effect type="confirm" content="是否停止该应用?"></effect>
+                <effect type="ajaxSubmit" action="/extend/application_operate.json"></effect>
+                <effect type="component.reload"></effect>
+            </event>
+        </component>
+    </page>
+
+    <page id="code_diff" name="代码差异分析" page-template="dynamic" >
+        <component id="qList" data-set="hframe/code_diff" dataid="AddClassInfo" title="新增字段">
+            <event name="codeGenerate">
+                <attach anchor="EOFC">
+                    <appendElement type="button" param='{btnclass:"btn-primary",btnText:"代码生成"}'></appendElement>
+                </attach>
+                <source scope="BOFR" param="checkIds" >
+                    <appendElement type="checkbox" param='entityCode'></appendElement>
+                </source>
+                <!--<effect type="ajaxSubmit" action='${batchDelete}' param="ids" isStack="true"></effect>-->
+                <effect type="ajaxSubmit" action='/extend/code_generate.json' isStack="true"></effect>
+                <effect type="page.reload"></effect>
+            </event>
+        </component>
+        <component id="qList" data-set="hframe/code_diff" dataid="ModClassInfo"  title="修改字段">
+            <event name="codeGenerate">
+                <attach anchor="EOFC">
+                    <appendElement type="button" param='{btnclass:"btn-primary",btnText:"代码生成"}'></appendElement>
+                </attach>
+                <source scope="BOFR" param="checkIds" >
+                    <appendElement type="checkbox" param='entityCode'></appendElement>
+                </source>
+                <!--<effect type="ajaxSubmit" action='${batchDelete}' param="ids" isStack="true"></effect>-->
+                <effect type="ajaxSubmit" action='/extend/code_generate.json' isStack="true"></effect>
+                <effect type="page.reload"></effect>
+            </event>
+        </component>
+        <component id="qList" data-set="hframe/code_diff" dataid="DelClassInfo"  title="删除字段">
+        </component>
+    </page>
+
+    <page id="page_load" name="页面加载" page-template="shapeshift" >
+    </page>
+
+    <page id="menu_chart" name="菜单配置" page-template="orgchart"  data-set="hframe/hfsec_menu" >
+        <component id="treeChart"  dataid="AllMenuTree" data-set="hframe/hfsec_menu"/>
+    </page>
+
+    <page id="dynTree_test" name="动态树测试" page-template="editByCategory" data-set="hframe/hfsec_menu">
+        <component id="dynTree" data-set="hframe/hfsec_menu"/>
+        <component id="eForm" data-set="hframe/hfsec_menu"/>
+    </page>
+    <page id="hfsec_menu_mgr" name="菜单管理" page-template="editByCategory" data-set="hframe/hfsec_menu">
+        <!--<component id="qForm" data-set="hframe/hfsec_menu_DS4Q"/>-->
+    </page>
+    <page id="hfsec_organize_mgr" name="组织管理" page-template="editByCategory" data-set="hframe/hfsec_organize">
+        <component id="dynTree" data-set="hframe/hfsec_organize"/>
+    </page>
+    <!--<page id="canal_manager" name="canal实例管理" page-template="fileEditor" data-set="hframe/hfsec_menu">-->
+        <!--<component id="dynTree"  data-set="hffile/folder.tree.feditor" dataid="D:/my_workspace/hframe-trunk/hframe-reconciliation/src/main/resources"/>-->
+        <!--&lt;!&ndash;<component id="dynTree" data-set="hframe/hfsec_menu"/>&ndash;&gt;-->
+        <!--<component id="container" data-set="hffile/compare.feditor"  dataid="D:/my_workspace/hframe-trunk/hframe-reconciliation/src/main/resources" />-->
+    <!--</page>-->
+
+    <!--<page id="canal_manager2container"  page-template="dynamic">-->
+        <!--<component id="eList" data-set="hffile/compare.feditor#config.global.host"/>-->
+        <!--<component id="eForm" data-set="hffile/compare.feditor#config.services.service"/>-->
+        <!--<component id="eList" data-set="hffile/compare.feditor#config.services.service.importer"/>-->
+        <!--<component id="eList" data-set="hffile/compare.feditor#config.services.service.rule"/>-->
+        <!--<component id="eList" data-set="hffile/compare.feditor#config.services.service.exporter"/>-->
+    <!--</page>-->
+
+    <page id="canal_manager" name="canal实例管理" page-template="fileEditor" data-set="hframe/hfsec_menu">
+        <component id="dynTree"  data-set="hffile/folder.tree.feditor" dataid="D:/my_workspace/hframe-trunk/hframe-reconciliation/src/main/resources"/>
+        <!--<component id="dynTree" data-set="hframe/hfsec_menu"/>-->
+        <component id="container" data-set="hffile/compare.feditor"  dataid="D:/my_workspace/hframe-trunk/hframe-reconciliation/src/main/resources" />
+    </page>
+
+    <page id="compare.feditor#"  page-template="dynamic">
+        <component id="eList" data-set="hffile/compare.feditor#config.global.host"/>
+        <component id="eForm" data-set="hffile/compare.feditor#config.services.service"/>
+        <!-- 容器默认为list，否则容器单元素已被智能计算在外面了，所以，容器在展现时，按照手风琴或者tab的形式展现 -->
+        <component id="mutexContainer" data-set="hffile/compare.feditor#config.services.service.importers.importer" title="数据导入"/>
+        <component id="mutexContainer" data-set="hffile/compare.feditor#config.services.service.ruleCenter.rule" title="比对规则"/>
+        <component id="eList" data-set="hffile/compare.feditor#config.services.service.exporters.exporter" title="数据导出"/>
+    </page>
+
+    <page id="compare.feditor#config.services.service.importers.importer#"  page-template="dynamic">
+        <component id="eForm" data-set="hffile/compare.feditor#config.services.service.importers.importer" title="基本信息"/>
+        <component id="eList" data-set="hffile/compare.feditor#config.services.service.importers.importer.file.row" title="数据行"/>
+        <component id="eList" data-set="hffile/compare.feditor#config.services.service.importers.importer.dataset.sql" title="SQL"/>
+    </page>
+
+    <page id="compare.feditor#config.services.service.ruleCenter.rule#"  page-template="dynamic">
+        <component id="eForm" data-set="hffile/compare.feditor#config.services.service.ruleCenter.rule" title="数据集"/>
+        <component id="eList" data-set="hffile/compare.feditor#config.services.service.ruleCenter.rule.datanode" title="节点"/>
+    </page>
+
+    <page id="chartDemo" name="图表"  page-template="dynamic">
+        <component id="chart" data-set="hframe/manis_statistics_second" title="chartDemo"/>
+    </page>
+
+</module>
+
+<!--<module code="hfmd" name="数据建模">-->
+    <!--<page id="hfmd_entity_mgr" name="项目维护" page-template="qlist" data-set="hframe/hfmd_entity" is-main="true">-->
+        <!--<component id="qForm" data-set="hframe/hfmd_entity_DS4Q"></component>-->
+    <!--</page>-->
+    <!--<page id="hfmd_entity_mgr" name="实体维护" page-template="qlist" data-set="hframe/hfmd_entity" is-main="true">-->
+        <!--<component id="qForm" data-set="hframe/hfmd_entity_DS4Q"></component>-->
+    <!--</page>-->
+    <!--<page id="hfmd_entity_mgr" name="字典维护" page-template="edit" data-set="hframe/hfmd_entity" is-main="true">-->
+        <!--<component id="qForm" data-set="hframe/hfmd_entity_DS4Q"></component>-->
+    <!--</page>-->
+    <!--<page id="hfmd_entity_mgr" name="数据集维护" page-template="qlist" data-set="hframe/hfmd_entity" is-main="true">-->
+        <!--<component id="qForm" data-set="hframe/hfmd_entity_DS4Q"></component>-->
+    <!--</page>-->
+    <!--<page id="hfmd_entity_mgr" name="实体权限维护" page-template="edit" data-set="hframe/hfmd_entity" is-main="true">-->
+        <!--<component id="qForm" data-set="hframe/hfmd_entity_DS4Q"></component>-->
+    <!--</page>-->
+    <!--<page id="hfmd_entity_mgr" name="实体捆绑规则维护" page-template="edit" data-set="hframe/hfmd_entity" is-main="true">-->
+        <!--<component id="qForm" data-set="hframe/hfmd_entity_DS4Q"></component>-->
+    <!--</page>-->
+
+    <!--<page id="hfmd_entity_create" name="项目新增" page-template="edit" data-set="hframe/hfmd_entity"></page>-->
+    <!--<page id="hfmd_entity_create" name="实体新增" page-template="qlist" data-set="hframe/hfmd_entity"></page>-->
+    <!--<page id="hfmd_entity_create" name="字典新增" page-template="edit" data-set="hframe/hfmd_entity"></page>-->
+    <!--<page id="hfmd_entity_create" name="数据集新增" page-template="qlist" data-set="hframe/hfmd_entity"></page>-->
+    <!--<page id="hfmd_entity_create" name="实体权限新增" page-template="edit" data-set="hframe/hfmd_entity"></page>-->
+    <!--<page id="hfmd_entity_create" name="实体捆绑规则新增" page-template="edit" data-set="hframe/hfmd_entity"></page>-->
+
+    <!--<page id="hfmd_entity_edit" name="项目修改" page-template="edit" data-set="hframe/hfmd_entity"></page>-->
+    <!--<page id="hfmd_entity_edit" name="实体修改" page-template="qlist" data-set="hframe/hfmd_entity"></page>-->
+    <!--<page id="hfmd_entity_edit" name="字典修改" page-template="edit" data-set="hframe/hfmd_entity"></page>-->
+    <!--<page id="hfmd_entity_edit" name="数据集修改" page-template="qlist" data-set="hframe/hfmd_entity"></page>-->
+    <!--<page id="hfmd_entity_edit" name="实体权限修改" page-template="edit" data-set="hframe/hfmd_entity"></page>-->
+    <!--<page id="hfmd_entity_edit" name="实体捆绑规则修改" page-template="edit" data-set="hframe/hfmd_entity"></page>-->
+<!--</module>-->
+<!--<module code="hfpm" name="智能云库">-->
+    <!--<page id="hfmd_entity_mgr" name="常用实体属性" page-template="qlist" data-set="hframe/hfmd_entity" is-main="true">-->
+        <!--<component id="qForm" data-set="hframe/hfmd_entity_DS4Q"></component>-->
+    <!--</page>-->
+    <!--<page id="hfmd_entity_mgr" name="实体类型关联常用实体属性" page-template="create" data-set="hframe/hfmd_entity" is-main="true">-->
+        <!--<component id="qForm" data-set="hframe/hfmd_entity_DS4Q"></component>-->
+    <!--</page>-->
+    <!--<page id="hfmd_entity_mgr" name="项目常用实体属性" page-template="edit" data-set="hframe/hfmd_entity" is-main="true">-->
+        <!--<component id="qForm" data-set="hframe/hfmd_entity_DS4Q"></component>-->
+    <!--</page>-->
+    <!--<page id="hfmd_entity_mgr" name="单词库" page-template="edit" data-set="hframe/hfmd_entity" is-main="true">-->
+        <!--<component id="qForm" data-set="hframe/hfmd_entity_DS4Q"></component>-->
+    <!--</page>-->
+
+    <!--<page id="hfmd_entity_create" name="常用实体属性" page-template="qlist" data-set="hframe/hfmd_entity" is-main="true"></page>-->
+    <!--<page id="hfmd_entity_create" name="实体类型关联常用实体属性" page-template="create" data-set="hframe/hfmd_entity" is-main="true"></page>-->
+    <!--<page id="hfmd_entity_create" name="项目常用实体属性" page-template="edit" data-set="hframe/hfmd_entity" is-main="true"></page>-->
+    <!--<page id="hfmd_entity_create" name="单词库" page-template="edit" data-set="hframe/hfmd_entity" is-main="true"></page>-->
+
+    <!--<page id="hfmd_entity_edit" name="常用实体属性" page-template="qlist" data-set="hframe/hfmd_entity" is-main="true"></page>-->
+    <!--<page id="hfmd_entity_edit" name="实体类型关联常用实体属性" page-template="create" data-set="hframe/hfmd_entity" is-main="true"></page>-->
+    <!--<page id="hfmd_entity_edit" name="项目常用实体属性" page-template="edit" data-set="hframe/hfmd_entity" is-main="true"></page>-->
+    <!--<page id="hfmd_entity_edit" name="单词库" page-template="edit" data-set="hframe/hfmd_entity" is-main="true"></page>-->
+<!--</module>-->
+
+<!-- -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+<!--<module code="hfmd" name="数据建模">-->
+    <!--<page id="hfmd_entity_query" name="实体维护" page-template="qlist" data-set="hframe/hfmd_entity"></page>-->
+    <!--<page id="hfmd_entity_create" name="实体属性维护" page-template="create" data-set="hframe/hfmd_entity"></page>-->
+    <!--<page id="hfmd_entity_edit" name="实体关系维护" page-template="edit" data-set="hframe/hfmd_entity"></page>-->
+    <!--<page id="hfmd_entity_detail" name="枚举值维护" page-template="edit" data-set="hframe/hfmd_entity"></page>-->
+    <!--<page id="hfmd_entity_detail" name="枚举类维护" page-template="edit" data-set="hframe/hfmd_entity"></page>-->
+<!--</module>-->
+<!--<module code="hfpm" name="项目配置">-->
+    <!--<page id="hfmd_entity_query" name="数据集维护" page-template="qlist" data-set="hframe/hfmd_entity"></page>-->
+    <!--<page id="hfmd_entity_create" name="数据列维护" page-template="create" data-set="hframe/hfmd_entity"></page>-->
+    <!--<page id="hfmd_entity_edit" name="项目维护" page-template="edit" data-set="hframe/hfmd_entity"></page>-->
+    <!--<page id="hfmd_entity_edit" name="项目设置" page-template="edit" data-set="hframe/hfmd_entity"></page>-->
+    <!--<page id="hfmd_entity_detail" name="模块维护" page-template="edit" data-set="hframe/hfmd_entity"></page>-->
+    <!--<page id="hfmd_entity_detail" name="页面维护" page-template="edit" data-set="hframe/hfmd_entity"></page>-->
+    <!--<page id="hfmd_entity_detail" name="实体权限维护" page-template="edit" data-set="hframe/hfmd_entity"></page>-->
+    <!--<page id="hfmd_entity_detail" name="实体捆绑规则维护" page-template="edit" data-set="hframe/hfmd_entity"></page>-->
+<!--</module>-->
+<!--<module code="hfpm" name="智能云库">-->
+    <!--<page id="hfmd_entity_query" name="常用实体属性" page-template="qlist" data-set="hframe/hfmd_entity"></page>-->
+    <!--<page id="hfmd_entity_create" name="实体类型关联常用实体属性" page-template="create" data-set="hframe/hfmd_entity"></page>-->
+    <!--<page id="hfmd_entity_edit" name="项目常用实体属性" page-template="edit" data-set="hframe/hfmd_entity"></page>-->
+    <!--<page id="hfmd_entity_edit" name="单词库" page-template="edit" data-set="hframe/hfmd_entity"></page>-->
+<!--</module>-->

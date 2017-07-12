@@ -1,0 +1,35 @@
+<program>
+  <company>hframe</company>
+  <code>hframe</code>
+  <name>Chameleon</name>
+  <description>Chameleon-Web项目快速构建平台</description>
+  <modules>
+    <module code="hframe" name="框架"/>
+  </modules>
+  <template>
+    <path>hframework.template.default</path>
+    <code>default</code>
+  </template>
+  <welcome>uc/login.html</welcome>
+  <login url="/login.html" data-set="hframe/hfsec_user_4_login" />
+  <auth-instance>
+    <user>hframe.hfsec_user</user>
+    <data>hframe.hfsec_organize</data>
+    <role>hframe.hfsec_role</role>
+    <function>hframe.hfsec_menu</function>
+    <dictionary>hframe.hfmd_enum_class / hframe.hfmd_enum</dictionary>
+    <user-data-auth>hframe.hfsec_user / hframe.hfsec_user_authorize / hframe.hfsec_organize</user-data-auth>
+    <user-func-auth>hframe.hfsec_user / hframe.hfsec_user_authorize / hframe.hfsec_role / hframe.hfsec_role_authorize / hframe.hfsec_menu</user-func-auth>
+    <super-auth-filter>
+      <data-set>hframe.hfsec_role</data-set>
+      <data-field>hfsec_role_code</data-field>
+      <data-field-value>super_operator</data-field-value>
+    </super-auth-filter>
+  </auth-instance>
+  <superManager>
+    <code>admin</code>
+    <password>admin</password>
+    <name>草鸡管理员</name>
+  </superManager>
+
+</program>

@@ -1,0 +1,26 @@
+<mapper component-id="dynTree" data-set="hframe/hfsec_organize" data-auth="orgId=SELF.orgId">
+    <baseMapper>
+        <mapping id="id" value="${code}_tree"></mapping>
+        <mapping id="icon" value="${icon}"></mapping>
+        <mapping id="title" value="${name}树"></mapping>
+        <mapping id="children" value="${data}">
+            <mapping id="id" value="hfsec_organize_id"></mapping>
+            <!--<mapping id="icon" value="icon"></mapping>-->
+            <!--<mapping id="url" value="url"></mapping>-->
+            <mapping id="name" value="hfsec_organize_name"></mapping>
+            <!--<mapping id="name" value="${hfsec_organize_name}&lt;div style='float:right;'&gt;&lt;a href='javascript:alert(1)'&gt;&lt;i class='icon-file-alt blue'&gt;&lt;/i&gt;&lt;/a&gt;&lt;div&gt;"></mapping>-->
+            <mapping id="children"></mapping>
+        </mapping>
+    </baseMapper>
+    <eventMapper>
+        <mapping id="id" value="hfsec_organize_id"></mapping>
+        <mapping id="pid" value="parent_hfsec_organize_id"></mapping>
+        <mapping id="name" value="hfsec_organize_name"></mapping>
+        <mapping id="create" value="${create}.html"></mapping>
+        <mapping id="edit" value="${edit}.html"></mapping>
+        <mapping id="detail" value="${detail}.html"></mapping>
+        <mapping id="delete" value="${deleteByAjax}.json"></mapping>
+        <mapping id="updateByAjax" value="${updateByAjax}.json"></mapping>
+        <mapping id="batchDelete" value="${batchDelete}.html"></mapping>
+    </eventMapper>
+</mapper>

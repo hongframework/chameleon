@@ -1,0 +1,12 @@
+<dataset>
+  <module>hframe</module>
+  <code>sql</code>
+  <entity></entity>
+  <name>SQL语句</name>
+  <fields>
+    <field code="sql" name="SQL" edit-type="input" not-null="true">
+      <create-edit-type>text</create-edit-type>
+      <update-edit-type>text</update-edit-type>
+    </field>
+  </fields>
+</dataset>

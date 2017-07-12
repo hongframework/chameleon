@@ -1,0 +1,129 @@
+<pagetemplates>
+
+    <pagetemplate id="login" path="login.vm" name="登录页" type="forward">
+        <element id="programName" type="string"></element>
+        <element id="cForm" type="component"></element>
+    </pagetemplate>
+
+    <pagetemplate id="default" path="default.vm" name="默认页" type="forward">
+        <element id="programName" type="string"></element>
+        <element id="leftMenuTree" type="component"></element>
+        <element id="personal" type="component"></element>
+        <element id="breadcrumb" type="component"></element>
+        <element id="topFastMenu" type="component"></element>
+        <element id="content" type="container"></element>
+    </pagetemplate>
+    <pagetemplate id="qlist" path="list.vm" parent-id = "default" name="列表页" type="forward">
+        <element id="qForm" type="component"  event-extend="false">
+            <events>
+                <event name="query" description="查询">
+                    <attach anchor="EOFC">
+                        <appendElement type="button" param='{btnclass:"btn-primary",btnText:"查询"}'></appendElement>
+                    </attach>
+                    <source scope="thisForm"></source>
+                    <effect type="component.reload" target-id="qList"></effect>
+                </event>
+            </events>
+        </element>
+        <element id="qList" type="component"></element>
+    </pagetemplate>
+    <pagetemplate id="elist" path="eList.vm" parent-id = "default" name="可编辑列表页" type="forward">
+        <element id="eList" type="component"></element>
+    </pagetemplate>
+    <pagetemplate id="create" path="create.vm" parent-id = "default" name="创建页" type="forward">
+        <element id="cForm" type="component"></element>
+    </pagetemplate>
+    <pagetemplate id="edit" path="edit.vm" parent-id = "default" name="编辑页" type="pop">
+        <element id="eForm" type="component"></element>
+    </pagetemplate>
+    <pagetemplate id="detail" path="detail.vm" parent-id = "default" name="详情页" type="pop">
+        <element id="dForm" type="component"></element>
+    </pagetemplate>
+
+
+    <pagetemplate id="cComb" path="common.vm" parent-id = "default" name="父子连带创建页面" type="forward">
+        <element id="cForm" type="component" event-extend="false"></element>
+        <element id="cList" type="component" event-extend="false">
+            <events>
+                <event name="submit" description="提交">
+                    <attach anchor="EOFC">
+                        <appendElement type="button" param='{btnclass:"btn-primary",btnText:" 提 交 "}'></appendElement>
+                    </attach>
+                    <source scope="EOC" param="thisForm"></source>
+                    <effect type="ajaxSubmitByJson" action="ajaxSubmits.json" target-id="cForm,cList"></effect>
+                    <effect type="pageFwd" action='${cForm:mgr}' isStack="true"></effect>
+                </event>
+            </events>
+        </element>
+    </pagetemplate>
+    <pagetemplate id="eComb" path="common.vm" parent-id = "default" name="父子连带修改页面" type="forward">
+        <element id="eForm" type="component" event-extend="false"></element>
+        <element id="eList" type="component" event-extend="false">
+            <events>
+                <event name="submit" description="提交">
+                    <attach anchor="EOFC">
+                        <appendElement type="button" param='{btnclass:"btn-primary",btnText:" 提 交 "}'></appendElement>
+                    </attach>
+                    <source scope="EOC" param="thisForm"></source>
+                    <effect type="ajaxSubmitByJson" action="ajaxSubmits.json" target-id="eForm,eList"></effect>
+                    <effect type="page.reload"></effect>
+                </event>
+            </events>
+        </element>
+    </pagetemplate>
+    <pagetemplate id="dComb" path="common.vm" parent-id = "default" name="父子连带查询页面" type="forward">
+        <element id="dForm" type="component" event-extend="false"></element>
+        <element id="qList" type="component" event-extend="false"></element>
+    </pagetemplate>
+    <pagetemplate id="dynamic" path="common.vm" parent-id = "default" name="动态页面" type="forward" />
+
+    <pagetemplate id="editByCategory" path="container.vm" parent-id = "default" name="动态页面" type="forward">
+        <element id="dynTree" type="component" container="span3">
+        </element>
+        <element id="cForm" type="component" event-extend="true"  container="span9" element-group="form"></element>
+        <element id="eForm" type="component" event-extend="true"  container="span9" element-group="form"></element>
+    </pagetemplate>
+    <pagetemplate id="fileEditor" path="container.vm" parent-id = "default" name="动态页面" type="forward">
+        <element id="dynTree" type="component" event-extend="false" container="span3">
+            <events>
+                <event name="onclick">
+                    <attach anchor="${name}"></attach>
+                    <source scope="CROW" param="${id}"></source>
+                    <effect type="component.reload" target-id="container"></effect>
+                </event>
+            </events>
+        </element>
+        <element id="container" type="component" container="span9">
+            <!--<events>-->
+                <!--<event name="save">-->
+                    <!--<attach anchor="EOFC">-->
+                        <!--<appendElement type="button" param='{btnclass:"btn-primary",btnText:"保存"}'></appendElement>-->
+                    <!--</attach>-->
+                    <!--&lt;!&ndash;<effect type="ajaxSubmit" action='${batchDelete}' param="ids" isStack="true"></effect>&ndash;&gt;-->
+                    <!--<effect type="ajaxSubmit" action='/extend/model_execute.json' isStack="true"></effect>-->
+                    <!--<effect type="page.reload"></effect>-->
+                <!--</event>-->
+            <!--</events>-->
+        </element>
+    </pagetemplate>
+
+    <pagetemplate id="shapeshift" path="shapeshift.vm" parent-id = "default" name="分组页" type="forward" />
+    <pagetemplate id="orgchart" path="orgchart.vm" parent-id = "default" name="可视化编辑页" type="forward" >
+        <element id="treeChart" type="component">
+            <events>
+                <event name="submit">
+                    <attach anchor="EOFC">
+                        <appendElement type="button" param='{btnclass:"btn-primary",btnText:" 提 交 "}'></appendElement>
+                    </attach>
+                    <source scope="EOC" param="thisForm"></source>
+                    <effect type="ajaxSubmitByJson" action="extend/save_menu.json" target-id="treeChart"></effect>
+                    <effect type="page.reload"></effect>
+                </event>
+            </events>
+        </element>
+    </pagetemplate>
+
+    <!--<pagetemplate id="pop" path="blank.vm"  name="空白页" type="pop"></pagetemplate>-->
+    <!--<pagetemplate id="popForm" path="blank.vm"  name="空白页" type="pop"></pagetemplate>-->
+
+</pagetemplates>

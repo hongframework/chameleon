@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+       default-autowire="byName">
+
+    <!--  对于参数需要特别赋值的JAVA对象，可以通过xml显示的进行配置，而不实用注解自动生成
+    <bean id="sendRecommendMessageThreadPoolService"
+          class="com.ourangel.box.core.threadpool.impl.SendRecommendMessageThreadPoolServiceImpl">
+        <property name="corePoolSize" value="${sendMsg.corePoolSize}"/>
+        <property name="queueCapacity" value="${sendMsg.queueCapacity}"/>
+        <property name="maxPoolSize" value="${sendMsg.maxPoolSize}"/>
+        <property name="keepAliveTime" value="${sendMsg.keepAliveSeconds}"/>
+        <property name="threadWaitMaxTime" value="${sendMsg.threadWaitMaxTime}"/>
+    </bean>
+    -->
+    <!--<bean id="dataSetLoaderService" class="com.hframework.base.service.DataSetLoaderService"></bean>-->
+    <!--<bean id="modelLoaderService" class="com.hframework.base.service.ModelLoaderService"></bean>-->
+
+</beans>
