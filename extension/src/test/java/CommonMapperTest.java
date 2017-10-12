@@ -60,11 +60,11 @@ public class CommonMapperTest {
     @Test
     public void testManis_batchInsert() throws Exception {
         long cnt = 0;
-        DataSourceContextHolder.setDbInfo("jdbc:mysql://**:3306/firstp2p_test?useUnicode=true", "***", "**");
+        DataSourceContextHolder.setDbInfo("jdbc:mysql://**:3306/**_test?useUnicode=true", "***", "**");
         while (true) {
             cnt++;
             Thread.sleep(100L);
-            commonDataService.executeDBStructChange("INSERT INTO firstp2p_user_log_47\n" +
+            commonDataService.executeDBStructChange("INSERT INTO **_user_log_47\n" +
                     "            (log_info,\n" +
                     "             log_time,\n" +
                     "             log_admin_id,\n" +
@@ -100,11 +100,11 @@ public class CommonMapperTest {
                     "  remaining_total_money,\n" +
                     "  is_delete,\n" +
                     "  item_id\n" +
-                    "FROM firstp2p_user_log_47\n" +
+                    "FROM **_user_log_47\n" +
                     "WHERE id = 19102");
 
             if (cnt % 10000 == 0) {
-                commonDataService.executeDBStructChange("delete from  firstp2p_user_log_47 where log_admin_id = 999");
+                commonDataService.executeDBStructChange("delete from  **_user_log_47 where log_admin_id = 999");
             }
         }
     }
