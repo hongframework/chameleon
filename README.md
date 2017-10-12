@@ -29,8 +29,5 @@ chameleon，是一个web项目快速构建平台，由Java开发实现，无需�
 ## 下载
 * 待开放
 
-## Maven
-* 待开放
-
 ## 联系我们
 * zqhget1@163.com
