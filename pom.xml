@@ -17,7 +17,7 @@
     <properties>
         <encoding>UTF-8</encoding>
         <jdk_version>1.7</jdk_version>
-        <hframe.version>1.0-SNAPSHOT</hframe.version>
+        <hframe.version>1.0</hframe.version>
     </properties>
 
     <profiles>
