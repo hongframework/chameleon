@@ -11,7 +11,7 @@
     <field code="hfpm_program_name" name="项目名称" edit-type="input" not-null="true"/>
     <field code="hfpm_program_desc" name="项目描述" edit-type="input"  not-null="true"/>
     <field code="hfpm_program_code" name="项目编码" edit-type="input"  not-null="true"/>
-    <field code="owner_code" name="法人编码" edit-type="input"  not-null="true"/>
+    <field code="owner_code" name="法人编码" edit-type="input"  not-null="true" tipinfo="生成的代码将会以为com.{法人编码}..开头"/>
     <field code="op_id" name="创建人" edit-type="input">
       <rel entity-code="hfsec_user/hfsec_user_id/hfsec_user_name"/>
       <create-edit-type>hidden</create-edit-type>
