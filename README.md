@@ -9,8 +9,6 @@ chameleon，是一个web项目快速构建平台，由Java开发实现，无需�
 * 一键式构建部署：设计模型，定制数据集，项目基础设置后即能一键生成代码，初始化数据库与数据，一键编译运行
 * 数据库反向工程：根据ddl 数据库模型文件（sql文件），逆向快速构建web项目，省去建模工作
 
-
-
 ## chameleon平台主要特点
 * 易使用：平台在快速构建时，通过操作联想提示，常用配置默认生成，操作拖拽化等手段使平台极易使用
 * 易发布：平台定义了一套统一的编译发布机制，只需点击页面按钮运行或运行启动脚本即可启动项目，同时多环境配置独立（dev,test,beta,release）
@@ -21,15 +19,12 @@ chameleon，是一个web项目快速构建平台，由Java开发实现，无需�
 
 
 ## QuickStart
-* 详见wiki
+* 详见[wiki](https://github.com/hongframework/chameleon/wiki/QuickStart)
 
 ## 文档
-* 详见wiki
+* 详见[wiki](https://github.com/hongframework/chameleon/wiki)
 
 ## 下载
-* 待开放
-
-## Maven
 * 待开放
 
 ## 联系我们
