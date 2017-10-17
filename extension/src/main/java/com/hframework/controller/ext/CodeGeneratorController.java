@@ -257,7 +257,7 @@ public class CodeGeneratorController extends ExtBaseController {
 //            }
 
 
-            String projectCompileTargetPath = projectBasePath + "\\basic\\target\\classes\\";
+            String projectCompileTargetPath = projectBasePath + "/basic/target/classes/";
 //            String filePath = "/D:/my_workspace/hframe-trunk" + "\\hframe-core\\target\\classes\\";
 //            String classPackage = com.hframework.web.CreatorUtil.getDefPoClass(WebContext.get().getProgram().getCompany(),
 //                    programCode, moduleCode, "X").getClassPackage() + ".";
