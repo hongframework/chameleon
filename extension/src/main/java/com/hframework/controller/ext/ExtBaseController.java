@@ -101,7 +101,7 @@ public class ExtBaseController {
                 String url = dbConnect.getUrl();
                 String user = dbConnect.getUser();
                 String password = dbConnect.getPassword();
-                DataSourceContextHolder.setDbInfo(url,user,password);
+                DataSourceContextHolder.setDbInfo(url.trim(), user.trim(), password != null ? password.trim() : null);
                 return dbConnect;
             }
 

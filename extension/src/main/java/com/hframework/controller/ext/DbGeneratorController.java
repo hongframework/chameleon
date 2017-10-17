@@ -1,5 +1,6 @@
 package com.hframework.controller.ext;
 
+import com.alibaba.fastjson.JSONObject;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import com.hframe.domain.model.*;
@@ -170,7 +171,7 @@ public class DbGeneratorController extends ExtBaseController {
 
             HfModelContainer curDbModelContainer = SQLParseUtil.parseModelContainerFromSQLFile(
                     dbSqlPath, programCode, programeName, moduleCode, moduleName);
-
+            System.out.println("==>" + JSONObject.toJSONString(curDbModelContainer));
             final HfModelContainer[] resultModelContainers =
                     HfModelContainerUtil.mergerModelContainer(curDbModelContainer, targetModelContainer);
             final List<String> result = HfModelContainerUtil.getSql(resultModelContainers[0], resultModelContainers[1], false, true);
