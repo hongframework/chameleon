@@ -15,6 +15,7 @@ import com.hframework.common.util.collect.CollectionUtils;
 import com.hframework.common.util.collect.bean.Fetcher;
 import com.hframework.common.util.collect.bean.Grouper;
 import com.hframework.common.util.collect.bean.Mapper;
+import com.hframework.common.util.message.JsonUtils;
 import com.hframework.generator.web.container.bean.Entity;
 import com.hframework.generator.web.container.bean.EntityAttr;
 import com.hframework.generator.web.container.bean.Module;
@@ -276,9 +277,15 @@ public class CodeGeneratorController extends ExtBaseController {
                 }
             });
 
+
+
 //            String classPackage = "com";
             HfClassContainer originClassContainer = HfClassContainerUtil.fromClassPath(
                     projectCompileTargetPath, classPackages, programCode, programName);
+
+            logger.debug("projectCompileTargetPath:{}; classPackages: {}, originClassContainer:{}",
+                    projectCompileTargetPath, JsonUtils.writeValueAsString(classPackages),
+                    JsonUtils.writeValueAsString(originClassContainer));
 
             final List<Map<String, String>>[] result = HfClassContainerUtil.compare(originClassContainer, targetClassContainer);
 
