@@ -405,7 +405,7 @@ public class CodeGeneratorController extends ExtBaseController {
             });
 
             String projectBasePath = CreatorUtil.getTargetProjectBasePath(companyCode, programCode, moduleCode);
-            String projectRootPath = projectBasePath + "\\basic";
+            String projectRootPath = projectBasePath + "/basic";
             for (Map.Entry<String, List<Map<String, String>>> moduleAndTable : moduleAndTables.entrySet()) {
                 moduleCode = moduleAndTable.getKey();
                 tables = moduleAndTable.getValue();
