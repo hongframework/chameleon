@@ -415,7 +415,20 @@ public class CodeGeneratorController extends ExtBaseController {
                 MyBatisGeneratorUtil.generate(new File(mybatisConfigFilePath));
             }
 
-            ShellExecutor.exeCmd(projectBasePath + "/build/compile.bat");
+            String compileShellPath = projectBasePath + "/build/compile.";
+            if(File.separatorChar == '/') {//linux
+                compileShellPath += "sh";
+            }else {//windows
+                compileShellPath += "bat";
+            }
+
+            File compileShellFile = new File(compileShellPath);
+            if(!compileShellFile.canExecute()) {
+                System.out.println(compileShellPath + "chmod -x");
+                compileShellFile.setExecutable(true);
+            }
+
+            ShellExecutor.exeCmd(compileShellPath);
 
             return ResultData.success();
         }catch (Exception e) {
