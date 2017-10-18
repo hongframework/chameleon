@@ -18,7 +18,7 @@ if [ -f $base/build/hframe.pid ] ; then
 fi
 
 
-mvn compile -Pdeamon 1> $base/build/nohup.log 2>&1 &
+mvn clean compile -Pdeamon 1> $base/build/nohup.log 2>&1 &
 echo $!
 echo $! > $base/build/hframe.pid
 echo "startup Oook!"
