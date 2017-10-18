@@ -22,3 +22,13 @@ mvn compile -Pdeamon 1> $base/build/nohup.log 2>&1 &
 echo $!
 echo $! > $base/build/hframe.pid
 echo "startup Oook!"
+
+while(true)
+do
+ results=`jps | grep $!`
+ sleep 1
+ if  [ ! -n "$results" ] ;then
+    echo "server shutdown ..."
+    exit
+ fi
+done
