@@ -78,7 +78,7 @@ public class ApplicationManageController extends ExtBaseController {
     @Resource
     private IHfmdEntityAttrSV hfmdEntityAttrSV;
 
-    private static final Map<Long, Thread> applicationInfos = new HashMap<Long, Thread>();
+    private static final Map<Long, ProcessThread> applicationInfos = new HashMap<Long, ProcessThread>();
 
 
     /**
@@ -176,29 +176,28 @@ public class ApplicationManageController extends ExtBaseController {
             final String projectBasePath = CreatorUtil.getTargetProjectBasePath(program.getOwnerCode(), program.getHfpmProgramCode(),"MM");
 
             if("2".equals(type) || "3".equals(type)) {
-                applicationInfos.remove(program.getHfpmProgramId()).stop();
+                applicationInfos.remove(program.getHfpmProgramId()).shutdown();
+                if(File.separatorChar == '/') {//linux
+                    String startupShellPath = projectBasePath + "/build/stop.sh";
+                    File startupShellFile = new File(startupShellPath);
+                    if(!startupShellFile.canExecute()) {
+                        startupShellFile.setExecutable(true);
+                    }
+                    ShellExecutor.exeCmd(startupShellPath);
+                }
+
                 Thread.sleep(300);
             }
 
             if("1".equals(type) || "2".equals(type) ) {
-                applicationInfos.put(program.getHfpmProgramId(), new Thread(new Runnable() {
-                    public void run() {
-                        String startupShellPath = projectBasePath + "/build/startup.";
-                        if(File.separatorChar == '/') {//linux
-                            startupShellPath += "sh";
-                        }else {//windows
-                            startupShellPath += "bat";
-                        }
+                String startupShellPath = projectBasePath + "/build/startup.";
+                if(File.separatorChar == '/') {//linux
+                    startupShellPath += "sh";
+                }else {//windows
+                    startupShellPath += "bat";
+                }
 
-                        File startupShellFile = new File(startupShellPath);
-                        if(!startupShellFile.canExecute()) {
-                            System.out.println(startupShellPath + "chmod -x");
-                            startupShellFile.setExecutable(true);
-                        }
-
-                        ShellExecutor.exeCmd(startupShellPath);
-                    }
-                }));
+                applicationInfos.put(program.getHfpmProgramId(), new ProcessThread(startupShellPath, program.getHfpmProgramId()));
                 applicationInfos.get(program.getHfpmProgramId()).start();
             }
         } catch (Exception e) {
@@ -209,7 +208,31 @@ public class ApplicationManageController extends ExtBaseController {
         return ResultData.success();
     }
 
+    public static class ProcessThread extends Thread{
+        private Process process;
+        private Long projectId;
+        private String startupShellPath;
+        public ProcessThread(String startupShellPath, Long projectId) {
+            this.startupShellPath = startupShellPath;
+            this.projectId = projectId;
+        }
+        public void run() {
 
+            File startupShellFile = new File(startupShellPath);
+            if(!startupShellFile.canExecute()) {
+                startupShellFile.setExecutable(true);
+            }
 
+            process = ShellExecutor.exeCmdAsync(startupShellPath);
+            String processResult = ShellExecutor.getProcessResult(process);
+            System.out.println(processResult);
+            applicationInfos.remove(projectId);
+        }
 
+        public void shutdown(){
+            process.destroy();
+            this.stop();
+        }
+
+    }
 }
