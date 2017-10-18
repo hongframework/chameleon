@@ -26,10 +26,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.File;
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.util.*;
 
 /**
  * Created by zhangquanhong on 2016/12/11.
@@ -103,7 +105,7 @@ public class ApplicationManageController extends ExtBaseController {
                     programInfo.put("hfpmProgramId", String.valueOf(program.getHfpmProgramId()));
                     programInfo.put("hfpmProgramName",program.getHfpmProgramName());
                     programInfo.put("hfpmProgramCode", program.getHfpmProgramCode());
-                    programInfo.put("url", "127.0.0.1:" + port);
+                    programInfo.put("url", request.getServerName() /*getServerIp()*/ + ":" + port);
                     programInfo.put("state", applicationInfos.containsKey(program.getHfpmProgramId()) ? "已启动": "未启动");
                     result.add(programInfo);
                 }
@@ -118,7 +120,7 @@ public class ApplicationManageController extends ExtBaseController {
                     programInfo.put("hfpmProgramId", String.valueOf(program.getHfpmProgramId()));
                     programInfo.put("hfpmProgramName",program.getHfpmProgramName());
                     programInfo.put("hfpmProgramCode", program.getHfpmProgramCode());
-                    programInfo.put("url", "127.0.0.1:" + port);
+                    programInfo.put("url", request.getServerName() /*getServerIp()*/ + ":" + port);
                     programInfo.put("state", applicationInfos.containsKey(program.getHfpmProgramId()) ? "已启动": "未启动");
                     result.add(programInfo);
                 }
@@ -135,6 +137,27 @@ public class ApplicationManageController extends ExtBaseController {
         }finally {
             DataSourceContextHolder.clear();
         }
+    }
+
+    private String getServerIp() throws SocketException {
+        Enumeration allNetInterfaces = NetworkInterface.getNetworkInterfaces();
+        InetAddress ip = null;
+        while (allNetInterfaces.hasMoreElements())
+        {
+            NetworkInterface netInterface = (NetworkInterface) allNetInterfaces.nextElement();
+            System.out.println(netInterface.getName());
+            Enumeration addresses = netInterface.getInetAddresses();
+            while (addresses.hasMoreElements())
+            {
+                ip = (InetAddress) addresses.nextElement();
+                if (ip != null && ip instanceof Inet4Address)
+                {
+                    System.out.println("server id is : " + ip.getHostAddress());
+                    return ip.getHostAddress();
+                }
+            }
+        }
+        return null;
     }
 
 
@@ -160,7 +183,20 @@ public class ApplicationManageController extends ExtBaseController {
             if("1".equals(type) || "2".equals(type) ) {
                 applicationInfos.put(program.getHfpmProgramId(), new Thread(new Runnable() {
                     public void run() {
-                        ShellExecutor.exeCmd(projectBasePath + "/build/startup.bat");
+                        String startupShellPath = projectBasePath + "/build/startup.";
+                        if(File.separatorChar == '/') {//linux
+                            startupShellPath += "sh";
+                        }else {//windows
+                            startupShellPath += "bat";
+                        }
+
+                        File startupShellFile = new File(startupShellPath);
+                        if(!startupShellFile.canExecute()) {
+                            System.out.println(startupShellPath + "chmod -x");
+                            startupShellFile.setExecutable(true);
+                        }
+
+                        ShellExecutor.exeCmd(startupShellPath);
                     }
                 }));
                 applicationInfos.get(program.getHfpmProgramId()).start();

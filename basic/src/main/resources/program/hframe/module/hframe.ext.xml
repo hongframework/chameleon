@@ -148,6 +148,10 @@
                 <effect type="ajaxSubmit" action="/extend/application_operate.json"></effect>
                 <effect type="component.reload"></effect>
             </event>
+            <event name="urlFwd" description="跳转">
+                <attach anchor="url"></attach>
+                <effect type="openPage" action='url' isStack="true"></effect>
+            </event>
         </component>
     </page>
 
