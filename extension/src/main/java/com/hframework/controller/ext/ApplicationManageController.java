@@ -212,6 +212,7 @@ public class ApplicationManageController extends ExtBaseController {
         private Process process;
         private Long projectId;
         private String startupShellPath;
+        private boolean shutdownSg;
         public ProcessThread(String startupShellPath, Long projectId) {
             this.startupShellPath = startupShellPath;
             this.projectId = projectId;
@@ -225,11 +226,14 @@ public class ApplicationManageController extends ExtBaseController {
 
             process = ShellExecutor.exeCmdAsync(startupShellPath);
             String processResult = ShellExecutor.getProcessResult(process);
-            System.out.println(processResult);
+            if(!(startupShellPath.endsWith(".sh") && shutdownSg)) {
+                System.out.println(processResult);
+            }
             applicationInfos.remove(projectId);
         }
 
         public void shutdown(){
+            shutdownSg = true;
             process.destroy();
             this.stop();
         }
