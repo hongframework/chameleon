@@ -156,7 +156,7 @@
                                     <!--<type>jar</type>-->
                                     <overWrite>false</overWrite>
                                     <outputDirectory>${project.basedir}/target/classes</outputDirectory>
-                                    <includes>hframework/**, properties/**, jetty.xml, mybatis.xml, transactions.xml</includes>>
+                                    <includes>webapp/**, hframework/**, properties/**, jetty.xml, mybatis.xml, transactions.xml</includes>>
                                 </artifactItem>
                             </artifactItems>
                         </configuration>
