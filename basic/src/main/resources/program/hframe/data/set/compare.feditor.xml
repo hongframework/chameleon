@@ -5,16 +5,16 @@
   <source>file</source>
   <descriptor>
     <node code="config">
-      <node code="global.host[]" name="全局设置" />
-      <node code="services.service" name="对账实例">
-        <node code="importers.importer[]" name="信号源">
-          <node code="file.row[]" name="数据条目" />
-          <node code="dataset.sql[]" name="SQL" />
+      <node code="global.host[]" name="数据导出" editor="eList" />
+      <node code="services.service" name="对账实例" editor="eForm" >
+        <node code="importers.importer[]" name="数据导入" editor="flatContainer,eForm" >
+          <node code="file.row[]" name="数据行"  editor="eList" />
+          <node code="dataset.sql[]" name="SQL"  editor="eList" />
         </node>
-        <node code="ruleCenter.rule[]" name="对账规则">
-          <node code="datanode[]" name="数据节点"/>
+        <node code="ruleCenter.rule[]" name="比对规则" editor="mutexContainer,eForm">
+          <node code="datanode[]" name="节点" editor="eList"/>
         </node>
-        <node code="exporters.exporter[]" name="输出源"/>
+        <node code="exporters.exporter[]" name="数据导出" editor="eList"/>
       </node>
     </node>
 

@@ -21,6 +21,7 @@ import com.hframework.controller.ext.bean.AuthManager;
 import com.hframework.controller.ext.bean.AuthObject;
 import com.hframework.controller.ext.bean.AuthObjectAttr;
 import com.hframework.controller.ext.bean.AuthObjects;
+import com.hframework.generator.web.container.bean.Entity;
 import com.hframework.web.controller.DefaultController;
 import com.hframework.common.springext.datasource.DataSourceContextHolder;
 import com.hframework.generator.util.CreatorUtil;
@@ -30,6 +31,8 @@ import com.hframework.generator.web.sql.SqlGeneratorUtil;
 import com.hframework.generator.web.sql.reverse.SQLParseUtil;
 import com.hframework.web.context.WebContext;
 import com.hframework.web.config.bean.Program;
+import org.activiti.engine.ProcessEngines;
+import org.activiti.engine.RepositoryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -39,6 +42,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.text.MessageFormat;
 import java.util.*;
 
@@ -49,6 +53,9 @@ import java.util.*;
 @RequestMapping(value = "/extend")
 public class DbGeneratorController extends ExtBaseController {
     private static final Logger logger = LoggerFactory.getLogger(DbGeneratorController.class);
+
+    protected transient RepositoryService repositoryService = ProcessEngines.getDefaultProcessEngine().getRepositoryService();
+
     @Resource
     private DataSetLoaderService dataSetLoaderService;
 
@@ -110,6 +117,22 @@ public class DbGeneratorController extends ExtBaseController {
             "WHERE EXISTS (SELECT 1 FROM hfmd_enum_class c WHERE c.hfmd_enum_class_id = t.hfmd_enum_class_id)";
     private static final String SELECT_HFMD_ENUM_CLASS_SQL = "SELECT hfmd_enum_class_id,hfmd_enum_class_name,CONCAT('<font color=\"red\">',hfmd_enum_class_code,'</font>') " +
             "as hfmd_enum_class_code,hfmd_enum_class_desc,del_flag FROM hfmd_enum_class t";
+
+    private static final String SELECT_ACT_RE_MODEL_SQL_FORMAT = "SELECT mdl.*\n" +
+            "FROM hfpm_data_field fld,\n" +
+            "  hfpm_data_set st,act_re_model mdl\n" +
+            "WHERE fld.hfpm_data_set_id = st.hfpm_data_set_id\n" +
+            "    AND mdl.id_ = fld.workfow_model_id\n" +
+            "    AND st.hfpm_program_id IN ({0});";
+
+    private static final String SELECT_ACT_GE_BYTEARRAY_SQL_FORMAT = "SELECT btarr.*\n" +
+            "FROM hfpm_data_field fld,\n" +
+            "  hfpm_data_set st,act_re_model mdl,\n" +
+            "  act_ge_bytearray btarr\n" +
+            "WHERE fld.hfpm_data_set_id = st.hfpm_data_set_id\n" +
+            "    AND mdl.id_ = fld.workfow_model_id\n" +
+            "    AND (btarr.ID_ = mdl.EDITOR_SOURCE_VALUE_ID_ OR btarr.ID_ = mdl.EDITOR_SOURCE_EXTRA_VALUE_ID_)\n" +
+            "    AND st.hfpm_program_id IN ({0});";
 
     /**
      * 重新加载（全量）
@@ -201,7 +224,7 @@ public class DbGeneratorController extends ExtBaseController {
 //            String insertSuperFuncSql = calcInsertSql(authManager.superFunc);
 
             //添加枚举值变更sql语句
-            List<String> enumSqls =  getEnumSql(authManager, programId, pageFlowParams,program);
+            List<String> enumSqls =  getEnumSql(authManager, programId, pageFlowParams,program, request, curDbModelContainer.getEntityAttrCountMap().containsKey("act_re_model"));
             for (final String enumSql : enumSqls) {
                 sqls.add(new HashMap<String, String>() {{
                     put("sql", enumSql);
@@ -260,7 +283,7 @@ public class DbGeneratorController extends ExtBaseController {
 
 
 
-    private List<String> getEnumSql(final AuthManager authManager, final Long finalProgramId, Map<String, String> pageFlowParams, final Program program) throws Exception {
+    private List<String> getEnumSql(final AuthManager authManager, final Long finalProgramId, Map<String, String> pageFlowParams, final Program program, HttpServletRequest request, boolean containActModel) throws Exception {
 
         List<String> sqls = new ArrayList<String>();
 
@@ -281,6 +304,10 @@ public class DbGeneratorController extends ExtBaseController {
             }
         }
 //        List<Map<String, Object>> curUserAuthList = getDynamicTableDataSome(SELECT_HFSEC_USER_AUTH_SQL);
+        List<Map<String, Object>> curActReModel = AuthManager.getDynamicTableDataSome(commonDataService,"SELECT * FROM act_re_model");
+//        List<Map<String, Object>> curActGeByteArrayModel = AuthManager.getDynamicTableDataSome(commonDataService,"SELECT * FROM act_ge_bytearray");
+
+
 
 
         DataSourceContextHolder.clear();
@@ -322,6 +349,10 @@ public class DbGeneratorController extends ExtBaseController {
                 add(data);
             }}));
         }
+
+        List<Map<String, Object>> actReModel = AuthManager.getDynamicTableDataSome(commonDataService,MessageFormat.format(SELECT_ACT_RE_MODEL_SQL_FORMAT, String.valueOf(151031375445L)));
+//        List<Map<String, Object>> actGeByteArrayModel = AuthManager.getDynamicTableDataSome(commonDataService,MessageFormat.format(SELECT_ACT_GE_BYTEARRAY_SQL_FORMAT, String.valueOf(151031375445L)));
+
 
 //        List<Map<String, Object>> userAuthList = getDynamicTableDataSome(SELECT_HFSEC_USER_AUTH_2_SQL);
 
@@ -391,6 +422,28 @@ public class DbGeneratorController extends ExtBaseController {
             });
         }
 
+        CollectionUtils.remove(actReModel, curActReModel, new Merger<String, Map<String,Object>>() {
+            public <K> K getKey(Map<String, Object> objectMap) {
+                return (K) (String.valueOf(objectMap.get("NAME_")) +  String.valueOf(objectMap.get("KEY_"))) ;
+            }
+
+            public <K> K groupKey(Map<String, Object> objectMap) {
+                return (K) (String.valueOf(objectMap.get("NAME_")) +  String.valueOf(objectMap.get("KEY_"))) ;
+            }
+        });
+
+//        CollectionUtils.remove(actGeByteArrayModel, curActGeByteArrayModel, new Merger<String, Map<String,Object>>() {
+//            public <K> K getKey(Map<String, Object> objectMap) {
+//                return (K)String.valueOf(objectMap.get("ID_"));
+//            }
+//
+//            public <K> K groupKey(Map<String, Object> objectMap) {
+//                return  (K)String.valueOf(objectMap.get("ID_"));
+//            }
+//        });
+
+
+
         List<String> roleSqls = HfModelContainerUtil.getSql(roleList, authManager.superFunc.get(0).tableName, false);
         for (String roleSql : roleSqls) {
             sqls.add(roleSql + ";");
@@ -446,7 +499,73 @@ public class DbGeneratorController extends ExtBaseController {
                 sqls.add(sql + ";");
             }
         }
+//
+//        List<String> actGeByteArrays = HfModelContainerUtil.getSql(actGeByteArrayModel, "act_ge_bytearray", false);
+//        for (Map<String, Object> map : actGeByteArrayModel) {
+//            HttpSession session = request.getSession();
+//
+//            if(session.getAttribute("BlobObjectCache") == null) {
+//                session.setAttribute("BlobObjectCache", new HashMap<String, Object>());
+//            }
+//            Map<String, Object[]> blobObjectCache = (Map<String, Object[]>) session.getAttribute("BlobObjectCache");
+//            blobObjectCache.put(map.get("BYTES_").toString(), new Object[]{map.get("ID_").toString(), map.get("BYTES_")});
+//        }
+//        for (String actGeByteArraySql : actGeByteArrays) {
+//            sqls.add(actGeByteArraySql + ";");
+//        }
+//        for (Map<String, Object> map : actReModel) {
+//            map.remove("EDITOR_SOURCE_VALUE_ID_");
+//            map.remove("EDITOR_SOURCE_EXTRA_VALUE_ID_");
+//            map.remove("DEPLOYMENT_ID_");
+//        }
+        List<String> actReModels = HfModelContainerUtil.getSql(actReModel, "act_re_model", false);
+        if(!containActModel && actReModels.size() > 0) {
+            sqls.add("CREATE TABLE `act_re_deployment` (\n" +
+                    "  `ID_` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',\n" +
+                    "  `NAME_` varchar(255) COLLATE utf8_bin DEFAULT NULL,\n" +
+                    "  `CATEGORY_` varchar(255) COLLATE utf8_bin DEFAULT NULL,\n" +
+                    "  `TENANT_ID_` varchar(255) COLLATE utf8_bin DEFAULT '',\n" +
+                    "  `DEPLOY_TIME_` timestamp NULL DEFAULT NULL,\n" +
+                    "  PRIMARY KEY (`ID_`)\n" +
+                    ") ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;");
+            sqls.add("CREATE TABLE `act_ge_bytearray` (\n" +
+                    "  `ID_` varchar(64) COLLATE utf8_bin NOT NULL DEFAULT '',\n" +
+                    "  `REV_` int(11) DEFAULT NULL,\n" +
+                    "  `NAME_` varchar(255) COLLATE utf8_bin DEFAULT NULL,\n" +
+                    "  `DEPLOYMENT_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,\n" +
+                    "  `BYTES_` longblob,\n" +
+                    "  `GENERATED_` tinyint(4) DEFAULT NULL,\n" +
+                    "  PRIMARY KEY (`ID_`),\n" +
+                    "  KEY `ACT_FK_BYTEARR_DEPL` (`DEPLOYMENT_ID_`),\n" +
+                    "  CONSTRAINT `ACT_FK_BYTEARR_DEPL` FOREIGN KEY (`DEPLOYMENT_ID_`) REFERENCES `act_re_deployment` (`ID_`)\n" +
+                    ") ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;\n");
+            sqls.add("CREATE TABLE `act_re_model` (\n" +
+                    "  `ID_` varchar(64) COLLATE utf8_bin NOT NULL,\n" +
+                    "  `REV_` int(11) DEFAULT NULL,\n" +
+                    "  `NAME_` varchar(255) COLLATE utf8_bin DEFAULT NULL,\n" +
+                    "  `KEY_` varchar(255) COLLATE utf8_bin DEFAULT NULL,\n" +
+                    "  `CATEGORY_` varchar(255) COLLATE utf8_bin DEFAULT NULL,\n" +
+                    "  `CREATE_TIME_` timestamp NULL DEFAULT NULL,\n" +
+                    "  `LAST_UPDATE_TIME_` timestamp NULL DEFAULT NULL,\n" +
+                    "  `VERSION_` int(11) DEFAULT NULL,\n" +
+                    "  `META_INFO_` varchar(4000) COLLATE utf8_bin DEFAULT NULL,\n" +
+                    "  `DEPLOYMENT_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,\n" +
+                    "  `EDITOR_SOURCE_VALUE_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,\n" +
+                    "  `EDITOR_SOURCE_EXTRA_VALUE_ID_` varchar(64) COLLATE utf8_bin DEFAULT NULL,\n" +
+                    "  `TENANT_ID_` varchar(255) COLLATE utf8_bin DEFAULT '',\n" +
+                    "  PRIMARY KEY (`ID_`),\n" +
+                    "  KEY `ACT_FK_MODEL_SOURCE` (`EDITOR_SOURCE_VALUE_ID_`),\n" +
+                    "  KEY `ACT_FK_MODEL_SOURCE_EXTRA` (`EDITOR_SOURCE_EXTRA_VALUE_ID_`),\n" +
+                    "  KEY `ACT_FK_MODEL_DEPLOYMENT` (`DEPLOYMENT_ID_`),\n" +
+                    "  CONSTRAINT `ACT_FK_MODEL_DEPLOYMENT` FOREIGN KEY (`DEPLOYMENT_ID_`) REFERENCES `act_re_deployment` (`ID_`),\n" +
+                    "  CONSTRAINT `ACT_FK_MODEL_SOURCE` FOREIGN KEY (`EDITOR_SOURCE_VALUE_ID_`) REFERENCES `act_ge_bytearray` (`ID_`),\n" +
+                    "  CONSTRAINT `ACT_FK_MODEL_SOURCE_EXTRA` FOREIGN KEY (`EDITOR_SOURCE_EXTRA_VALUE_ID_`) REFERENCES `act_ge_bytearray` (`ID_`)\n" +
+                    ") ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;");
+        }
 
+        for (String modelSql : actReModels) {
+            sqls.add(modelSql.replaceAll("\\{","&123;").replaceAll("\\}","&125;") + ";");
+        }
         return sqls;
     }
 
@@ -463,13 +582,31 @@ public class DbGeneratorController extends ExtBaseController {
             sqls = new String[]{Joiner.on(",").join(sqls)};
         }
         logger.debug("request : {}", sqls);
+        Map<String, int[]> actReModelSet = new HashMap<String, int[]>();
         List<String> result = new ArrayList<String>();
+        List<String> actReModelSqlList = new ArrayList<String>();
         for (String sql : sqls) {
             if(sql.contains("insert into")) {
                 String[] split = sql.split(";[ ]*insert into");
                 for (String s : split) {
                     if(StringUtils.isNotBlank(s)) {
-                        result.add((s.startsWith("insert into ") ? "" : "insert into ") + (s.endsWith(";") ? s : (s + ";")));
+                        String insertSql = (s.startsWith("insert into ") ? "" : "insert into ") + (s.endsWith(";") ? s : (s + ";"));
+                        if(insertSql.contains("insert into act_re_model")) {
+                            insertSql = insertSql.replace("&123;", "{").replace("&125;", "}");
+                            int idIndex = insertSql.substring(0, insertSql.indexOf("`ID_`")).split(",").length;
+                            int sourceIdIndex = insertSql.substring(0, insertSql.indexOf("`EDITOR_SOURCE_VALUE_ID_`")).split(",").length;
+                            int sourceExtIdIndex = insertSql.substring(0, insertSql.indexOf("`EDITOR_SOURCE_EXTRA_VALUE_ID_`")).split(",").length;
+
+                            String idValue = insertSql.substring(insertSql.lastIndexOf("(")).split("','")[idIndex];
+                            String sourceId = insertSql.substring(insertSql.lastIndexOf("(")).split("','")[sourceIdIndex];
+                            String sourceExtId = insertSql.substring(insertSql.lastIndexOf("(")).split("','")[sourceExtIdIndex];
+                            actReModelSet.put(idValue, new int[]{Integer.parseInt(sourceId), Integer.parseInt(sourceExtId)});
+                            actReModelSqlList.add(insertSql);
+                        }else {
+                            result.add(insertSql);
+                        }
+
+
                     }
                 }
             }else {
@@ -481,10 +618,28 @@ public class DbGeneratorController extends ExtBaseController {
             Map<String, String>  pageContextParams = DefaultController.getPageContextParams(request);
             WebContext.putContext(DefaultController.getPageContextRealyParams(pageContextParams));
             Map<String, String> pageFlowParams = WebContext.get(HashMap.class.getName());
+
             startDynamicDataSource(pageFlowParams);
             commonDataService.executeDBStructChange(result);
+            DataSourceContextHolder.clear();
+
+            for (String actReModelId : actReModelSet.keySet()) {
+                List<Map<String, Object>> actGeByteArrayModel = AuthManager.getDynamicTableDataSome(commonDataService,
+                        MessageFormat.format("SELECT `ID_` AS id, `REV_` AS rev, `NAME_` AS NAME, `DEPLOYMENT_ID_` AS deploymentId, `BYTES_` AS bytes, `GENERATED_` AS generated FROM act_ge_bytearray where id_ in ({0},{1});",
+                                String.valueOf(actReModelSet.get(actReModelId)[0]),
+                                String.valueOf(actReModelSet.get(actReModelId)[1])));
+                startDynamicDataSource(pageFlowParams);
+                for (Map<String, Object> map : actGeByteArrayModel) {
+                    commonDataService.insertActGeByteArray(map);
+                }
+                DataSourceContextHolder.clear();
+            }
+
+            startDynamicDataSource(pageFlowParams);
+            commonDataService.executeDBStructChange(actReModelSqlList);
+            DataSourceContextHolder.clear();
             return ResultData.success();
-        }catch (Exception e) {
+        } catch (Exception e) {
             logger.error("error : ", e);
             return ResultData.error(ResultCode.ERROR);
         }finally {
