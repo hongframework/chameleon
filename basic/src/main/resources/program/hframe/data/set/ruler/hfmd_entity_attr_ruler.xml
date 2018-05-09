@@ -31,7 +31,7 @@
     <target-code>hfmd_entity_attr_code</target-code>
     <target-value>{object.hfmd_entity_attr_code}</target-value>
     <rule-model>invalid-if-target-value-exists</rule-model>
-    <editable>false</editable>
+    <editable>true</editable>
   </rule>
   <rule>
     <rule-type>2</rule-type>

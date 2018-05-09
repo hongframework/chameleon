@@ -68,6 +68,7 @@ public class HfModelService {
             if(hfmdEntityList != null && hfmdEntityList.size() > 0) {
                 //实体信息<entityCode,HfmdEntity>
                 for (HfmdEntity entity : hfmdEntityList) {
+                    entity.setHfmdEntityCode(entity.getHfmdEntityCode().toLowerCase());
                     entityMap.put(entity.getHfmdEntityCode(), BeanUtils.convertObject(Entity.class, entity));
                     entityIdEntityMap.put(entity.getHfmdEntityId(), BeanUtils.convertObject(Entity.class, entity));
                 }

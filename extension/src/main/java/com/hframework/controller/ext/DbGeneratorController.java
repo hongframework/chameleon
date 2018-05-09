@@ -224,7 +224,8 @@ public class DbGeneratorController extends ExtBaseController {
 //            String insertSuperFuncSql = calcInsertSql(authManager.superFunc);
 
             //添加枚举值变更sql语句
-            List<String> enumSqls =  getEnumSql(authManager, programId, pageFlowParams,program, request, curDbModelContainer.getEntityAttrCountMap().containsKey("act_re_model"));
+            List<String> enumSqls =  getEnumSql(authManager, programId, pageFlowParams,program, request,
+                    curDbModelContainer.getEntityAttrCountMap() != null && curDbModelContainer.getEntityAttrCountMap().containsKey("act_re_model"));
             for (final String enumSql : enumSqls) {
                 sqls.add(new HashMap<String, String>() {{
                     put("sql", enumSql);

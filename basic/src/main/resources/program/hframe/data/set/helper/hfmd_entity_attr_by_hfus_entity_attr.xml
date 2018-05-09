@@ -3,6 +3,7 @@
   <help-dataset>hfus_entity_attr</help-dataset>
   <effect-module>hframe</effect-module>
   <effect-dataset>hfmd_entity_attr</effect-dataset>
+  <help-datascore>del_flag = 0</help-datascore>
   <mappings>
     <mapping help-dataset-field="hfus_entity_attr_id" effect-dataset-field="hfmd_entity_attr_id"/>
     <mapping help-dataset-field="hfus_entity_attr_name" effect-dataset-field="hfmd_entity_attr_name"  is-compare-name="true" />

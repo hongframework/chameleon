@@ -219,6 +219,9 @@ public class MenuGeneratorController extends ExtBaseController {
             Object parentObject = null;
             Map<String, String> result = new LinkedHashMap<String, String>();
             JSONObject jsonObject1 = JSONObject.parseObject(jsonObject.getString("treeChart"));
+            if(jsonObject1 == null) {
+                jsonObject1 = JSONObject.parseObject(jsonObject.getString("treeChart|0"));
+            }
             parseRelatMap(jsonObject1, result);
 
             AuthObject funcObject = authManager.func.get(0);
