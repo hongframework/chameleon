@@ -46,9 +46,9 @@
     <bean class="com.hframework.common.springext.properties.PropertyConfigurerUtils">
         <property name="locations">
             <list>
+                <value>classpath:properties/hframe-init.properties</value>
                 <value>classpath:hframe.properties</value>
                 <value>classpath:properties/dataSource.properties</value>
-                <value>classpath:properties/hframe-init.properties</value>
                 <value>classpath:properties/hframe-generator-init.properties</value>
                 <!--<value>classpath:db.properties</value>-->
                 <value>classpath:ui.properties</value>
